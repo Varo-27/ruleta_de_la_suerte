@@ -13,9 +13,13 @@ class Jugador:
             return True
 
     def tirar(self):
+        print("tirando")
         #tirar de la ruleta
         pass
 
     def resolver(self):
         #resolver el panel
         pass
+
+    def __str__(self) -> str:
+        return self.nombre

@@ -2,6 +2,7 @@ class Panel:
 
     def __init__(self,frase: str) -> None:
         self.frase = frase.lower()
+
         self.letras_acertadas = [" "]
         self.letras_falladas = ["j", "k", "w", "m"]
 
@@ -21,11 +22,22 @@ class Panel:
 
 import animation
 if __name__ == "__main__":
-    incognita = Panel("Es una frase de prueba")
-    incognita.comprobar_letra("a")
-    incognita.comprobar_letra("f")
-    incognita.comprobar_letra("b")
-    incognita.comprobar_letra("e")
-    incognita.comprobar_letra("r")
-    print(incognita)
+
+    pregunta1 = {
+        "frase" : "Es una frase de prueba",
+        "pista" : "Pista de prueba"
+    }
+    pregunta1 = {
+        "frase" : "Es una frase de prueba",
+        "pista" : "Pista de prueba"
+    }
+
+
+    frase_prueba = Panel("Es una frase de prueba")
+    frase_prueba.comprobar_letra("a")
+    frase_prueba.comprobar_letra("f")
+    frase_prueba.comprobar_letra("b")
+    frase_prueba.comprobar_letra("e")
+    frase_prueba.comprobar_letra("r")
+    print(frase_prueba)
     animation.animation()
