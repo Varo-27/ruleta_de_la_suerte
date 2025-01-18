@@ -46,7 +46,7 @@ class Juego:
                     print("Aun no implementado")
                     input()
                 else:
-                    print("Selecciona una opcion válida")
+                    self.vista.error()
 
             except:
                 print("numero invalido")

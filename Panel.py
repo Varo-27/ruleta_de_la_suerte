@@ -1,3 +1,5 @@
+import json
+
 class Panel:
 
     def __init__(self,frase: str) -> None:
