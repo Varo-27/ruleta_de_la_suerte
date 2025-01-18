@@ -1,6 +1,7 @@
 from Vista import Vista
 import Ruleta
 import Jugador
+from time import sleep
 
 class Juego:
 
@@ -24,19 +25,22 @@ class Juego:
             try:
                 self.vista.inicio()
                 self.vista.menu_opciones()
-                seleccion = int(input("Elige una opción"))
+                self.vista.elegir()
+                seleccion = int(input())
                 if seleccion == 1:
                     check = False
                     while check == False:
                         try:
-                            num_players = int(input("Introduce el numero de participantes: "))
+                            self.vista.num_participantes()
+                            num_players = int(input())
                             check = True
                         except ValueError:
-                            print("Introduce un numero de jugadores")
+                            self.vista.error()
 
                     while len(game.jugadores) < num_players:
-                        game.añadir_jugadores(input(f"Nombre del Jugador {len(game.jugadores)+1}: "))
-                    print("Jugadores listos")
+                        self.vista.nombre_jugador(len(game.jugadores)+1)
+                        game.añadir_jugadores(input())
+                    self.vista.empezando_partida()
                     jugadores_ok = True
                 elif seleccion == 2:
                     print("Aun no implementado")
@@ -46,6 +50,7 @@ class Juego:
 
             except:
                 print("numero invalido")
+                sleep(1)
 
 
 

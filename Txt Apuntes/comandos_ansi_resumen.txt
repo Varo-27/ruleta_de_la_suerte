@@ -1,0 +1,20 @@
+
+Comandos ANSI:
+
+1. \033[10C
+   - Mueve el cursor 10 columnas a la derecha.
+
+2. \033[20D
+   - Mueve el cursor 20 columnas a la izquierda.
+
+3. \033[30G
+   - Mueve el cursor a la columna 30 en la fila actual.
+
+4. \033[1F
+   - Mueve el cursor una línea hacia arriba.
+
+5. \033[K
+   - Borra el contenido de la línea desde la posición actual hasta el final de la línea.
+
+6. \033[5;10H
+   - Mueve el cursor a la fila 5, columna 10.
