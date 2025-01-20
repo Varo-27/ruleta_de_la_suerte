@@ -20,15 +20,17 @@ class Juego:
         while jugadores_ok == False:
             try:
                 self.vista.inicio()
-                self.vista.menu_inicio()
+                
                 self.vista.elegir()
-                seleccion = int(input())
+                seleccion = self.vista.menu_inicio()
                 if seleccion == 1:
                     self.add_players()
                     jugadores_ok = True
                 elif seleccion == 2:
                     print("Aun no implementado")
                     input()
+                elif seleccion == 3:
+                    exit()
                 else:
                     self.vista.error("Valor incorrecto")
             except:
