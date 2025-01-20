@@ -23,7 +23,10 @@ class Vista():
     def nombre_jugador(self, num_jugador):
         print(f"Nombre del Jugador {num_jugador}: ", end="")
 
-    def empezando_partida(self, ):
+    def empezando_partida(self):
         print("Jugadores listos, empezando partida...")
         time.sleep(2)
         print("\033[F\033[K", end="")
+
+    def pintar_panel(self):
+        print()

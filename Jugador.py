@@ -12,10 +12,10 @@ class Jugador:
             self.puntos -=50
             return True
 
-    def tirar(self):
-        print("tirando")
-        #tirar de la ruleta
-        pass
+    def jugar(self):
+        
+
+
 
     def resolver(self):
         #resolver el panel

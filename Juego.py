@@ -1,5 +1,5 @@
 from Vista import Vista
-import Ruleta
+from Weel import Weel
 import Jugador
 from time import sleep
 
@@ -9,17 +9,10 @@ class Juego:
         self.vista = Vista()
         self.turno = 0
         self.jugadores = []
+        self.resuelto = False
 
-    def añadir_jugadores(self, nombre):
-        self.jugadores.append(Jugador.Jugador(nombre))
 
-    def siguiente_turno(self):
-        self.jugadores[self.turno].tirar()
-
-    def control_puntos(self):
-        pass
-
-    def run(self):
+    def menu(self):
         jugadores_ok = False
         while jugadores_ok == False:
             try:
@@ -28,32 +21,47 @@ class Juego:
                 self.vista.elegir()
                 seleccion = int(input())
                 if seleccion == 1:
-                    check = False
-                    while check == False:
-                        try:
-                            self.vista.num_participantes()
-                            num_players = int(input())
-                            check = True
-                        except ValueError:
-                            self.vista.error()
-
-                    while len(game.jugadores) < num_players:
-                        self.vista.nombre_jugador(len(game.jugadores)+1)
-                        game.añadir_jugadores(input())
-                    self.vista.empezando_partida()
+                    self.add_players()
                     jugadores_ok = True
                 elif seleccion == 2:
                     print("Aun no implementado")
                     input()
                 else:
                     self.vista.error()
-
             except:
                 print("numero invalido")
                 sleep(1)
 
 
 
-if __name__ == "__main__":
-    game = Juego()
-    game.run()
+    def add_players(self):
+        check = False
+        while check == False:
+            try:
+                self.vista.num_participantes()
+                num_players = int(input())
+                check = True
+            except ValueError:
+                self.vista.error()
+
+        while len(self.jugadores) < num_players:
+            self.vista.nombre_jugador(len(self.jugadores)+1)
+            
+            self.jugadores.append(Jugador.Jugador(input()))
+
+        self.vista.empezando_partida()
+
+
+
+    def siguiente_turno(self):
+        self.turno += 1
+
+    def control_puntos(self):
+        pass
+
+
+    def run(self):
+        self.menu()
+
+        while self.resuelto ==False:
+            self.jugadores[self.turno].jugar()
