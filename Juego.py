@@ -58,10 +58,10 @@ class Juego:
 
         self.vista.empezando_partida()
 
-
-
     def siguiente_turno(self):
         self.turno += 1
+        if self.turno == len(self.jugadores):
+            self.turno = 0
 
     def control_puntos(self):
         pass
@@ -74,6 +74,13 @@ class Juego:
             self.jugadores[self.turno].jugar()
 
 
+
+
+
+
+
+
+#Tests
 if __name__ == "__main__":
     juego = Juego()
     print(juego.frase())
