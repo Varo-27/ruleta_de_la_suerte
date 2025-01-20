@@ -1,7 +1,10 @@
+from Panel import Panel
 from Vista import Vista
 from Weel import Weel
 import Jugador
 from time import sleep
+import random
+import json
 
 class Juego:
 
@@ -17,7 +20,7 @@ class Juego:
         while jugadores_ok == False:
             try:
                 self.vista.inicio()
-                self.vista.menu_opciones()
+                self.vista.menu_inicio()
                 self.vista.elegir()
                 seleccion = int(input())
                 if seleccion == 1:
@@ -27,27 +30,29 @@ class Juego:
                     print("Aun no implementado")
                     input()
                 else:
-                    self.vista.error()
+                    self.vista.error("Valor incorrecto")
             except:
-                print("numero invalido")
+                self.vista.error("Tipo de dato incorrecto")
                 sleep(1)
 
+    def frase(self) -> tuple:
+        with open("paneles.json", "r") as f:
+            paneles = json.load(f)
+        clave = random.choice(list(paneles.keys()))
+        return (paneles[clave]['frase'], paneles[clave]['pista'])
 
 
     def add_players(self):
         check = False
         while check == False:
             try:
-                self.vista.num_participantes()
-                num_players = int(input())
+                num_players = self.vista.num_participantes()
                 check = True
             except ValueError:
-                self.vista.error()
+                self.vista.error("Valor incorrecto")
 
         while len(self.jugadores) < num_players:
-            self.vista.nombre_jugador(len(self.jugadores)+1)
-            
-            self.jugadores.append(Jugador.Jugador(input()))
+            self.jugadores.append(Jugador.Jugador(self.vista.nombre_jugador(len(self.jugadores)+1)))
 
         self.vista.empezando_partida()
 
@@ -62,6 +67,11 @@ class Juego:
 
     def run(self):
         self.menu()
-
+        self.panel = Panel(self.frase())
         while self.resuelto ==False:
             self.jugadores[self.turno].jugar()
+
+
+if __name__ == "__main__":
+    juego = Juego()
+    print(juego.frase())

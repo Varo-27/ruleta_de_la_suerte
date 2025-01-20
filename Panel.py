@@ -1,10 +1,8 @@
-import json
-
 class Panel:
 
-    def __init__(self,frase: dict) -> None:
-        self.frase = frase
-
+    def __init__(self,panel: tuple) -> None:
+        self.frase = panel[0]
+        self.pista = panel[1]
         self.letras_acertadas = [" "]
         self.letras_falladas = ["j", "k", "w", "m"]
 

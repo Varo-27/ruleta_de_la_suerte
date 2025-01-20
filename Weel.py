@@ -1,6 +1,6 @@
 import random
 
-class Weel():
+class Weel:
 
     def __init__(self):
         self.section = (0, 25, 25, 50, 50, 75, 75, 100, 200, 'broke', 'broke', 'lose_turn', 'lose_turn')

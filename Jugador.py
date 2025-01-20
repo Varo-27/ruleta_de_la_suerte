@@ -12,14 +12,9 @@ class Jugador:
             self.puntos -=50
             return True
 
-    def jugar(self):
-        
-
-
-
     def resolver(self):
         #resolver el panel
         pass
 
     def __str__(self) -> str:
-        return self.nombre
+        return f"{self.nombre} - {self.puntos} puntos"
