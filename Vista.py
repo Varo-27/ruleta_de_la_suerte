@@ -18,6 +18,7 @@ class Vista():
         print("3.Salir")
         while True:
             try:
+                self.choice()
                 answer = int(input())
                 if answer in [1, 2, 3]:
                     return answer
@@ -35,7 +36,8 @@ class Vista():
         print("4. Salir")
         while True:
             try:
-                answer = int(input(self.choice()))
+                self.choice()
+                answer = int(input())
                 if answer in [1, 2, 3, 4]:
                     return answer
                 else:
@@ -65,7 +67,16 @@ class Vista():
                 self.error("Tipo de dato incorrecto")
     
     def choice(self):
-        print("Elige una opción: ")
+        print("Elige una opción: ", end="")
+
+    def bankrupt(self):
+        print("Has caido en la quiebra")
+        time.sleep(2)
+
+    def lose_turn(self):
+        print("Pierdes el turno")
+        time.sleep(2)
+
 
     def player_name(self, num_jugador: int) -> str:
         print(f"Nombre del Jugador {num_jugador}: ", end="")
@@ -86,7 +97,7 @@ class Vista():
             except:
                 self.error("Tipo de dato incorrecto")
 
-    def empezando_partida(self):
+    def starting_game(self):
         print("Jugadores listos, empezando partida...")
         time.sleep(2)
         print("\033[F\033[K", end="")

@@ -14,6 +14,7 @@ class Panel:
         else:
             self.letras_falladas.append(letra)
             self.letras_falladas.sort()
+            return 0
 
     def comprobar_resolucion(self, resolucion):
         if resolucion == self.frase:

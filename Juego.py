@@ -21,8 +21,6 @@ class Juego:
         while jugadores_ok == False:
             try:
                 self.vista.welcome()
-                
-                self.vista.choice()
                 seleccion = self.vista.start_menu()
                 if seleccion == 1:
                     self.add_players()
@@ -57,7 +55,7 @@ class Juego:
         while len(self.jugadores) < num_players:
             self.jugadores.append(Jugador.Jugador(self.vista.player_name(len(self.jugadores)+1)))
 
-        self.vista.empezando_partida()
+        self.vista.starting_game()
 
     def siguiente_turno(self):
         self.turno += 1
@@ -80,8 +78,10 @@ class Juego:
                     match selection:
                         case 'broke':
                             self.jugadores[self.turno].puntos = 0
+                            self.vista.bankrupt()
                             self.siguiente_turno()
                         case 'lose_turn':
+                            self.vista.lose_turn()
                             self.siguiente_turno()
                         case _:
                             letra = self.vista.consonant()
@@ -97,6 +97,8 @@ class Juego:
                     if self.panel.comprobar_resolucion(solucion):
                         self.resuelto = True
                         self.control_puntos()
+                    else:
+                        self.siguiente_turno()
                 case 4:
                     exit()
                 case _:
