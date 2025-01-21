@@ -10,6 +10,7 @@ class Juego:
 
     def __init__(self):
         self.vista = Vista()
+        self.weel = Weel()
         self.turno = 0
         self.jugadores = []
         self.resuelto = False
@@ -71,9 +72,15 @@ class Juego:
         self.menu()
         self.panel = Panel(self.frase())
         while self.resuelto ==False:
-            self.jugadores[self.turno].jugar()
-
-
+            opcion_juego = self.vista.menu_juego()
+            match opcion_juego:
+                case 1:
+                    self.weel.tirada()
+                case 2:
+                    self.jugadores[self.turno].compra_vocal()
+                case 3:
+                    self.vista.resolver()
+                    self.panel.
 
 
 

@@ -4,7 +4,7 @@ skipFiles = [ ".gitignore", "package.json" ]
 
 [[processes]]
 id = "process1"
-name = "To Do"
+name = "Sin empezar"
 
   [[processes.tasks]]
   id = "kmqw04cuza6j4gbkj2l5hctu"
@@ -52,7 +52,7 @@ name = "To Do"
 
 [[processes]]
 id = "process2"
-name = "In Progress"
+name = "Em proceso"
 
   [[processes.tasks]]
   id = "acx63xen65ux0bgm3ou0h189"
@@ -67,7 +67,7 @@ name = "In Progress"
 
 [[processes]]
 id = "process3"
-name = "Done"
+name = "Completadas"
 
   [[processes.tasks]]
   id = "rr7b5j5e11ntc65bw44orplh"

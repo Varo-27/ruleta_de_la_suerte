@@ -8,6 +8,9 @@ class Vista():
         print("Bienvenido a la Ruleta de la suerte")
         print("===================================")
 
+    def error(self, menssaje):
+        print(f"Error introduciendo datos: {menssaje}")
+
     def menu_inicio(self):
         print("1.Añadir jugadores")
         print("2.Scoreboard")
@@ -30,7 +33,7 @@ class Vista():
         print("4. Salir")
         while True:
             try:
-                answer = int(input())
+                answer = int(input(self.elegir()))
                 if answer in [1, 2, 3, 4]:
                     return answer
                 else:
@@ -39,7 +42,7 @@ class Vista():
                 self.error("Tipo de dato incorrecto")
     
     def elegir(self):
-        print("Elige una opción: ", end="")
+        print("Elige una opción: ")
 
     def num_participantes(self) -> int:
         print("Introduce el número de participantes: ", end="")
@@ -50,9 +53,6 @@ class Vista():
             except:
                 self.error("Tipo de dato incorrecto")
 
-    def error(self, menssaje):
-        print(f"Error introduciendo datos: {menssaje}")
-
     def nombre_jugador(self, num_jugador: int) -> str:
         print(f"Nombre del Jugador {num_jugador}: ", end="")
         while True:
@@ -62,6 +62,17 @@ class Vista():
                 return nombre
             else:
                 print("Introducelo de nuevo: ", end="")
+
+    def resolver(self):
+        print("Respuesta final: ")
+        while True:
+            try:
+                answer = input()
+                return answer
+            except:
+                self.error("Tipo de dato incorrecto")
+
+
 
     def empezando_partida(self):
         print("Jugadores listos, empezando partida...")
