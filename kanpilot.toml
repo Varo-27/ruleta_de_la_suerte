@@ -13,7 +13,7 @@ name = "Sin empezar"
   tag = "backlog"
   linkFiles = [ ]
   dueDate = ""
-  priority = ""
+  priority = "Normal"
   linkCommits = [ ]
 
     [[processes.tasks.checkList]]
@@ -32,25 +32,25 @@ name = "Sin empezar"
     completed = false
 
   [[processes.tasks]]
-  id = "kmqw04cuza6j4gbkj2l5hctu"
-  title = "Registrador de paneles"
-  description = "Un cliente para poder añadir preguntas nuevas"
+  id = "y7iw8hsksae635wocjg7bu6k"
+  title = "Printear el panel en todo momento"
+  description = "<p></p>"
   tag = "backlog"
   linkFiles = [ ]
   dueDate = ""
   checkList = [ ]
-  priority = ""
+  priority = "Normal"
   linkCommits = [ ]
 
   [[processes.tasks]]
-  id = "y7iw8hsksae635wocjg7bu6k"
-  title = "Printear el panel en todo momento"
-  description = ""
+  id = "kmqw04cuza6j4gbkj2l5hctu"
+  title = "Registrador de paneles"
+  description = "<p>Un cliente para poder añadir preguntas nuevas</p>"
   tag = "backlog"
   linkFiles = [ ]
   dueDate = ""
   checkList = [ ]
-  priority = ""
+  priority = "Low"
   linkCommits = [ ]
 
   [[processes.tasks]]
@@ -93,34 +93,34 @@ name = "En proceso"
   [[processes.tasks]]
   id = "acx63xen65ux0bgm3ou0h189"
   title = "Ciclo de juego"
-  description = ""
+  description = "<p></p>"
   tag = "backlog"
   linkFiles = [ ]
   dueDate = ""
   checkList = [ ]
-  priority = ""
+  priority = "High"
   linkCommits = [ ]
 
   [[processes.tasks]]
   id = "s3sal9ct7zhcek2qqp0qgbbp"
   title = "Puntuacion al resolver un panel"
-  description = ""
-  tag = "backlog"
+  description = "<p></p>"
+  tag = "bug"
   linkFiles = [ ]
   dueDate = ""
   checkList = [ ]
-  priority = ""
+  priority = "High"
   linkCommits = [ ]
 
   [[processes.tasks]]
   id = "pe04nu8dw2g7z771bkeqhl55"
   title = "Cambio de turnos"
-  description = ""
+  description = "<p></p>"
   tag = "backlog"
   linkFiles = [ ]
   dueDate = ""
   checkList = [ ]
-  priority = ""
+  priority = "High"
   linkCommits = [ ]
 
   [[processes.tasks]]
