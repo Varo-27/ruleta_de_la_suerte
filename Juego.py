@@ -75,6 +75,7 @@ class Juego:
             match opcion_juego:
                 case 1:
                     selection = self.weel.tirada()
+
                     match selection:
                         case 'broke':
                             self.jugadores[self.turno].puntos = 0
@@ -92,6 +93,9 @@ class Juego:
                 case 2:
                     self.vista.pintar_panel(self.panel)
                     self.jugadores[self.turno].compra_vocal()
+                    vowel = self.vista.vowel()
+                    if self.panel.comprobar_letra(vowel) == 0:
+                        self.siguiente_turno()
                 case 3:
                     solucion = self.vista.solve()
                     if self.panel.comprobar_resolucion(solucion):

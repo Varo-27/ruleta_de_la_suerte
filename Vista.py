@@ -65,6 +65,18 @@ class Vista():
                     self.error("Valor incorrecto")
             except:
                 self.error("Tipo de dato incorrecto")
+
+    def vowel(self):
+        print("Introduce vocal: ")
+        while True:
+            try:
+                answer = input()
+                if len(answer) == 1 and answer in "aeiou":
+                    return answer
+                else:
+                    self.error("Valor incorrecto")
+            except:
+                self.error("Tipo de dato incorrecto")
     
     def choice(self):
         print("Elige una opción: ", end="")
@@ -89,11 +101,12 @@ class Vista():
                 print("Introducelo de nuevo: ", end="")
 
     def num_participantes(self) -> int:
-        print("Introduce el número de participantes: ", end="")
+        print("Introduce el número de participantes (2 o 3): ", end="")
         while True:
             try:
                 answer = int(input())
-                return answer
+                if 1 < answer < 4:
+                    return answer
             except:
                 self.error("Tipo de dato incorrecto")
 

@@ -7,6 +7,31 @@ id = "process1"
 name = "Sin empezar"
 
   [[processes.tasks]]
+  id = "dn0v3forr7g9n1bmfpfwsi69"
+  title = "Mejora de la ruleta"
+  description = "<p>Añadir mas gajos especiales</p>"
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  priority = ""
+  linkCommits = [ ]
+
+    [[processes.tasks.checkList]]
+    id = "ek8imheir7nsnct34wcwa5gq"
+    title = "Mas gajos especiales"
+    completed = false
+
+    [[processes.tasks.checkList]]
+    id = "otxjj6lm0f1rmjjff87xkdav"
+    title = "Printeo de las selecciones"
+    completed = false
+
+    [[processes.tasks.checkList]]
+    id = "xu7e7e2vaignhntpdiniyp3p"
+    title = "Animacion por pantalla"
+    completed = false
+
+  [[processes.tasks]]
   id = "kmqw04cuza6j4gbkj2l5hctu"
   title = "Registrador de paneles"
   description = "Un cliente para poder añadir preguntas nuevas"
@@ -18,8 +43,8 @@ name = "Sin empezar"
   linkCommits = [ ]
 
   [[processes.tasks]]
-  id = "bfmypci4i4piw1a2m21han8i"
-  title = "preguntar por letra"
+  id = "y7iw8hsksae635wocjg7bu6k"
+  title = "Printear el panel en todo momento"
   description = ""
   tag = "backlog"
   linkFiles = [ ]
@@ -31,6 +56,17 @@ name = "Sin empezar"
   [[processes.tasks]]
   id = "tbaal8dr8uxrckvv4whehqgu"
   title = "juego a varias rondas"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "awp9gi4jf4vt71nigbozkbzj"
+  title = "ScoreBoard"
   description = ""
   tag = "backlog"
   linkFiles = [ ]
@@ -52,11 +88,55 @@ name = "Sin empezar"
 
 [[processes]]
 id = "process2"
-name = "Em proceso"
+name = "En proceso"
 
   [[processes.tasks]]
   id = "acx63xen65ux0bgm3ou0h189"
   title = "Ciclo de juego"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "s3sal9ct7zhcek2qqp0qgbbp"
+  title = "Puntuacion al resolver un panel"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "pe04nu8dw2g7z771bkeqhl55"
+  title = "Cambio de turnos"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "bfmypci4i4piw1a2m21han8i"
+  title = "preguntar por letra"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "asrxxnystnst7fzbddvuxlry"
+  title = "Finalizar ronda panel resuelto"
   description = ""
   tag = "backlog"
   linkFiles = [ ]
