@@ -4,15 +4,22 @@ class Panel:
         self.frase = panel[0]
         self.pista = panel[1]
         self.letras_acertadas = [" "]
-        self.letras_falladas = ["j", "k", "w", "m"]
+        self.letras_falladas = []
 
     def comprobar_letra(self, letra):
         if letra in self.frase:
             self.letras_acertadas.append(letra)
             self.letras_acertadas.sort()
+            return self.frase.count(letra)
         else:
             self.letras_falladas.append(letra)
             self.letras_falladas.sort()
+
+    def comprobar_resolucion(self, resolucion):
+        if resolucion == self.frase:
+            return True
+        else:
+            return False
 
     def __str__(self) -> str:
         frase_oculta = " ".join(letra if letra in self.letras_acertadas else "_" for letra in self.frase).upper()
@@ -21,15 +28,27 @@ class Panel:
         return frase_oculta + "\n"*2 + frase_fallos + "\n"*2 + pista
 
 
-import animation
+
+
+
+
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
+    import animation
 
     pregunta1 = {
-        "frase" : "Es una frase de prueba",
+        "frase" : "es una frase de prueba",
         "pista" : "Pista de prueba"
     }
     pregunta2 = {
-        "frase" : "Es una frase de prueba dos",
+        "frase" : "es una frase de prueba dos",
         "pista" : "Pista de prueba dos"
     }
 
@@ -41,5 +60,10 @@ if __name__ == "__main__":
     frase_prueba.comprobar_letra("b")
     frase_prueba.comprobar_letra("e")
     frase_prueba.comprobar_letra("r")
+    frase_prueba.comprobar_letra("j")
+    frase_prueba.comprobar_letra("k")
+    frase_prueba.comprobar_letra("w")
+    frase_prueba.comprobar_letra("m")
+    frase_prueba.comprobar_letra("l")
     print(frase_prueba)
     animation.animation()

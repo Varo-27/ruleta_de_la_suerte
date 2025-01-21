@@ -20,10 +20,10 @@ class Juego:
         jugadores_ok = False
         while jugadores_ok == False:
             try:
-                self.vista.inicio()
+                self.vista.welcome()
                 
-                self.vista.elegir()
-                seleccion = self.vista.menu_inicio()
+                self.vista.choice()
+                seleccion = self.vista.start_menu()
                 if seleccion == 1:
                     self.add_players()
                     jugadores_ok = True
@@ -55,7 +55,7 @@ class Juego:
                 self.vista.error("Valor incorrecto")
 
         while len(self.jugadores) < num_players:
-            self.jugadores.append(Jugador.Jugador(self.vista.nombre_jugador(len(self.jugadores)+1)))
+            self.jugadores.append(Jugador.Jugador(self.vista.player_name(len(self.jugadores)+1)))
 
         self.vista.empezando_partida()
 
@@ -65,6 +65,7 @@ class Juego:
             self.turno = 0
 
     def control_puntos(self):
+        self.jugadores[self.turno].puntos += 100
         pass
 
 
@@ -72,15 +73,42 @@ class Juego:
         self.menu()
         self.panel = Panel(self.frase())
         while self.resuelto ==False:
-            opcion_juego = self.vista.menu_juego()
+            opcion_juego = self.vista.game_menu(self.jugadores[self.turno].nombre)
             match opcion_juego:
                 case 1:
-                    self.weel.tirada()
+                    selection = self.weel.tirada()
+                    match selection:
+                        case 'broke':
+                            self.jugadores[self.turno].puntos = 0
+                            self.siguiente_turno()
+                        case 'lose_turn':
+                            self.siguiente_turno()
+                        case _:
+                            letra = self.vista.consonant()
+                            if self.panel.comprobar_letra(letra) > 0:
+                                self.jugadores[self.turno].puntos += self.panel.comprobar_letra(letra) * selection
+                            else:
+                                self.siguiente_turno() 
                 case 2:
+                    self.vista.pintar_panel(self.panel)
                     self.jugadores[self.turno].compra_vocal()
                 case 3:
-                    self.vista.resolver()
-                    self.panel.
+                    solucion = self.vista.solve()
+                    if self.panel.comprobar_resolucion(solucion):
+                        self.resuelto = True
+                        self.control_puntos()
+                case 4:
+                    exit()
+                case _:
+                    raise ValueError("Valor incorrecto en mach case")
+
+
+
+
+
+
+
+
 
 
 

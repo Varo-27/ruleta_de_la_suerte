@@ -8,7 +8,7 @@ class Weel:
 
     def tirada(self):
         self.selection = random.choice(self.section)
-        print(self.selection)
+        return self.selection
 
 
 
