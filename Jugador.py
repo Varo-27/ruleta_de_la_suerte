@@ -3,15 +3,17 @@ class Jugador:
 
     def __init__(self, nombre):
         self.nombre = nombre
-        self.puntos = 0
-        
+        self.puntos_ronda = 0
+        self.puntos_totales = 0
 
     def compra_vocal(self):
-        if self.puntos < 50:
-            return False
-        else:
-            self.puntos -=50
-            return True
+        self.puntos_ronda -=50
+
+    def win_panel(self):
+        self.puntos_totales += self.puntos_ronda
+    
+    def pintar_total(self):
+        return f"{self.nombre} - {self.puntos_totales} puntos"
 
     def __str__(self) -> str:
-        return f"{self.nombre} - {self.puntos} puntos"
+        return f"{self.nombre} - {self.puntos_ronda} puntos"

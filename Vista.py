@@ -28,7 +28,6 @@ class Vista():
                 self.error("Tipo de dato incorrecto")
 
     def game_menu(self, player_name: str):
-        os.system("cls" if os.name == "nt" else "clear")
         print(f"Turno de {player_name}")
         print("1. Tirar")
         print("2. Comprar vocal")
@@ -41,8 +40,10 @@ class Vista():
                 if answer in [1, 2, 3, 4]:
                     return answer
                 else:
+                    print("\033[F\033[K", end="")
                     self.error("Valor incorrecto")
             except:
+                print("\033[F\033[K", end="")
                 self.error("Tipo de dato incorrecto")
 
     def solve(self):
@@ -113,7 +114,15 @@ class Vista():
     def starting_game(self):
         print("Jugadores listos, empezando partida...")
         time.sleep(2)
-        print("\033[F\033[K", end="")
+
+    def end_points(self, jugadores):
+        for jugador in jugadores:
+            print(jugador.pintar_total())
+        input("Pulsa enter para continuar...")
+
+    def pintar_jugadores(self, jugador):
+        print(jugador)
 
     def pintar_panel(self, panel: Panel):
+        os.system("cls" if os.name == "nt" else "clear")
         print(panel)

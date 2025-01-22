@@ -32,17 +32,6 @@ name = "Sin empezar"
     completed = false
 
   [[processes.tasks]]
-  id = "y7iw8hsksae635wocjg7bu6k"
-  title = "Printear el panel en todo momento"
-  description = "<p></p>"
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = "Normal"
-  linkCommits = [ ]
-
-  [[processes.tasks]]
   id = "kmqw04cuza6j4gbkj2l5hctu"
   title = "Registrador de paneles"
   description = "<p>Un cliente para poder añadir preguntas nuevas</p>"
@@ -91,17 +80,6 @@ id = "process2"
 name = "En proceso"
 
   [[processes.tasks]]
-  id = "acx63xen65ux0bgm3ou0h189"
-  title = "Ciclo de juego"
-  description = "<p></p>"
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = "High"
-  linkCommits = [ ]
-
-  [[processes.tasks]]
   id = "s3sal9ct7zhcek2qqp0qgbbp"
   title = "Puntuacion al resolver un panel"
   description = "<p></p>"
@@ -113,8 +91,8 @@ name = "En proceso"
   linkCommits = [ ]
 
   [[processes.tasks]]
-  id = "pe04nu8dw2g7z771bkeqhl55"
-  title = "Cambio de turnos"
+  id = "y7iw8hsksae635wocjg7bu6k"
+  title = "Printear el panel en todo momento"
   description = "<p></p>"
   tag = "backlog"
   linkFiles = [ ]
@@ -124,14 +102,14 @@ name = "En proceso"
   linkCommits = [ ]
 
   [[processes.tasks]]
-  id = "bfmypci4i4piw1a2m21han8i"
-  title = "preguntar por letra"
-  description = ""
+  id = "acx63xen65ux0bgm3ou0h189"
+  title = "Ciclo de juego"
+  description = "<p></p>"
   tag = "backlog"
   linkFiles = [ ]
   dueDate = ""
   checkList = [ ]
-  priority = ""
+  priority = "High"
   linkCommits = [ ]
 
   [[processes.tasks]]
@@ -163,6 +141,28 @@ name = "Completadas"
   [[processes.tasks]]
   id = "uqavhr1cw5sy4ulf1wwqy83c"
   title = "Menu de Inicio"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "pe04nu8dw2g7z771bkeqhl55"
+  title = "Cambio de turnos"
+  description = "<p></p>"
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = "High"
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "bfmypci4i4piw1a2m21han8i"
+  title = "preguntar por letra"
   description = ""
   tag = "backlog"
   linkFiles = [ ]

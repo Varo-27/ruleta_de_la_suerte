@@ -16,17 +16,80 @@ class Panel:
             self.letras_falladas.sort()
             return 0
 
-    def comprobar_resolucion(self, resolucion):
-        if resolucion == self.frase:
+    def comprobar_resolucion(self, resolucion: str):
+        if resolucion.lower() == self.frase.lower():
             return True
         else:
             return False
 
+    def decorar_letra(self, letra: str):
+        if letra == " ":
+            return [
+                " _____ ",
+                "|█████|",
+                "|█████|",
+                "|█████|",
+                " ‾‾‾‾‾ "
+            ]
+        elif letra == "_":
+            return [
+                " _____ ",
+                "|     |",
+                "|  ░  |",
+                "|     |",
+                " ‾‾‾‾‾ "
+            ]       
+        else:
+            return [
+                " _____ ",
+                "|     |",
+                "|  {}  |".format(letra),
+                "|     |",
+                " ‾‾‾‾‾ "
+            ]
+
+    def decorar_frase(self, frase):
+        # Buscar el espacio más cercano a la mitad de la frase
+        mitad = len(frase) // 2
+        mejor_corte = len(frase)
+        for i in range(mitad - 3, mitad + 10):
+            if frase[i] == ' ':
+                mejor_corte = i
+                break
+
+        #Ocultar las letras no acertadas
+        print(frase)
+        frase_oculta = "".join([letra.upper() if letra in self.letras_acertadas else "_" for letra in frase])
+
+        # Dividir la frase en dos líneas
+        linea1 = frase_oculta[:mejor_corte].strip()
+        linea2 = frase_oculta[mejor_corte:].strip()
+
+        # Decorar cada línea
+        decorada1 = [self.decorar_letra(letra) for letra in linea1]
+        decorada2 = [self.decorar_letra(letra) for letra in linea2]
+
+        # Unir las partes de cada línea en filas horizontales
+        filas1 = ["", "", "", "", ""]
+        for letra in decorada1:
+            for i in range(5):
+                filas1[i] += letra[i] + "  "
+
+        filas2 = ["", "", "", "", ""]
+        for letra in decorada2:
+            for i in range(5):
+                filas2[i] += letra[i] + "  "
+
+        # Combinar las filas de ambas líneas con un separador
+        return "\n".join(filas1) + "\n" + "\n".join(filas2)
+
+
+
     def __str__(self) -> str:
-        frase_oculta = " ".join(letra if letra in self.letras_acertadas else "_" for letra in self.frase).upper()
+        frase_oculta = self.decorar_frase(self.frase)
         pista = self.pista
         frase_fallos = f"Letras ya probadas: {", ".join(self.letras_falladas).upper()}"
-        return frase_oculta + "\n"*2 + frase_fallos + "\n"*2 + pista
+        return frase_oculta + "\n"*2 + frase_fallos + "\n"*2 + pista + "\n"
 
 
 
@@ -43,9 +106,11 @@ class Panel:
 
 if __name__ == "__main__":
     import animation
+    import os
 
+    os.system("cls" if os.name == "nt" else "clear")
     pregunta1 = {
-        "frase" : "es una frase de prueba",
+        "frase" : "la mejor frase de prueba posible",
         "pista" : "Pista de prueba"
     }
     pregunta2 = {
@@ -61,10 +126,12 @@ if __name__ == "__main__":
     frase_prueba.comprobar_letra("b")
     frase_prueba.comprobar_letra("e")
     frase_prueba.comprobar_letra("r")
-    frase_prueba.comprobar_letra("j")
+    frase_prueba.comprobar_letra("d")
     frase_prueba.comprobar_letra("k")
     frase_prueba.comprobar_letra("w")
     frase_prueba.comprobar_letra("m")
     frase_prueba.comprobar_letra("l")
     print(frase_prueba)
-    animation.animation()
+    #animation.animation()
+    while True:
+        pass

@@ -19,22 +19,19 @@ class Juego:
     def menu(self):
         jugadores_ok = False
         while jugadores_ok == False:
-            try:
-                self.vista.welcome()
-                seleccion = self.vista.start_menu()
-                if seleccion == 1:
+            self.vista.welcome()
+            seleccion = self.vista.start_menu()
+            match seleccion:
+                case 1:
                     self.add_players()
                     jugadores_ok = True
-                elif seleccion == 2:
+                case 2:
                     print("Aun no implementado")
                     input()
-                elif seleccion == 3:
+                case 3:
                     exit()
-                else:
+                case _:
                     self.vista.error("Valor incorrecto")
-            except:
-                self.vista.error("Tipo de dato incorrecto")
-                sleep(1)
 
     def frase(self) -> tuple:
         with open("paneles.json", "r") as f:
@@ -63,50 +60,70 @@ class Juego:
             self.turno = 0
 
     def control_puntos(self):
-        self.jugadores[self.turno].puntos += 100
-        pass
+        self.jugadores[self.turno].win_panel()
+        for jugador in self.jugadores:
+            jugador.puntos_ronda = 0
 
 
     def run(self):
-        self.menu()
+        self.menu() #Menu de inicio - Elegir participantes
         self.panel = Panel(self.frase())
-        while self.resuelto ==False:
-            opcion_juego = self.vista.game_menu(self.jugadores[self.turno].nombre)
-            match opcion_juego:
-                case 1:
-                    selection = self.weel.tirada()
-
-                    match selection:
-                        case 'broke':
-                            self.jugadores[self.turno].puntos = 0
-                            self.vista.bankrupt()
+        while self.resuelto == False:
+            first_throw = False
+            round_game = True
+            while round_game == True:
+                self.vista.pintar_panel(self.panel)
+                self.vista.pintar_jugadores(self.jugadores[self.turno])
+                opcion_juego = self.vista.game_menu(self.jugadores[self.turno].nombre)
+                match opcion_juego:
+                    case 1:
+                        first_throw = True
+                        selection = self.weel.tirada()
+                        match selection:
+                            case 'broke':
+                                self.jugadores[self.turno].puntos_ronda = 0
+                                self.vista.bankrupt()
+                                self.siguiente_turno()
+                                round_game = False
+                            case 'lose_turn':
+                                self.vista.lose_turn()
+                                self.siguiente_turno()
+                                round_game = False
+                            case _:
+                                letra = self.vista.consonant()
+                                if self.panel.comprobar_letra(letra) > 0:
+                                    self.jugadores[self.turno].puntos_ronda += self.panel.comprobar_letra(letra) * selection
+                                else:
+                                    self.siguiente_turno()
+                                    round_game = False
+                    case 2:
+                        if first_throw == False:
+                            self.vista.error("Tienes que hacer una tirada primero")
+                        elif self.jugadores[self.turno].puntos_ronda <= 50:
+                            self.vista.error("No tienes suficientes puntos")
+                        else:
+                            self.vista.pintar_panel(self.panel)
+                            self.jugadores[self.turno].compra_vocal()
+                            vowel = self.vista.vowel()
+                            if self.panel.comprobar_letra(vowel) == 0:
+                                self.siguiente_turno()
+                                round_game = False
+                    case 3:
+                        print(self.panel)
+                        solucion = self.vista.solve()
+                        if self.panel.comprobar_resolucion(solucion):
+                            self.resuelto = True
+                            round_game = False
+                            self.control_puntos()
+                            self.vista.pintar_panel(self.panel)
+                            self.vista.end_points(self.jugadores)
+                        else:
                             self.siguiente_turno()
-                        case 'lose_turn':
-                            self.vista.lose_turn()
-                            self.siguiente_turno()
-                        case _:
-                            letra = self.vista.consonant()
-                            if self.panel.comprobar_letra(letra) > 0:
-                                self.jugadores[self.turno].puntos += self.panel.comprobar_letra(letra) * selection
-                            else:
-                                self.siguiente_turno() 
-                case 2:
-                    self.vista.pintar_panel(self.panel)
-                    self.jugadores[self.turno].compra_vocal()
-                    vowel = self.vista.vowel()
-                    if self.panel.comprobar_letra(vowel) == 0:
-                        self.siguiente_turno()
-                case 3:
-                    solucion = self.vista.solve()
-                    if self.panel.comprobar_resolucion(solucion):
-                        self.resuelto = True
-                        self.control_puntos()
-                    else:
-                        self.siguiente_turno()
-                case 4:
-                    exit()
-                case _:
-                    raise ValueError("Valor incorrecto en mach case")
+                            round_game = False
+                    case 4:
+                        exit()
+                    case _:
+                        raise ValueError("Valor incorrecto en mach case")
 
 
 
