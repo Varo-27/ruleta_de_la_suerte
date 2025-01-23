@@ -67,7 +67,8 @@ class Juego:
 
     def run(self):
         self.menu() #Menu de inicio - Elegir participantes
-        self.panel = Panel(self.frase())
+        self.panel = Panel(self.frase())    #Crear panel con una frase aleatoria
+
         while self.resuelto == False:
             first_throw = False
             round_game = True
