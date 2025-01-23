@@ -75,6 +75,17 @@ name = "Sin empezar"
   priority = ""
   linkCommits = [ ]
 
+  [[processes.tasks]]
+  id = "o0s2j52ykwmt7ze086k6spr1"
+  title = "añadir espacios para igualar las filas"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
 [[processes]]
 id = "process2"
 name = "En proceso"
