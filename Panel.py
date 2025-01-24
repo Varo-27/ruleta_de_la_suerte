@@ -35,8 +35,8 @@ class Panel:
             return [
                 " _____ ",
                 "|     |",
-                "|  ░  |",
                 "|     |",
+                "| *** |",
                 " ‾‾‾‾‾ "
             ]       
         else:
@@ -62,9 +62,14 @@ class Panel:
 
         # Dividir la frase en dos líneas
         linea1 = frase_oculta[:mejor_corte].strip()
-        decorada1 = [self.decorar_letra(letra) for letra in linea1]
-
         linea2 = frase_oculta[mejor_corte:].strip()
+        
+        if len(linea1) < len(linea2):
+            linea1 = linea1.center(len(linea2), " ")
+        elif len(linea2) < len(linea1):
+            linea2 = linea2.center(len(linea1), " ")
+
+        decorada1 = [self.decorar_letra(letra) for letra in linea1]
         decorada2 = [self.decorar_letra(letra) for letra in linea2]
 
         # Unir las partes de cada línea en filas horizontales
