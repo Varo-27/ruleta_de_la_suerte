@@ -1,3 +1,5 @@
+from textwrap import wrap
+
 class Panel:
 
     def __init__(self,panel: tuple):
@@ -48,43 +50,26 @@ class Panel:
                 " ‾‾‾‾‾ "
             ]
 
-    def decorar_frase(self, frase: str) -> str:
-        # Buscar el espacio más cercano a la mitad de la frase
-        mitad = len(frase) // 2
-        mejor_corte = len(frase)
-        for i in range(mitad + 10, mitad - 3, -1):
-            if frase[i] == ' ':
-                mejor_corte = i
+    def decorar_frase(self, frase: str):
+        hidden_phrase = "".join([letra.upper() if letra in self.letras_acertadas else "_" for letra in frase])
 
-        #Ocultar las letras no acertadas
-        print(frase)
-        frase_oculta = "".join([letra.upper() if letra in self.letras_acertadas else "_" for letra in frase])
+        MAXLENGHT = 14
+        divided_lines = wrap(hidden_phrase, MAXLENGHT)
 
-        # Dividir la frase en dos líneas
-        linea1 = frase_oculta[:mejor_corte].strip()
-        linea2 = frase_oculta[mejor_corte:].strip()
-        
-        if len(linea1) < len(linea2):
-            linea1 = linea1.center(len(linea2), " ")
-        elif len(linea2) < len(linea1):
-            linea2 = linea2.center(len(linea1), " ")
+        max_length = max([len(linea) for linea in divided_lines])
+        centered_lines = [linea.center(max_length, " ") for linea in divided_lines]
+        print(centered_lines)
+        lines = [["", "", "", "", ""] for _ in range(len(centered_lines))]
 
-        decorada1 = [self.decorar_letra(letra) for letra in linea1]
-        decorada2 = [self.decorar_letra(letra) for letra in linea2]
+        for index, line in enumerate(centered_lines):
+            decorada = [self.decorar_letra(letter) for letter in line]
+            for letter in decorada:
+                for i in range(5):
+                    lines[index][i] += letter[i] + " "
 
-        # Unir las partes de cada línea en filas horizontales
-        filas1 = ["", "", "", "", ""]
-        for letra in decorada1:
-            for i in range(5):
-                filas1[i] += letra[i] + "  "
 
-        filas2 = ["", "", "", "", ""]
-        for letra in decorada2:
-            for i in range(5):
-                filas2[i] += letra[i] + "  "
+        return "\n\n".join("\n".join(line) for line in lines)
 
-        # Combinar las lineas del panel
-        return "\n".join(filas1) + "\n" + "\n".join(filas2)
 
     def __str__(self) -> str:
         frase_oculta = self.decorar_frase(self.frase)
@@ -111,7 +96,7 @@ if __name__ == "__main__":
 
     os.system("cls" if os.name == "nt" else "clear")
     pregunta1 = {
-        "frase" : "la mejor frase de prueba posible",
+        "frase" : "en un lugar de la mancha de cuyo nombre",
         "pista" : "Pista de prueba"
     }
     pregunta2 = {
@@ -132,7 +117,11 @@ if __name__ == "__main__":
     frase_prueba.comprobar_letra("w")
     frase_prueba.comprobar_letra("m")
     frase_prueba.comprobar_letra("l")
+    frase_prueba.comprobar_letra("o")
+    frase_prueba.comprobar_letra("p")
+    frase_prueba.comprobar_letra("s")
+    frase_prueba.comprobar_letra("t")
     print(frase_prueba)
-    #animation.animation()
+    animation.animation()
     while True:
         pass

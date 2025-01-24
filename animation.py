@@ -4,7 +4,8 @@ from colorama import init
 def limpiar_lineas(n):
     init()
     for _ in range(n):
-        print("\033[F\033[K", end="")
+        print("\033[F", end="")
+        print("\033[K", end="")
 
 
 def animation():
