@@ -5,6 +5,9 @@ from Jugador import Jugador     #Solo para type hints
 
 class Vista():
 
+    #Funciones solo de impresión
+    #===========================
+
     def welcome(self) -> None:
         os.system("cls" if os.name == "nt" else "clear")
         print("Bienvenido a la Ruleta de la suerte")
@@ -41,20 +44,26 @@ class Vista():
         print(jugador)
 
 
+
+    #Funciones con input
+    #===================
+
     def start_menu(self) -> int:
         print("1.Añadir jugadores")
         print("2.Scoreboard")
         print("3.Salir")
-        while True:
+        valid_answer = False
+        while valid_answer == False:
             try:
                 self.choice()
                 answer = int(input())
                 if answer in [1, 2, 3]:
-                    return answer
+                    valid_answer = True
                 else:
                     self.error("Valor incorrecto")
             except:
                 self.error("Tipo de dato incorrecto")
+        return answer
 
     def game_menu(self, player_name: str) -> int:
         print(f"Turno de {player_name}")
@@ -62,69 +71,88 @@ class Vista():
         print("2. Comprar vocal")
         print("3. Resolver")
         print("4. Salir")
-        while True:
+        valid_answer = False
+        while valid_answer == False:
             try:
                 self.choice()
                 answer = int(input())
                 if answer in [1, 2, 3, 4]:
-                    return answer
+                    valid_answer = True
                 else:
                     print("\033[F\033[K", end="")
                     self.error("Valor incorrecto")
             except:
                 print("\033[F\033[K", end="")
                 self.error("Tipo de dato incorrecto")
+        return answer
 
     def solve(self) -> str:
         print("Respuesta final: ")
-        while True:
+        valid_answer = False
+        while valid_answer == False:
             try:
                 answer = input()
-                return answer
-            except:
+            except: 
                 self.error("Tipo de dato incorrecto")
+        return answer
 
     def consonant(self) -> str:
         print("Introduce consonante: ")
-        while True:
+        valid_answer = False
+        while valid_answer == False:
             try:
                 answer = input()
                 if len(answer) == 1 and answer.lower() in "bcdfghjklmnñpqrstvwxyz":
-                    return answer
+                    valid_answer = True
                 else:
                     self.error("Valor incorrecto")
             except:
                 self.error("Tipo de dato incorrecto")
+        return answer
 
     def vowel(self) -> str:
         print("Introduce vocal: ")
-        while True:
+        valid_answer = False
+        while valid_answer == False:
             try:
                 answer = input()
                 if len(answer) == 1 and answer.lower() in "aeiou":
-                    return answer
+                    valid_answer = True
                 else:
                     self.error("Valor incorrecto")
             except:
                 self.error("Tipo de dato incorrecto")
+        return answer
 
 
     def player_name(self, num_jugador: int) -> str:
         print(f"Nombre del Jugador {num_jugador}: ", end="")
-        while True:
-            nombre = input()
+        valid_answer = False
+        while valid_answer == False:
+            player_name = input()
             respuesta = "s" #input(f"El nombre del jugador {num_jugador} es {nombre}, ¿es correcto? (s/n): ")
             if respuesta.lower() == "s":
-                return nombre
+                valid_answer = True
             else:
                 print("Introducelo de nuevo: ", end="")
+        return player_name
 
     def num_participantes(self) -> int:
         print("Introduce el número de participantes (2 o 3): ", end="")
-        while True:
+        valid_answer = False
+        while valid_answer == False:
             try:
                 answer = int(input())
                 if 1 < answer < 4:
-                    return answer
+                    valid_answer = True
             except:
                 self.error("Tipo de dato incorrecto")
+        return answer
+
+    def end_game(self) -> None:
+        print("Seguro que quieres salir? (s/N): ", end="")
+        answer = input()
+        if answer.lower() == "s":
+            exit()
+        else:
+            return

@@ -29,7 +29,7 @@ class Juego:
                     print("Aun no implementado")
                     input()
                 case 3:
-                    exit()
+                    self.vista.end_game()
                 case _:
                     self.vista.error("Valor incorrecto")
 
@@ -77,7 +77,7 @@ class Juego:
                 self.vista.pintar_jugadores(self.jugadores[self.turno])
                 opcion_juego = self.vista.game_menu(self.jugadores[self.turno].nombre)
                 match opcion_juego:
-                    case 1:
+                    case 1: #Tirar ruleta
                         first_throw = True
                         selection = self.weel.tirada()
                         match selection:
@@ -97,7 +97,8 @@ class Juego:
                                 else:
                                     self.siguiente_turno()
                                     player_round = False
-                    case 2:
+
+                    case 2: #Comprar vocal
                         if first_throw == False:
                             self.vista.error("Tienes que hacer una tirada primero")
                         elif self.jugadores[self.turno].puntos_ronda <= 50:
@@ -109,10 +110,10 @@ class Juego:
                             if self.panel.comprobar_letra(vowel) == 0:
                                 self.siguiente_turno()
                                 player_round = False
-                    case 3:
+
+                    case 3: #Resolver panel
                         self.vista.pintar_panel(self.panel)
                         solucion = self.vista.solve()
-
                         if self.panel.comprobar_resolucion(solucion):
                             self.panel.resuelto = True
                             self.panel.resuleto = True
@@ -120,12 +121,13 @@ class Juego:
                             self.control_puntos()
                             self.vista.pintar_panel(self.panel)
                             self.vista.end_points(self.jugadores)
-                            
                         else:
                             self.siguiente_turno()
                             player_round = False
-                    case 4:
-                        exit()
+
+                    case 4: #Salir
+                        self.vista.end_game()
+
                     case _:
                         raise ValueError("Valor incorrecto en mach case")
 

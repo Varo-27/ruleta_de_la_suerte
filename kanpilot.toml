@@ -7,6 +7,54 @@ id = "process1"
 name = "Sin empezar"
 
   [[processes.tasks]]
+  id = "tbaal8dr8uxrckvv4whehqgu"
+  title = "juego a varias rondas"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "kmqw04cuza6j4gbkj2l5hctu"
+  title = "Registrador de paneles"
+  description = "<p>Un cliente para poder añadir preguntas nuevas</p>"
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = "Low"
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "vf93e7vn3enfmrwhw29rwqei"
+  title = "Implementar sockets"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "awp9gi4jf4vt71nigbozkbzj"
+  title = "ScoreBoard"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+[[processes]]
+id = "process2"
+name = "En proceso"
+
+  [[processes.tasks]]
   id = "dn0v3forr7g9n1bmfpfwsi69"
   title = "Mejora de la ruleta"
   description = "<p>Añadir mas gajos especiales</p>"
@@ -32,87 +80,6 @@ name = "Sin empezar"
     completed = false
 
   [[processes.tasks]]
-  id = "kmqw04cuza6j4gbkj2l5hctu"
-  title = "Registrador de paneles"
-  description = "<p>Un cliente para poder añadir preguntas nuevas</p>"
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = "Low"
-  linkCommits = [ ]
-
-  [[processes.tasks]]
-  id = "tbaal8dr8uxrckvv4whehqgu"
-  title = "juego a varias rondas"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
-  linkCommits = [ ]
-
-  [[processes.tasks]]
-  id = "awp9gi4jf4vt71nigbozkbzj"
-  title = "ScoreBoard"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
-  linkCommits = [ ]
-
-  [[processes.tasks]]
-  id = "vf93e7vn3enfmrwhw29rwqei"
-  title = "Implementar sockets"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
-  linkCommits = [ ]
-
-  [[processes.tasks]]
-  id = "o0s2j52ykwmt7ze086k6spr1"
-  title = "añadir espacios para igualar las filas"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
-  linkCommits = [ ]
-
-[[processes]]
-id = "process2"
-name = "En proceso"
-
-  [[processes.tasks]]
-  id = "s3sal9ct7zhcek2qqp0qgbbp"
-  title = "Puntuacion al resolver un panel"
-  description = "<p></p>"
-  tag = "bug"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = "High"
-  linkCommits = [ ]
-
-  [[processes.tasks]]
-  id = "y7iw8hsksae635wocjg7bu6k"
-  title = "Printear el panel en todo momento"
-  description = "<p></p>"
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = "High"
-  linkCommits = [ ]
-
-  [[processes.tasks]]
   id = "acx63xen65ux0bgm3ou0h189"
   title = "Ciclo de juego"
   description = "<p></p>"
@@ -121,17 +88,6 @@ name = "En proceso"
   dueDate = ""
   checkList = [ ]
   priority = "High"
-  linkCommits = [ ]
-
-  [[processes.tasks]]
-  id = "asrxxnystnst7fzbddvuxlry"
-  title = "Finalizar ronda panel resuelto"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
   linkCommits = [ ]
 
 [[processes]]
@@ -174,6 +130,50 @@ name = "Completadas"
   [[processes.tasks]]
   id = "bfmypci4i4piw1a2m21han8i"
   title = "preguntar por letra"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "y7iw8hsksae635wocjg7bu6k"
+  title = "Printear el panel en todo momento"
+  description = "<p></p>"
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = "High"
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "asrxxnystnst7fzbddvuxlry"
+  title = "Finalizar ronda panel resuelto"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "s3sal9ct7zhcek2qqp0qgbbp"
+  title = "Puntuacion al resolver un panel"
+  description = "<p></p>"
+  tag = "bug"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = "High"
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "o0s2j52ykwmt7ze086k6spr1"
+  title = "añadir espacios para igualar las filas"
   description = ""
   tag = "backlog"
   linkFiles = [ ]
