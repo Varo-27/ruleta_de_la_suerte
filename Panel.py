@@ -7,10 +7,11 @@ class Panel:
         self.pista = panel[1]
         self.letras_acertadas = [" "]
         self.letras_falladas = []
+        self.resuelto = False
 
     def comprobar_letra(self, letra: str) -> int:
         if letra in self.frase:
-            self.letras_acertadas.append(letra)
+            self.letras_acertadas.append(letra.upper())
             self.letras_acertadas.sort()
             return self.frase.count(letra)
         else:
@@ -51,24 +52,24 @@ class Panel:
             ]
 
     def decorar_frase(self, frase: str):
-        hidden_phrase = "".join([letra.upper() if letra in self.letras_acertadas else "_" for letra in frase])
+        if self.resuelto == False:
+            frase = "".join([letra if letra.upper() in self.letras_acertadas else "_" for letra in frase])
 
         MAXLENGHT = 14
-        divided_lines = wrap(hidden_phrase, MAXLENGHT)
+        divided_lines = wrap(frase.upper(), MAXLENGHT)                      #Separa la frase en lineas de 14 caracteres como maximo
 
         max_length = max([len(linea) for linea in divided_lines])
         centered_lines = [linea.center(max_length, " ") for linea in divided_lines]
         print(centered_lines)
         lines = [["", "", "", "", ""] for _ in range(len(centered_lines))]
 
-        for index, line in enumerate(centered_lines):
-            decorada = [self.decorar_letra(letter) for letter in line]
-            for letter in decorada:
-                for i in range(5):
-                    lines[index][i] += letter[i] + " "
+        for index, line in enumerate(centered_lines):                       #Cada linea de la frase
+            decorada = [self.decorar_letra(letter) for letter in line]      #Decorar cada letra de la linea
+            for letter in decorada:                                         #Cada letra de la linea ya decorada 
+                for i in range(5):                                          #Cada linea son 5 filas de letra                                      
+                    lines[index][i] += letter[i] + " "                      #Añade la fila de la letra a la fila de la linea
 
-
-        return "\n\n".join("\n".join(line) for line in lines)
+        return "\n\n".join("\n".join(line) for line in lines)               #Junta las filas de la frase con un salto de linea y las lineas de la frase con dos saltos de linea
 
 
     def __str__(self) -> str:

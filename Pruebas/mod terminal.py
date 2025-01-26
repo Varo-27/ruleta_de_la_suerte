@@ -1,22 +1,18 @@
 import ctypes
-import subprocess
+import time
 
-# Función para establecer el modo de pantalla completa
-def pantalla_completa():
-    # Obtener el manejador de la ventana de la consola
-    kernel32 = ctypes.WinDLL('kernel32')
-    user32 = ctypes.WinDLL('user32')
+def maximize_console():
+    # Get the handle for the console window
+    hwnd = ctypes.windll.kernel32.GetConsoleWindow()
+    
+    # Check if the handle is valid
+    if hwnd:
+        # Maximize the console window
+        ctypes.windll.user32.ShowWindow(hwnd, 3)  # SW_MAXIMIZE = 3
 
-    SW_MAXIMIZE = 3
+# Call the function to maximize the console window
+maximize_console()
 
-    h_wnd = kernel32.GetConsoleWindow()
-    user32.ShowWindow(h_wnd, SW_MAXIMIZE)
-
-# Ejecutar la función para establecer el modo de pantalla completa
-
-# El resto de tu código aquí
-print("Hola, mundo!")
-pantalla_completa()
-
-while True:
-    pass
+# Your script logic goes here
+print("This is running in maximized mode!")
+time.sleep(5)  # Keep the console open for 5 seconds    

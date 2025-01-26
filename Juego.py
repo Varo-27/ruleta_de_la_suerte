@@ -13,7 +13,7 @@ class Juego:
         self.weel = Weel()
         self.turno = 0
         self.jugadores = []
-        self.resuelto = False
+        
 
 
     def menu(self):
@@ -69,10 +69,10 @@ class Juego:
         self.menu() #Menu de inicio - Elegir participantes
         self.panel = Panel(self.frase())    #Crear panel con una frase aleatoria
 
-        while self.resuelto == False:
+        while self.panel.resuelto == False:
             first_throw = False
-            round_game = True
-            while round_game == True:
+            player_round = True
+            while player_round == True:
                 self.vista.pintar_panel(self.panel)
                 self.vista.pintar_jugadores(self.jugadores[self.turno])
                 opcion_juego = self.vista.game_menu(self.jugadores[self.turno].nombre)
@@ -85,18 +85,18 @@ class Juego:
                                 self.jugadores[self.turno].puntos_ronda = 0
                                 self.vista.bankrupt()
                                 self.siguiente_turno()
-                                round_game = False
+                                player_round = False
                             case 'lose_turn':
                                 self.vista.lose_turn()
                                 self.siguiente_turno()
-                                round_game = False
+                                player_round = False
                             case _:
                                 letra = self.vista.consonant()
                                 if self.panel.comprobar_letra(letra) > 0:
                                     self.jugadores[self.turno].puntos_ronda += self.panel.comprobar_letra(letra) * selection
                                 else:
                                     self.siguiente_turno()
-                                    round_game = False
+                                    player_round = False
                     case 2:
                         if first_throw == False:
                             self.vista.error("Tienes que hacer una tirada primero")
@@ -108,19 +108,22 @@ class Juego:
                             vowel = self.vista.vowel()
                             if self.panel.comprobar_letra(vowel) == 0:
                                 self.siguiente_turno()
-                                round_game = False
+                                player_round = False
                     case 3:
-                        print(self.panel)
+                        self.vista.pintar_panel(self.panel)
                         solucion = self.vista.solve()
+
                         if self.panel.comprobar_resolucion(solucion):
-                            self.resuelto = True
-                            round_game = False
+                            self.panel.resuelto = True
+                            self.panel.resuleto = True
+                            player_round = False
                             self.control_puntos()
                             self.vista.pintar_panel(self.panel)
                             self.vista.end_points(self.jugadores)
+                            
                         else:
                             self.siguiente_turno()
-                            round_game = False
+                            player_round = False
                     case 4:
                         exit()
                     case _:

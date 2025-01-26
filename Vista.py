@@ -89,7 +89,7 @@ class Vista():
         while True:
             try:
                 answer = input()
-                if len(answer) == 1 and answer in "bcdfghjklmnñpqrstvwxyz":
+                if len(answer) == 1 and answer.lower() in "bcdfghjklmnñpqrstvwxyz":
                     return answer
                 else:
                     self.error("Valor incorrecto")
@@ -101,7 +101,7 @@ class Vista():
         while True:
             try:
                 answer = input()
-                if len(answer) == 1 and answer in "aeiou":
+                if len(answer) == 1 and answer.lower() in "aeiou":
                     return answer
                 else:
                     self.error("Valor incorrecto")
@@ -113,7 +113,7 @@ class Vista():
         print(f"Nombre del Jugador {num_jugador}: ", end="")
         while True:
             nombre = input()
-            respuesta = input(f"El nombre del jugador {num_jugador} es {nombre}, ¿es correcto? (s/n): ")
+            respuesta = "s" #input(f"El nombre del jugador {num_jugador} es {nombre}, ¿es correcto? (s/n): ")
             if respuesta.lower() == "s":
                 return nombre
             else:
