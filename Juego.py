@@ -1,19 +1,23 @@
-from Panel import Panel
-from Vista import Vista
-from Weel import Weel
-import Jugador
-from time import sleep
+from panel import Panel
+from vista import Vista
+from weel import Weel
+from jugador import Jugador
 import random
 import json
 
 class Juego:
+    turno: int
+    jugadores: list[Jugador]
+    paneles_completados: int
+    weel: Weel
+    vista: Vista
 
     def __init__(self):
-        self.vista = Vista()
-        self.weel = Weel()
         self.turno = 0
         self.jugadores = []
-        
+        self.paneles_completados = 0
+        self.vista = Vista()
+        self.weel = Weel()
 
 
     def menu(self):
@@ -50,7 +54,7 @@ class Juego:
                 self.vista.error("Valor incorrecto")
 
         while len(self.jugadores) < num_players:
-            self.jugadores.append(Jugador.Jugador(self.vista.player_name(len(self.jugadores)+1)))
+            self.jugadores.append(Jugador(self.vista.player_name(len(self.jugadores)+1)))
 
         self.vista.starting_game()
 
@@ -69,68 +73,77 @@ class Juego:
         self.menu() #Menu de inicio - Elegir participantes
         self.panel = Panel(self.frase())    #Crear panel con una frase aleatoria
 
-        while self.panel.resuelto == False:
-            first_throw = False
-            player_round = True
-            while player_round == True:
-                self.vista.pintar_panel(self.panel)
-                self.vista.pintar_jugadores(self.jugadores[self.turno])
-                opcion_juego = self.vista.game_menu(self.jugadores[self.turno].nombre)
-                match opcion_juego:
-                    case 1: #Tirar ruleta
-                        first_throw = True
-                        selection = self.weel.tirada()
-                        match selection:
-                            case 'broke':
-                                self.jugadores[self.turno].puntos_ronda = 0
-                                self.vista.bankrupt()
-                                self.siguiente_turno()
-                                player_round = False
-                            case 'lose_turn':
-                                self.vista.lose_turn()
-                                self.siguiente_turno()
-                                player_round = False
-                            case _:
-                                letra = self.vista.consonant()
-                                if self.panel.comprobar_letra(letra) > 0:
-                                    self.jugadores[self.turno].puntos_ronda += self.panel.comprobar_letra(letra) * selection
-                                else:
+        while self.paneles_completados < 3:
+
+            self.panel.resuelto = False
+
+            while self.panel.resuelto == False:
+                first_throw = False
+                player_round = True
+
+                while player_round == True:
+                    self.vista.pintar_panel(self.panel)
+                    self.vista.pintar_jugadores(self.jugadores[self.turno])
+                    opcion_juego = self.vista.game_menu(self.jugadores[self.turno].nombre)
+                    match opcion_juego:
+                        case 1: #Tirar ruleta
+                            first_throw = True
+                            selection = self.weel.tirada()
+                            match selection:
+                                case 'broke':
+                                    self.jugadores[self.turno].puntos_ronda = 0
+                                    self.vista.bankrupt()
+                                    self.siguiente_turno()
+                                    player_round = False
+                                case 'lose_turn':
+                                    self.vista.lose_turn()
+                                    self.siguiente_turno()
+                                    player_round = False
+                                case _:
+                                    try:
+                                        selection = int(selection)
+                                        letra = self.vista.consonant()
+                                        if self.panel.comprobar_letra(letra) > 0:
+                                            self.jugadores[self.turno].puntos_ronda += self.panel.comprobar_letra(letra) * selection
+                                        else:
+                                            self.siguiente_turno()
+                                            player_round = False
+                                    except ValueError:
+                                        self.vista.error("Error en la tirada, 'selection' no previsto")
+
+                        case 2: #Comprar vocal
+                            if first_throw == False:
+                                self.vista.error("Tienes que hacer una tirada primero")
+                            elif self.jugadores[self.turno].puntos_ronda <= 50:
+                                self.vista.error("No tienes suficientes puntos")
+                            else:
+                                self.vista.pintar_panel(self.panel)
+                                self.jugadores[self.turno].compra_vocal()
+                                vowel = self.vista.vowel()
+                                if self.panel.comprobar_letra(vowel) == 0:
                                     self.siguiente_turno()
                                     player_round = False
 
-                    case 2: #Comprar vocal
-                        if first_throw == False:
-                            self.vista.error("Tienes que hacer una tirada primero")
-                        elif self.jugadores[self.turno].puntos_ronda <= 50:
-                            self.vista.error("No tienes suficientes puntos")
-                        else:
+                        case 3: #Resolver panel
                             self.vista.pintar_panel(self.panel)
-                            self.jugadores[self.turno].compra_vocal()
-                            vowel = self.vista.vowel()
-                            if self.panel.comprobar_letra(vowel) == 0:
+                            solucion = self.vista.solve()
+                            if self.panel.comprobar_resolucion(solucion):
+                                self.panel.resuelto = True
+                                player_round = False
+                                self.control_puntos()
+                                self.vista.pintar_panel(self.panel)
+                                self.vista.end_points(self.jugadores)
+                            else:
                                 self.siguiente_turno()
                                 player_round = False
 
-                    case 3: #Resolver panel
-                        self.vista.pintar_panel(self.panel)
-                        solucion = self.vista.solve()
-                        if self.panel.comprobar_resolucion(solucion):
-                            self.panel.resuelto = True
-                            self.panel.resuleto = True
-                            player_round = False
-                            self.control_puntos()
-                            self.vista.pintar_panel(self.panel)
-                            self.vista.end_points(self.jugadores)
-                        else:
-                            self.siguiente_turno()
-                            player_round = False
+                        case 4: #Salir
+                            self.vista.end_game()
 
-                    case 4: #Salir
-                        self.vista.end_game()
+                        case _:
+                            raise ValueError("Valor incorrecto en mach case")
 
-                    case _:
-                        raise ValueError("Valor incorrecto en mach case")
-
+                self.paneles_completados += 1
 
 
 

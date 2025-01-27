@@ -1,7 +1,7 @@
 import os
 import time
-from Panel import Panel         #Solo para type hints
-from Jugador import Jugador     #Solo para type hints
+from panel import Panel         #Solo para type hints
+from jugador import Jugador     #Solo para type hints
 
 class Vista():
 
@@ -19,6 +19,7 @@ class Vista():
 
     def error(self, menssaje: str) -> None:
         print(f"Error introduciendo datos: {menssaje}")
+        input("Pulsa enter para continuar...")
 
     def pintar_panel(self, panel: Panel) -> None:
         os.system("cls" if os.name == "nt" else "clear")

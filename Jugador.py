@@ -1,5 +1,7 @@
-
 class Jugador:
+    nombre: str
+    puntos_ronda: int
+    puntos_totales: int
 
     def __init__(self, nombre: str):
         self.nombre = nombre

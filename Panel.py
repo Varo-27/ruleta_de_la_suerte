@@ -1,6 +1,11 @@
 from textwrap import wrap
 
 class Panel:
+    frase: str
+    pista: str
+    letras_acertadas: list[str]
+    letras_falladas: list[str]
+    resuelto: bool
 
     def __init__(self,panel: tuple):
         self.frase = panel[0]
