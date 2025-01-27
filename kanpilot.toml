@@ -61,6 +61,17 @@ name = "Sin empezar"
   priority = ""
   linkCommits = [ ]
 
+  [[processes.tasks]]
+  id = "v5li6ps12ukktmsbqzbiw85k"
+  title = "Juntar funcion vocal y consonante"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
 [[processes]]
 id = "process2"
 name = "En proceso"

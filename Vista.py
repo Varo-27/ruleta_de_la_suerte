@@ -47,6 +47,10 @@ class Vista():
     def pintar_jugadores(self, jugador: Jugador) -> None:
         print(jugador)
 
+    def phrase_register(self):
+        os.system("cls" if os.name == "nt" else "clear")
+        print("REGISTRANDO NUEVA ENTRADA EN EL JUEGO")
+        print("=====================================")
 
 
     #Funciones con input
@@ -55,7 +59,8 @@ class Vista():
     def start_menu(self) -> int:
         print("1.Añadir jugadores")
         print("2.Scoreboard")
-        print("3.Salir")
+        print("3.Añadir nuevo panel")
+        print("4.Salir")
         valid_answer = False
         while valid_answer == False:
             try:
@@ -90,43 +95,37 @@ class Vista():
                 self.error("Tipo de dato incorrecto")
         return answer
 
-    def solve(self) -> str:
-        print("Respuesta final: ")
+    def phrase_entry(self,msg) -> str:
+        print(f"{msg}: ", end="")
         valid_answer = False
         while valid_answer == False:
             try:
-                answer = input()
+                answer = input().lower()
             except: 
                 self.error("Tipo de dato incorrecto")
         return answer
 
-    def consonant(self) -> str:
-        print("Introduce consonante: ")
+    def prove_letter(self, letter_type) -> str:
+        consonants = "bcdfghjklmnñpqrstvwxyz"
+        vowels = "aeiou"
         valid_answer = False
         while valid_answer == False:
             try:
-                answer = input()
-                if len(answer) == 1 and answer.lower() in "bcdfghjklmnñpqrstvwxyz":
-                    valid_answer = True
+                print(f"Introduce una {letter_type}: ", end="")
+                answer = input().lower()
+                if len(answer) == 1:
+                    if letter_type == "consonante" and answer in consonants:
+                        valid_answer = True
+                    elif letter_type == "vocal" and answer in vowels:
+                        valid_answer = True
+                    else:
+                        self.error("Letra no reconocida")
                 else:
-                    self.error("Valor incorrecto")
+                    self.error("Solo una letra")
             except:
                 self.error("Tipo de dato incorrecto")
         return answer
 
-    def vowel(self) -> str:
-        print("Introduce vocal: ")
-        valid_answer = False
-        while valid_answer == False:
-            try:
-                answer = input()
-                if len(answer) == 1 and answer.lower() in "aeiou":
-                    valid_answer = True
-                else:
-                    self.error("Valor incorrecto")
-            except:
-                self.error("Tipo de dato incorrecto")
-        return answer
 
 
     def player_name(self, num_jugador: int) -> str:
@@ -134,9 +133,8 @@ class Vista():
         valid_answer = False
         while valid_answer == False:
             player_name = input()
-            respuesta = "s" #input(f"El nombre del jugador {num_jugador} es {nombre}, ¿es correcto? (s/n): ")
-            if respuesta.lower() == "s":
-                valid_answer = True
+            if len(player_name) > 0:
+                valid_answer = self.double_check()
             else:
                 print("Introducelo de nuevo: ", end="")
         return player_name
@@ -153,10 +151,15 @@ class Vista():
                 self.error("Tipo de dato incorrecto")
         return answer
 
-    def end_game(self) -> None:
-        print("Seguro que quieres salir? (s/N): ", end="")
+    def double_check(self) -> bool:
+        print("Seguro? (s/N): ", end="")
         answer = input()
         if answer.lower() == "s":
-            exit()
+            return True
         else:
-            return
+            return False
+
+            
+if __name__ == "__main__":
+    v = Vista()
+    v.prove_letter("consonante")
