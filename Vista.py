@@ -21,25 +21,28 @@ class Vista():
         print(f"Error introduciendo datos: {menssaje}")
         input("Pulsa enter para continuar...")
 
-    def pintar_panel(self, panel: Panel) -> None:
-        os.system("cls" if os.name == "nt" else "clear")
-        print(panel)
-
     def choice(self) -> None:
         print("Elige una opción: ", end="")
 
-    def bankrupt(self) -> None:
+    def weel_bankrupt(self) -> None:
         print("Has caido en la quiebra")
         time.sleep(2)
 
-    def lose_turn(self) -> None:
+    def weel_lose_turn(self) -> None:
         print("Pierdes el turno")
         time.sleep(2)
+
+    def weel_points(self, section: int) -> None:
+        print(f"Has caido en {section} puntos")
 
     def end_points(self, jugadores: list[Jugador]) -> None:
         for jugador in jugadores:
             print(jugador.pintar_total())
         input("Pulsa enter para continuar...")
+
+    def pintar_panel(self, panel: Panel) -> None:
+        os.system("cls" if os.name == "nt" else "clear")
+        print(panel)
 
     def pintar_jugadores(self, jugador: Jugador) -> None:
         print(jugador)

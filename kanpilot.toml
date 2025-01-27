@@ -7,17 +7,6 @@ id = "process1"
 name = "Sin empezar"
 
   [[processes.tasks]]
-  id = "tbaal8dr8uxrckvv4whehqgu"
-  title = "juego a varias rondas"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
-  linkCommits = [ ]
-
-  [[processes.tasks]]
   id = "kmqw04cuza6j4gbkj2l5hctu"
   title = "Registrador de paneles"
   description = "<p>Un cliente para poder añadir preguntas nuevas</p>"
@@ -50,6 +39,28 @@ name = "Sin empezar"
   priority = ""
   linkCommits = [ ]
 
+  [[processes.tasks]]
+  id = "aeg4zub92ulnat9jhlp3gvty"
+  title = "Control Visibidad Propiedades"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "am5jj29h0972smxgcr2zqgxw"
+  title = "Comprobar metodos estáticos"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
 [[processes]]
 id = "process2"
 name = "En proceso"
@@ -72,12 +83,16 @@ name = "En proceso"
     [[processes.tasks.checkList]]
     id = "otxjj6lm0f1rmjjff87xkdav"
     title = "Printeo de las selecciones"
-    completed = false
+    completed = true
 
     [[processes.tasks.checkList]]
     id = "xu7e7e2vaignhntpdiniyp3p"
     title = "Animacion por pantalla"
     completed = false
+
+[[processes]]
+id = "process3"
+name = "Completadas"
 
   [[processes.tasks]]
   id = "acx63xen65ux0bgm3ou0h189"
@@ -88,21 +103,6 @@ name = "En proceso"
   dueDate = ""
   checkList = [ ]
   priority = "High"
-  linkCommits = [ ]
-
-[[processes]]
-id = "process3"
-name = "Completadas"
-
-  [[processes.tasks]]
-  id = "rr7b5j5e11ntc65bw44orplh"
-  title = "preguntas aleatorias"
-  description = "eleccion de preguntas aleatorias"
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
   linkCommits = [ ]
 
   [[processes.tasks]]
@@ -125,6 +125,17 @@ name = "Completadas"
   dueDate = ""
   checkList = [ ]
   priority = "High"
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "rr7b5j5e11ntc65bw44orplh"
+  title = "preguntas aleatorias"
+  description = "eleccion de preguntas aleatorias"
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
   linkCommits = [ ]
 
   [[processes.tasks]]
@@ -174,6 +185,17 @@ name = "Completadas"
   [[processes.tasks]]
   id = "o0s2j52ykwmt7ze086k6spr1"
   title = "añadir espacios para igualar las filas"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "tbaal8dr8uxrckvv4whehqgu"
+  title = "juego a varias rondas"
   description = ""
   tag = "backlog"
   linkFiles = [ ]

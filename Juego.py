@@ -8,6 +8,7 @@ import json
 class Juego:
     turno: int
     jugadores: list[Jugador]
+    lista_paneles: list[Panel]
     paneles_completados: int
     weel: Weel
     vista: Vista
@@ -15,6 +16,7 @@ class Juego:
     def __init__(self):
         self.turno = 0
         self.jugadores = []
+        self.paneles = []
         self.paneles_completados = 0
         self.vista = Vista()
         self.weel = Weel()
@@ -71,8 +73,12 @@ class Juego:
 
     def run(self):
         self.menu() #Menu de inicio - Elegir participantes
-        self.panel = Panel(self.frase())    #Crear panel con una frase aleatoria
 
+        while len(self.paneles) < 3:
+            self.panel = Panel(self.frase())    #Crear paneles con una frase aleatoria
+            if self.panel.frase not in [panel.frase for panel in self.paneles]:
+                self.paneles.append(self.panel)
+        
         while self.paneles_completados < 3:
 
             self.panel.resuelto = False
@@ -92,16 +98,17 @@ class Juego:
                             match selection:
                                 case 'broke':
                                     self.jugadores[self.turno].puntos_ronda = 0
-                                    self.vista.bankrupt()
+                                    self.vista.weel_bankrupt()
                                     self.siguiente_turno()
                                     player_round = False
                                 case 'lose_turn':
-                                    self.vista.lose_turn()
+                                    self.vista.weel_lose_turn()
                                     self.siguiente_turno()
                                     player_round = False
                                 case _:
                                     try:
                                         selection = int(selection)
+                                        self.vista.weel_points(selection)
                                         letra = self.vista.consonant()
                                         if self.panel.comprobar_letra(letra) > 0:
                                             self.jugadores[self.turno].puntos_ronda += self.panel.comprobar_letra(letra) * selection
@@ -144,7 +151,7 @@ class Juego:
                             raise ValueError("Valor incorrecto en mach case")
 
                 self.paneles_completados += 1
-
+        self.vista.end_points(self.jugadores)
 
 
 
@@ -160,4 +167,4 @@ class Juego:
 #Tests
 if __name__ == "__main__":
     juego = Juego()
-    print(juego.frase())
+    print(juego.run())

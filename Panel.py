@@ -65,7 +65,6 @@ class Panel:
 
         max_length = max([len(linea) for linea in divided_lines])
         centered_lines = [linea.center(max_length, " ") for linea in divided_lines]
-        print(centered_lines)
         lines = [["", "", "", "", ""] for _ in range(len(centered_lines))]
 
         for index, line in enumerate(centered_lines):                       #Cada linea de la frase
