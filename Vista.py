@@ -28,6 +28,12 @@ class Vista():
         print("Has caido en la quiebra")
         time.sleep(2)
 
+    def weel_allvowels(self) -> None:
+        print("Acierta la consonante y desbloquea todas las vocales")
+
+    def weel_x2(self) -> None:
+        print("Acierta la consonante y duplica tus puntos esta ronda")
+
     def weel_lose_turn(self) -> None:
         print("Pierdes el turno")
         time.sleep(2)
@@ -61,6 +67,7 @@ class Vista():
         print("2.Scoreboard")
         print("3.Añadir nuevo panel")
         print("4.Salir")
+        answer = 0
         valid_answer = False
         while valid_answer == False:
             try:
@@ -77,9 +84,10 @@ class Vista():
     def game_menu(self, player_name: str) -> int:
         print(f"Turno de {player_name}")
         print("1. Tirar")
-        print("2. Comprar vocal")
+        print("2. Comprar vocal (50 puntos)")
         print("3. Resolver")
         print("4. Salir")
+        answer = 0
         valid_answer = False
         while valid_answer == False:
             try:
@@ -95,19 +103,22 @@ class Vista():
                 self.error("Tipo de dato incorrecto")
         return answer
 
-    def phrase_entry(self,msg) -> str:
+    def phrase_entry(self,msg: str) -> str:
         print(f"{msg}: ", end="")
+        answer = ""
         valid_answer = False
         while valid_answer == False:
             try:
                 answer = input().lower()
+                valid_answer = True
             except: 
                 self.error("Tipo de dato incorrecto")
         return answer
 
-    def prove_letter(self, letter_type) -> str:
+    def prove_letter(self, letter_type: str) -> str:
         consonants = "bcdfghjklmnñpqrstvwxyz"
         vowels = "aeiou"
+        answer = ""
         valid_answer = False
         while valid_answer == False:
             try:
@@ -126,10 +137,9 @@ class Vista():
                 self.error("Tipo de dato incorrecto")
         return answer
 
-
-
     def player_name(self, num_jugador: int) -> str:
         print(f"Nombre del Jugador {num_jugador}: ", end="")
+        player_name = ""
         valid_answer = False
         while valid_answer == False:
             player_name = input()
@@ -141,6 +151,7 @@ class Vista():
 
     def num_participantes(self) -> int:
         print("Introduce el número de participantes (2 o 3): ", end="")
+        answer = 0
         valid_answer = False
         while valid_answer == False:
             try:
@@ -159,7 +170,13 @@ class Vista():
         else:
             return False
 
-            
+
+
+
+
+
+
+
 if __name__ == "__main__":
     v = Vista()
     v.prove_letter("consonante")

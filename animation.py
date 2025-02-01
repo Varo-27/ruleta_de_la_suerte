@@ -1,7 +1,7 @@
 import time
 from colorama import init
 
-def limpiar_lineas(n):
+def limpiar_lineas(n: int):
     init()
     for _ in range(n):
         print("\033[F", end="")

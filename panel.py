@@ -7,7 +7,7 @@ class Panel:
     letras_falladas: list[str]
     resuelto: bool
 
-    def __init__(self,panel: tuple):
+    def __init__(self,panel: tuple[str, str]):
         self.frase = panel[0]
         self.pista = panel[1]
         self.letras_acertadas = [" "]
@@ -63,8 +63,7 @@ class Panel:
         MAXLENGHT = 14
         divided_lines = wrap(frase.upper(), MAXLENGHT)                      #Separa la frase en lineas de 14 caracteres como maximo
 
-        max_length = max([len(linea) for linea in divided_lines])
-        centered_lines = [linea.center(max_length, " ") for linea in divided_lines]
+        centered_lines = [linea.center(MAXLENGHT, " ") for linea in divided_lines]
         lines = [["", "", "", "", ""] for _ in range(len(centered_lines))]
 
         for index, line in enumerate(centered_lines):                       #Cada linea de la frase

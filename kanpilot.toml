@@ -7,47 +7,14 @@ id = "process1"
 name = "Sin empezar"
 
   [[processes.tasks]]
-  id = "kmqw04cuza6j4gbkj2l5hctu"
-  title = "Registrador de paneles"
-  description = "<p>Un cliente para poder añadir preguntas nuevas</p>"
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = "Low"
-  linkCommits = [ ]
-
-  [[processes.tasks]]
-  id = "vf93e7vn3enfmrwhw29rwqei"
-  title = "Implementar sockets"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
-  linkCommits = [ ]
-
-  [[processes.tasks]]
-  id = "awp9gi4jf4vt71nigbozkbzj"
-  title = "ScoreBoard"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
-  linkCommits = [ ]
-
-  [[processes.tasks]]
   id = "aeg4zub92ulnat9jhlp3gvty"
   title = "Control Visibidad Propiedades"
-  description = ""
+  description = "<p></p>"
   tag = "backlog"
   linkFiles = [ ]
   dueDate = ""
   checkList = [ ]
-  priority = ""
+  priority = "High"
   linkCommits = [ ]
 
   [[processes.tasks]]
@@ -62,8 +29,19 @@ name = "Sin empezar"
   linkCommits = [ ]
 
   [[processes.tasks]]
-  id = "v5li6ps12ukktmsbqzbiw85k"
-  title = "Juntar funcion vocal y consonante"
+  id = "exf7wixvu3iyyakffdi07xga"
+  title = "implementar pygame"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "awp9gi4jf4vt71nigbozkbzj"
+  title = "ScoreBoard"
   description = ""
   tag = "backlog"
   linkFiles = [ ]
@@ -100,6 +78,17 @@ name = "En proceso"
     id = "xu7e7e2vaignhntpdiniyp3p"
     title = "Animacion por pantalla"
     completed = false
+
+  [[processes.tasks]]
+  id = "kmqw04cuza6j4gbkj2l5hctu"
+  title = "Registrador de paneles"
+  description = "<p>Un cliente para poder añadir preguntas nuevas</p>"
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = "Low"
+  linkCommits = [ ]
 
 [[processes]]
 id = "process3"
@@ -207,6 +196,32 @@ name = "Completadas"
   [[processes.tasks]]
   id = "tbaal8dr8uxrckvv4whehqgu"
   title = "juego a varias rondas"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "v5li6ps12ukktmsbqzbiw85k"
+  title = "Juntar funcion vocal y consonante"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+[[processes]]
+id = "eqgsb2i1v2r2yhtlcw1g2wgl"
+name = "Opcionales"
+
+  [[processes.tasks]]
+  id = "vf93e7vn3enfmrwhw29rwqei"
+  title = "Implementar sockets"
   description = ""
   tag = "backlog"
   linkFiles = [ ]

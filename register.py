@@ -12,7 +12,7 @@ class Register:
         return next_id
 
     def pick_phrase(self) -> str|None:
-        phrase = ""
+        phrase = "Prueba de frase"
         
         
         return phrase.strip()

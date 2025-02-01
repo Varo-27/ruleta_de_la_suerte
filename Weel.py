@@ -3,15 +3,26 @@ import random
 class Weel:
 
     def __init__(self):
-        self.section = (0, 25, 25, 50, 50, 75, 75, 100, 200, 'broke', 'broke', 'lose_turn', 'lose_turn')
-        self.selection = 0
+        self.section = (
+                        0, 0, 
+                        200, 200, 
+                        500, 500, 500, 
+                        750, 750, 750, 
+                        1000, 1000, 
+                        1500, 
+                        2000, 
+                        'broke', 'broke', 
+                        'lose_turn', 'lose_turn', 
+                        'all_vowels', 
+                        'x2', 
+                        '1/2'
+                        )
 
     def tirada(self)  -> int | str:
-        self.selection = random.choice(self.section)
-        return self.selection
+        return random.choice(self.section)
 
 
 
 if __name__ == "__main__":
     well = Weel()
-    well.tirada()
+    print(well.tirada())

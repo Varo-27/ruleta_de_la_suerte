@@ -9,7 +9,7 @@ class Jugador:
         self.puntos_totales = 0
 
     def compra_vocal(self):
-        self.puntos_ronda -=50
+        self.puntos_ronda -=500
 
     def win_panel(self):
         self.puntos_totales += self.puntos_ronda
