@@ -7,17 +7,6 @@ id = "process1"
 name = "Sin empezar"
 
   [[processes.tasks]]
-  id = "aeg4zub92ulnat9jhlp3gvty"
-  title = "Control Visibidad Propiedades"
-  description = "<p></p>"
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = "High"
-  linkCommits = [ ]
-
-  [[processes.tasks]]
   id = "am5jj29h0972smxgcr2zqgxw"
   title = "Comprobar metodos estáticos"
   description = ""
@@ -65,18 +54,28 @@ name = "En proceso"
   linkCommits = [ ]
 
     [[processes.tasks.checkList]]
-    id = "ek8imheir7nsnct34wcwa5gq"
-    title = "Mas gajos especiales"
-    completed = false
-
-    [[processes.tasks.checkList]]
     id = "otxjj6lm0f1rmjjff87xkdav"
     title = "Printeo de las selecciones"
     completed = true
 
     [[processes.tasks.checkList]]
-    id = "xu7e7e2vaignhntpdiniyp3p"
-    title = "Animacion por pantalla"
+    id = "dqmvedsf6qtk410tybcqyq86"
+    title = "Gajo x2"
+    completed = true
+
+    [[processes.tasks.checkList]]
+    id = "bmwuf64y34cdvhm4an3iqkc8"
+    title = "Gajo 1/2"
+    completed = true
+
+    [[processes.tasks.checkList]]
+    id = "dvzsl869yzmjakdhh95f53r4"
+    title = "Gajo all vowels"
+    completed = true
+
+    [[processes.tasks.checkList]]
+    id = "p6d4sv1bwff181ztkylc00tl"
+    title = "mas?"
     completed = false
 
   [[processes.tasks]]
@@ -88,6 +87,17 @@ name = "En proceso"
   dueDate = ""
   checkList = [ ]
   priority = "Low"
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "aeg4zub92ulnat9jhlp3gvty"
+  title = "Control Visibidad Propiedades"
+  description = "<p></p>"
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = "High"
   linkCommits = [ ]
 
 [[processes]]

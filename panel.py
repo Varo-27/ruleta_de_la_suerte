@@ -1,31 +1,35 @@
 from textwrap import wrap
 
 class Panel:
-    frase: str
-    pista: str
+    __frase: str
+    __pista: str
     letras_acertadas: list[str]
     letras_falladas: list[str]
     resuelto: bool
 
     def __init__(self,panel: tuple[str, str]):
-        self.frase = panel[0]
-        self.pista = panel[1]
+        self.__frase = panel[0]
+        self.__pista = panel[1]
         self.letras_acertadas = [" "]
         self.letras_falladas = []
         self.resuelto = False
 
+    @property
+    def frase(self):
+        return self.__frase
+
     def comprobar_letra(self, letra: str) -> int:
-        if letra in self.frase:
+        if letra in self.__frase:
             self.letras_acertadas.append(letra.upper())
             self.letras_acertadas.sort()
-            return self.frase.count(letra)
+            return self.__frase.count(letra)
         else:
             self.letras_falladas.append(letra)
             self.letras_falladas.sort()
             return 0
 
     def comprobar_resolucion(self, resolucion: str)  -> bool:
-        if resolucion.lower() == self.frase.lower():
+        if resolucion.lower() == self.__frase.lower():
             return True
         else:
             return False
@@ -76,8 +80,8 @@ class Panel:
 
 
     def __str__(self) -> str:
-        frase_oculta = self.decorar_frase(self.frase)
-        pista = self.pista
+        frase_oculta = self.decorar_frase(self.__frase)
+        pista = self.__pista
         frase_fallos = f"Letras ya probadas: {", ".join(self.letras_falladas).upper()}"
         return frase_oculta + "\n"*2 + frase_fallos + "\n"*2 + pista + "\n"
 

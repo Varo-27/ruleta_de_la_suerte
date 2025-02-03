@@ -9,7 +9,7 @@ import json
 class Juego:
     turno: int
     jugadores: list[Jugador]
-    lista_paneles: list[Panel]
+    __lista_paneles: list[Panel]
     paneles_completados: int
     weel: Weel
     vista: Vista
@@ -17,7 +17,7 @@ class Juego:
     def __init__(self):
         self.turno = 0
         self.jugadores = []
-        self.lista_paneles = []
+        self.__lista_paneles = []
         self.paneles_completados = 0
         self.vista = Vista()
         self.weel = Weel()
@@ -144,10 +144,10 @@ class Juego:
     def run(self):
         self.menu() #Menu de inicio - Elegir participantes
 
-        while len(self.lista_paneles) < 3:
-            self.panel = Panel(self.frase())    #Crear paneles con una frase aleatoria
-            if self.panel.frase not in [panel.frase for panel in self.lista_paneles]:
-                self.lista_paneles.append(self.panel)
+        while len(self.__lista_paneles) < 3:
+            self.panel = Panel(self.frase())                                                #Crear paneles con una frase aleatoria
+            if self.panel.frase not in [panel.frase for panel in self.__lista_paneles]:     #Asegurarse de no repetir la frase
+                self.__lista_paneles.append(self.panel)
         
         while self.paneles_completados < 3:
 

@@ -1,21 +1,21 @@
 class Jugador:
     nombre: str
     puntos_ronda: int
-    puntos_totales: int
+    __puntos_totales: int
 
     def __init__(self, nombre: str):
         self.nombre = nombre
         self.puntos_ronda = 0
-        self.puntos_totales = 0
+        self.__puntos_totales = 0
 
     def compra_vocal(self):
         self.puntos_ronda -=500
 
     def win_panel(self):
-        self.puntos_totales += self.puntos_ronda
+        self.__puntos_totales += self.puntos_ronda
     
     def pintar_total(self) -> str:
-        return f"{self.nombre} - {self.puntos_totales} puntos"
+        return f"{self.nombre} - {self.__puntos_totales} puntos"
 
     def __str__(self) -> str:
         return f"{self.nombre} - {self.puntos_ronda} puntos"

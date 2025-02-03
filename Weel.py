@@ -1,9 +1,11 @@
 import random
 
 class Weel:
+    __section: tuple[int | str, ...]
+
 
     def __init__(self):
-        self.section = (
+        self.__section = (
                         0, 0, 
                         200, 200, 
                         500, 500, 500, 
@@ -19,7 +21,7 @@ class Weel:
                         )
 
     def tirada(self)  -> int | str:
-        return random.choice(self.section)
+        return random.choice(self.__section)
 
 
 
