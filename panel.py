@@ -30,6 +30,7 @@ class Panel:
 
     def comprobar_resolucion(self, resolucion: str)  -> bool:
         if resolucion.lower() == self.__frase.lower():
+            self.resuelto = True
             return True
         else:
             return False
@@ -48,7 +49,7 @@ class Panel:
                 " _____ ",
                 "|     |",
                 "|     |",
-                "| *** |",
+                "| ▀▀▀ |",
                 " ‾‾‾‾‾ "
             ]       
         else:
@@ -130,6 +131,6 @@ if __name__ == "__main__":
     frase_prueba.comprobar_letra("s")
     frase_prueba.comprobar_letra("t")
     print(frase_prueba)
-    animation.animation()
+    # animation.animation()
     while True:
         pass

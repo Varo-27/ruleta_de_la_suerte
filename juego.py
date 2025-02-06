@@ -9,16 +9,16 @@ import json
 class Juego:
     turno: int
     jugadores: list[Jugador]
-    __lista_paneles: list[Panel]
-    paneles_completados: int
+    __panel_list: list[Panel]
+    num_panel: int
     weel: Weel
     vista: Vista
 
     def __init__(self):
         self.turno = 0
         self.jugadores = []
-        self.__lista_paneles = []
-        self.paneles_completados = 0
+        self.__panel_list = []
+        self.num_panel = 0
         self.vista = Vista()
         self.weel = Weel()
         self.register = Register()
@@ -78,9 +78,6 @@ class Juego:
         for jugador in self.jugadores:
             jugador.puntos_ronda = 0
 
-    def prove_consonant(self):
-        pass
-
     def weel_throw(self) -> bool:
         selection = self.weel.tirada()
         match selection:
@@ -97,12 +94,12 @@ class Juego:
                 self.vista.weel_allvowels()
                 self.vista.prove_letter("consonante")
                 letra = self.vista.prove_letter("consonante")
-                if self.panel.comprobar_letra(letra) > 0:
-                    self.panel.comprobar_letra("a")
-                    self.panel.comprobar_letra("e")
-                    self.panel.comprobar_letra("i")
-                    self.panel.comprobar_letra("o")
-                    self.panel.comprobar_letra("u")
+                if self.__panel_list[self.num_panel].comprobar_letra(letra) > 0:
+                    self.__panel_list[self.num_panel].comprobar_letra("a")
+                    self.__panel_list[self.num_panel].comprobar_letra("e")
+                    self.__panel_list[self.num_panel].comprobar_letra("i")
+                    self.__panel_list[self.num_panel].comprobar_letra("o")
+                    self.__panel_list[self.num_panel].comprobar_letra("u")
                     return True
                 else:
                     self.siguiente_turno()
@@ -111,7 +108,7 @@ class Juego:
                 self.vista.weel_x2()
                 self.vista.prove_letter("consonante")
                 letra = self.vista.prove_letter("consonante")
-                if self.panel.comprobar_letra(letra) > 0:
+                if self.__panel_list[self.num_panel].comprobar_letra(letra) > 0:
                     self.jugadores[self.turno].puntos_ronda *= 2
                     return True
                 else:
@@ -120,19 +117,19 @@ class Juego:
             case '1/2':
                 self.vista.prove_letter("consonante")
                 letra = self.vista.prove_letter("consonante")
-                if self.panel.comprobar_letra(letra) > 0:
+                if self.__panel_list[self.num_panel].comprobar_letra(letra) > 0:
                     self.jugadores[self.turno].puntos_ronda //= 2
                     return True
                 else:
                     self.siguiente_turno()
                     return False
-            case _:
+            case _: #cualquier opcion de puntos normal
                 try:
                     selection = int(selection)
                     self.vista.weel_points(selection)
                     letra = self.vista.prove_letter("consonante")
-                    if self.panel.comprobar_letra(letra) > 0:
-                        self.jugadores[self.turno].puntos_ronda += self.panel.comprobar_letra(letra) * selection
+                    if self.__panel_list[self.num_panel].comprobar_letra(letra) > 0:
+                        self.jugadores[self.turno].puntos_ronda += self.__panel_list[self.num_panel].comprobar_letra(letra) * selection
                         return True
                     else:
                         self.siguiente_turno()
@@ -144,21 +141,20 @@ class Juego:
     def run(self):
         self.menu() #Menu de inicio - Elegir participantes
 
-        while len(self.__lista_paneles) < 3:
-            self.panel = Panel(self.frase())                                                #Crear paneles con una frase aleatoria
-            if self.panel.frase not in [panel.frase for panel in self.__lista_paneles]:     #Asegurarse de no repetir la frase
-                self.__lista_paneles.append(self.panel)
-        
-        while self.paneles_completados < 3:
+        while len(self.__panel_list) < 3:
+            panel = Panel(self.frase())                                             #Crear paneles con una frase aleatoria
+            if panel.frase not in [panel.frase for panel in self.__panel_list]:     #Asegurarse de no repetir la frase
+                self.__panel_list.append(panel)
 
-            self.panel.resuelto = False
+        while self.num_panel < 3:
+            resuelto = False
 
-            while self.panel.resuelto == False:
+            while resuelto == False:
                 first_throw = False
                 player_round = True
 
                 while player_round == True:
-                    self.vista.pintar_panel(self.panel)
+                    self.vista.pintar_panel(self.__panel_list[self.num_panel])
                     self.vista.pintar_jugadores(self.jugadores[self.turno])
                     opcion_juego = self.vista.game_menu(self.jugadores[self.turno].nombre)
                     match opcion_juego:
@@ -172,25 +168,30 @@ class Juego:
                             elif self.jugadores[self.turno].puntos_ronda <= 500:
                                 self.vista.error("No tienes suficientes puntos")
                             else:
-                                self.vista.pintar_panel(self.panel)
+                                self.vista.pintar_panel(self.__panel_list[self.num_panel])
                                 self.jugadores[self.turno].compra_vocal()
                                 vowel = self.vista.prove_letter("vocal")
-                                if self.panel.comprobar_letra(vowel) == 0:
+                                if self.__panel_list[self.num_panel].comprobar_letra(vowel) == 0:
                                     self.siguiente_turno()
                                     player_round = False
 
                         case 3: #Resolver panel
-                            self.vista.pintar_panel(self.panel)
-                            solucion = self.vista.phrase_entry("Introduce la solución")
-                            if self.panel.comprobar_resolucion(solucion):
-                                self.panel.resuelto = True
-                                player_round = False
-                                self.control_puntos()
-                                self.vista.pintar_panel(self.panel)
-                                self.vista.end_points(self.jugadores)
+                            if first_throw == False:
+                                self.vista.error("Tienes que hacer una tirada primero")
+                            elif self.jugadores[self.turno].puntos_ronda <= 0:
+                                self.vista.error("No tienes puntos para guardar")
                             else:
-                                self.siguiente_turno()
-                                player_round = False
+                                self.vista.pintar_panel(self.__panel_list[self.num_panel])
+                                solucion = self.vista.phrase_entry("Introduce la solución")
+                                if self.__panel_list[self.num_panel].comprobar_resolucion(solucion):
+                                    resuelto = True
+                                    player_round = False
+                                    self.control_puntos()
+                                    self.vista.pintar_panel(self.__panel_list[self.num_panel])
+                                    self.vista.end_points(self.jugadores)
+                                else:
+                                    self.siguiente_turno()
+                                    player_round = False
 
                         case 4: #Salir
                             answer = self.vista.double_check()
@@ -199,11 +200,8 @@ class Juego:
                         case _:
                             raise ValueError("Valor incorrecto en mach case")
 
-                self.paneles_completados += 1
+                self.num_panel += 1
         self.vista.end_points(self.jugadores)
-
-
-
 
 
 
@@ -216,4 +214,4 @@ class Juego:
 #Tests
 if __name__ == "__main__":
     juego = Juego()
-    print(juego.run())
+    juego.run()

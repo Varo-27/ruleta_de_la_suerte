@@ -5,8 +5,8 @@ from jugador import Jugador     #Solo para type hints
 
 class Vista():
 
-    #Funciones solo de impresión
-    #===========================
+#Funciones solo de impresión
+#===========================
 
     def welcome(self) -> None:
         os.system("cls" if os.name == "nt" else "clear")
@@ -23,6 +23,14 @@ class Vista():
 
     def choice(self) -> None:
         print("Elige una opción: ", end="")
+
+    def phrase_register(self):
+        os.system("cls" if os.name == "nt" else "clear")
+        print("REGISTRANDO NUEVA ENTRADA EN EL JUEGO")
+        print("=====================================")
+
+
+    # Tiradas ruleta
 
     def weel_bankrupt(self) -> None:
         print("Has caido en la quiebra")
@@ -41,6 +49,9 @@ class Vista():
     def weel_points(self, section: int) -> None:
         print(f"Has caido en {section} puntos")
 
+
+    # Paneles y puntuaciones
+
     def end_points(self, jugadores: list[Jugador]) -> None:
         for jugador in jugadores:
             print(jugador.pintar_total())
@@ -53,14 +64,9 @@ class Vista():
     def pintar_jugadores(self, jugador: Jugador) -> None:
         print(jugador)
 
-    def phrase_register(self):
-        os.system("cls" if os.name == "nt" else "clear")
-        print("REGISTRANDO NUEVA ENTRADA EN EL JUEGO")
-        print("=====================================")
 
-
-    #Funciones con input
-    #===================
+#Funciones con input
+#===================
 
     def start_menu(self) -> int:
         print("1.Añadir jugadores")
@@ -138,10 +144,10 @@ class Vista():
         return answer
 
     def player_name(self, num_jugador: int) -> str:
-        print(f"Nombre del Jugador {num_jugador}: ", end="")
         player_name = ""
         valid_answer = False
         while valid_answer == False:
+            print(f"Nombre del Jugador {num_jugador}: ", end="")
             player_name = input()
             if len(player_name) > 0:
                 valid_answer = self.double_check()
