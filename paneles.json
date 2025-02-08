@@ -1,14 +1,14 @@
 {
     "id1": {
-        "frase": "es una frase de prueba uno",
-        "pista": "Pista de prueba1"
+        "phrase": "es una frase de prueba uno",
+        "hint": "pista de prueba1"
     },
     "id2": {
-        "frase": "es una frase de prueba dos",
-        "pista": "Pista de prueba2"
+        "phrase": "es una frase de prueba dos",
+        "hint": "pista de prueba2"
     },
     "id3": {
-        "frase": "es una frase de prueba tres",
-        "pista": "Pista de prueba3"
+        "phrase": "es una frase de prueba tres",
+        "hint": "pista de prueba3"
     }
 }

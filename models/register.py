@@ -1,5 +1,5 @@
 import json
-
+from textwrap import wrap
 class Register:
 
     def next_id(self) -> str:
@@ -11,32 +11,36 @@ class Register:
         next_id = str("id" + str(int(last_id[2:]) + 1))
         return next_id
 
-    def pick_phrase(self) -> str|None:
-        phrase = "Prueba de frase"
-        return phrase.strip()
+    def format_phrase(self,phrase: str) -> str|None:
+        phrase = phrase.lower().strip()
+        phrase_lines = wrap(phrase, 14)
+        if len(phrase_lines) > 4 or len(phrase) < 5:
+            return None
+        return phrase
 
+    def format_hint(self, hint: str) -> str:
+        hint = hint.lower().strip()
+        if len(hint) > 30 or len(hint) < 5:
+            return None
+        return hint
 
-    def pick_hint(self) -> str:
-        return "frase prueba numero cuatro"
-
-    def entry_generator(self):
+    def entry_generator(self, phrase: str, hint: str) -> None:
         with open("paneles.json", "r") as file:
             file_data = json.load(file)
 
-        id = self.next_id()
-        phrase = self.pick_phrase()
-        hint = self.pick_hint()
-        new_entry = { id : {
-                        "frase": phrase,
-                        "pista": hint
+        for id in file_data:
+            if file_data[id]["phrase"] == phrase:
+                raise ValueError("La frase ya existe en el registro")
+            elif file_data[id]["hint"] == hint:
+                raise ValueError("La pista ya existe en el registro")
+
+        new_id = self.next_id()
+        new_entry = { new_id : {
+                        "phrase": phrase,
+                        "hint": hint
                         }
                     }
 
         file_data.update(new_entry)
         with open("paneles.json", "w") as file:
             json.dump(file_data, file, indent=4)
-
-
-if __name__ == "__main__":
-    r = Register()
-    r.entry_generator()

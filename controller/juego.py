@@ -10,6 +10,7 @@ class Juego:
     num_panel: int
     weel: Weel
     vista: Vista
+    player_round: bool
 
     def __init__(self, vista: Vista, weel: Weel, register: Register):
         self.turno = 0
@@ -19,6 +20,7 @@ class Juego:
         self.vista = vista
         self.weel = weel
         self.register = register
+        self.player_round = True
 
 
     def menu(self):
@@ -34,12 +36,26 @@ class Juego:
                     print("Aun no implementado")
                     input()
                 case 3:
-                    valid_answer = False
-                    while valid_answer == False:
-                        self.phrase = self.vista.phrase_entry("Introduce la frase")
-                        self.hint = self.vista.phrase_entry("Introduce la pista")
+                    phrase = self.vista.phrase_entry("Introduce la frase")
+                    if self.register.format_phrase(phrase) == None:
+                        self.vista.error("Frase demasiado larga o corta")
+                    else:
+                        hint = self.vista.phrase_entry("Introduce la pista")
+                        if self.register.format_hint(hint) == None:
+                            self.vista.error("Pista demasiado larga o corta")
+                        try:
+                            self.register.entry_generator(phrase, hint)
+                        except FileNotFoundError:
+                            self.vista.error("Archivo no encontrado")
+                        except json.JSONDecodeError:
+                            self.vista.error("Error en el archivo JSON")
+                        except ValueError as e:
+                            self.vista.error(e)
+                        except Exception as e:
+                            self.vista.error(f"Error desconocido: {e}")
                 case 4:
-                    self.vista.double_check()
+                    if self.vista.double_check():
+                        exit()
                 case _:
                     self.vista.error("Valor incorrecto")
 
@@ -47,7 +63,7 @@ class Juego:
         with open("paneles.json", "r") as f:
             paneles = json.load(f)
         clave = random.choice(list(paneles.keys()))
-        return (paneles[clave]['frase'], paneles[clave]['pista'])
+        return (paneles[clave]["phrase"], paneles[clave]["hint"])
 
 
     def add_players(self):
@@ -66,6 +82,7 @@ class Juego:
         self.vista.starting_game()
 
     def siguiente_turno(self):
+        self.player_round = False
         self.turno += 1
         if self.turno == len(self.jugadores):
             self.turno = 0
@@ -82,11 +99,9 @@ class Juego:
                 self.jugadores[self.turno].puntos_ronda = 0
                 self.vista.weel_bankrupt()
                 self.siguiente_turno()
-                return False
             case 'lose_turn':
                 self.vista.weel_lose_turn()
                 self.siguiente_turno()
-                return False
             case 'all_vowels':
                 self.vista.weel_allvowels()
                 self.vista.prove_letter("consonante")
@@ -97,29 +112,23 @@ class Juego:
                     self.__panel_list[self.num_panel].comprobar_letra("i")
                     self.__panel_list[self.num_panel].comprobar_letra("o")
                     self.__panel_list[self.num_panel].comprobar_letra("u")
-                    return True
                 else:
                     self.siguiente_turno()
-                    return False
             case 'x2':
                 self.vista.weel_x2()
                 self.vista.prove_letter("consonante")
                 letra = self.vista.prove_letter("consonante")
                 if self.__panel_list[self.num_panel].comprobar_letra(letra) > 0:
                     self.jugadores[self.turno].puntos_ronda *= 2
-                    return True
                 else:
                     self.siguiente_turno()
-                    return False
             case '1/2':
                 self.vista.prove_letter("consonante")
                 letra = self.vista.prove_letter("consonante")
                 if self.__panel_list[self.num_panel].comprobar_letra(letra) > 0:
                     self.jugadores[self.turno].puntos_ronda //= 2
-                    return True
                 else:
                     self.siguiente_turno()
-                    return False
             case _: #cualquier opcion de puntos normal
                 try:
                     selection = int(selection)
@@ -127,13 +136,10 @@ class Juego:
                     letra = self.vista.prove_letter("consonante")
                     if self.__panel_list[self.num_panel].comprobar_letra(letra) > 0:
                         self.jugadores[self.turno].puntos_ronda += self.__panel_list[self.num_panel].comprobar_letra(letra) * selection
-                        return True
                     else:
                         self.siguiente_turno()
-                        return False
                 except ValueError:
                     self.vista.error("Error en la tirada, valor 'selection' no previsto")
-                    return True
 
     def run(self):
         self.menu() #Menu de inicio - Elegir participantes
@@ -148,16 +154,16 @@ class Juego:
 
             while resuelto == False:
                 first_throw = False
-                player_round = True
+                self.player_round = True
 
-                while player_round == True:
+                while self.player_round == True:
                     self.vista.pintar_panel(self.__panel_list[self.num_panel])
                     self.vista.pintar_jugadores(self.jugadores[self.turno])
                     opcion_juego = self.vista.game_menu(self.jugadores[self.turno].nombre)
                     match opcion_juego:
                         case 1: #Tirar ruleta
                             first_throw = True
-                            player_round = self.weel_throw()
+                            self.weel_throw()
 
                         case 2: #Comprar vocal
                             if first_throw == False:
@@ -170,7 +176,10 @@ class Juego:
                                 vowel = self.vista.prove_letter("vocal")
                                 if self.__panel_list[self.num_panel].comprobar_letra(vowel) == 0:
                                     self.siguiente_turno()
-                                    player_round = False
+
+                        case 4: #Salir
+                            if self.vista.double_check():
+                                self.siguiente_turno()
 
                         case 3: #Resolver panel
                             if first_throw == False:
@@ -182,18 +191,10 @@ class Juego:
                                 solucion = self.vista.phrase_entry("Introduce la solución")
                                 if self.__panel_list[self.num_panel].comprobar_resolucion(solucion):
                                     resuelto = True
-                                    player_round = False
                                     self.control_puntos()
                                     self.vista.pintar_panel(self.__panel_list[self.num_panel])
                                     self.vista.end_points(self.jugadores)
-                                else:
-                                    self.siguiente_turno()
-                                    player_round = False
-
-                        case 4: #Salir
-                            answer = self.vista.double_check()
-                            if answer:
-                                exit()
+                                self.siguiente_turno()
                         case _:
                             raise ValueError("Valor incorrecto en mach case")
 

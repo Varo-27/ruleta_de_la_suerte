@@ -78,7 +78,7 @@ class Vista():
             try:
                 self.choice()
                 answer = int(input())
-                if answer in [1, 2, 3]:
+                if answer in [1, 2, 3, 4]:
                     valid_answer = True
                 else:
                     self.error("Valor incorrecto")
@@ -90,8 +90,8 @@ class Vista():
         print(f"Turno de {player_name}")
         print("1. Tirar")
         print("2. Comprar vocal (50 puntos)")
-        print("3. Resolver")
-        print("4. Salir")
+        print("3. Pasar turno")
+        print("4. Resolver")
         answer = 0
         valid_answer = False
         while valid_answer == False:
