@@ -1,8 +1,5 @@
-from panel import Panel
-from vista import Vista
-from weel import Weel
-from jugador import Jugador
-from register import Register
+from models import Jugador, Panel, Weel, Register
+from view.vista import Vista
 import random
 import json
 
@@ -14,14 +11,14 @@ class Juego:
     weel: Weel
     vista: Vista
 
-    def __init__(self):
+    def __init__(self, vista: Vista, weel: Weel, register: Register):
         self.turno = 0
         self.jugadores = []
         self.__panel_list = []
         self.num_panel = 0
-        self.vista = Vista()
-        self.weel = Weel()
-        self.register = Register()
+        self.vista = vista
+        self.weel = weel
+        self.register = register
 
 
     def menu(self):

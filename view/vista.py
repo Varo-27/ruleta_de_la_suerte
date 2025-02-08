@@ -1,7 +1,6 @@
 import os
 import time
-from panel import Panel         #Solo para type hints
-from jugador import Jugador     #Solo para type hints
+from models import Jugador, Panel
 
 class Vista():
 

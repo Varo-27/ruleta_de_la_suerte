@@ -13,8 +13,6 @@ class Register:
 
     def pick_phrase(self) -> str|None:
         phrase = "Prueba de frase"
-        
-        
         return phrase.strip()
 
 

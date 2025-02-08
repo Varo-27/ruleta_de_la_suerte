@@ -18,17 +18,6 @@ name = "Sin empezar"
   linkCommits = [ ]
 
   [[processes.tasks]]
-  id = "exf7wixvu3iyyakffdi07xga"
-  title = "implementar pygame"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
-  linkCommits = [ ]
-
-  [[processes.tasks]]
   id = "awp9gi4jf4vt71nigbozkbzj"
   title = "ScoreBoard"
   description = ""
@@ -98,6 +87,17 @@ name = "En proceso"
   dueDate = ""
   checkList = [ ]
   priority = "High"
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "exf7wixvu3iyyakffdi07xga"
+  title = "implementar pygame"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
   linkCommits = [ ]
 
 [[processes]]

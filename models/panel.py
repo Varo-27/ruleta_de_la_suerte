@@ -100,7 +100,7 @@ class Panel:
 
 
 if __name__ == "__main__":
-    import animation
+    import Pruebas.animation as animation
     import os
 
     os.system("cls" if os.name == "nt" else "clear")
