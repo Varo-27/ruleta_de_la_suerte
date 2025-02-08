@@ -32,9 +32,11 @@ class Juego:
                 case 1:
                     self.add_players()
                     jugadores_ok = True
+
                 case 2:
                     print("Aun no implementado")
                     input()
+
                 case 3:
                     phrase = self.vista.phrase_entry("Introduce la frase")
                     if self.register.format_phrase(phrase) == None:
@@ -53,6 +55,7 @@ class Juego:
                             self.vista.error(e)
                         except Exception as e:
                             self.vista.error(f"Error desconocido: {e}")
+
                 case 4:
                     if self.vista.double_check():
                         exit()

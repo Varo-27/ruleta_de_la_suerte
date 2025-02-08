@@ -10,5 +10,9 @@
     "id3": {
         "phrase": "es una frase de prueba tres",
         "hint": "pista de prueba3"
+    },
+    "id4": {
+        "phrase": "es una frase de prueba cuatro",
+        "hint": "pista de prueba4"
     }
 }

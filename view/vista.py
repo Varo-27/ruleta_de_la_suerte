@@ -115,7 +115,7 @@ class Vista():
         while valid_answer == False:
             try:
                 answer = input().lower()
-                valid_answer = True
+                valid_answer = self.double_check()
             except: 
                 self.error("Tipo de dato incorrecto")
         return answer
