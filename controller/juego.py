@@ -1,4 +1,4 @@
-from models import Jugador, Panel, Weel, Register
+from models import Jugador, Panel, Wheel, Register
 from view.vista import Vista
 import random
 import json
@@ -8,17 +8,17 @@ class Juego:
     jugadores: list[Jugador]
     __panel_list: list[Panel]
     num_panel: int
-    weel: Weel
+    wheel: Wheel
     vista: Vista
     player_round: bool
 
-    def __init__(self, vista: Vista, weel: Weel, register: Register):
+    def __init__(self, vista: Vista, wheel: Wheel, register: Register):
         self.turno = 0
         self.jugadores = []
         self.__panel_list = []
         self.num_panel = 0
         self.vista = vista
-        self.weel = weel
+        self.wheel = wheel
         self.register = register
         self.player_round = True
 
@@ -95,18 +95,18 @@ class Juego:
         for jugador in self.jugadores:
             jugador.puntos_ronda = 0
 
-    def weel_throw(self) -> bool:
-        selection = self.weel.tirada()
+    def wheel_throw(self) -> bool:
+        selection = self.wheel.tirada()
         match selection:
             case 'broke':
                 self.jugadores[self.turno].puntos_ronda = 0
-                self.vista.weel_bankrupt()
+                self.vista.wheel_bankrupt()
                 self.siguiente_turno()
             case 'lose_turn':
-                self.vista.weel_lose_turn()
+                self.vista.wheel_lose_turn()
                 self.siguiente_turno()
             case 'all_vowels':
-                self.vista.weel_allvowels()
+                self.vista.wheel_allvowels()
                 self.vista.prove_letter("consonante")
                 letra = self.vista.prove_letter("consonante")
                 if self.__panel_list[self.num_panel].comprobar_letra(letra) > 0:
@@ -118,7 +118,7 @@ class Juego:
                 else:
                     self.siguiente_turno()
             case 'x2':
-                self.vista.weel_x2()
+                self.vista.wheel_x2()
                 self.vista.prove_letter("consonante")
                 letra = self.vista.prove_letter("consonante")
                 if self.__panel_list[self.num_panel].comprobar_letra(letra) > 0:
@@ -135,7 +135,7 @@ class Juego:
             case _: #cualquier opcion de puntos normal
                 try:
                     selection = int(selection)
-                    self.vista.weel_points(selection)
+                    self.vista.wheel_points(selection)
                     letra = self.vista.prove_letter("consonante")
                     if self.__panel_list[self.num_panel].comprobar_letra(letra) > 0:
                         self.jugadores[self.turno].puntos_ronda += self.__panel_list[self.num_panel].comprobar_letra(letra) * selection
@@ -166,7 +166,7 @@ class Juego:
                     match opcion_juego:
                         case 1: #Tirar ruleta
                             first_throw = True
-                            self.weel_throw()
+                            self.wheel_throw()
 
                         case 2: #Comprar vocal
                             if first_throw == False:

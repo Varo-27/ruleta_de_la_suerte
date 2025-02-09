@@ -31,21 +31,21 @@ class Vista():
 
     # Tiradas ruleta
 
-    def weel_bankrupt(self) -> None:
+    def wheel_bankrupt(self) -> None:
         print("Has caido en la quiebra")
         time.sleep(2)
 
-    def weel_allvowels(self) -> None:
+    def wheel_allvowels(self) -> None:
         print("Acierta la consonante y desbloquea todas las vocales")
 
-    def weel_x2(self) -> None:
+    def wheel_x2(self) -> None:
         print("Acierta la consonante y duplica tus puntos esta ronda")
 
-    def weel_lose_turn(self) -> None:
+    def wheel_lose_turn(self) -> None:
         print("Pierdes el turno")
         time.sleep(2)
 
-    def weel_points(self, section: int) -> None:
+    def wheel_points(self, section: int) -> None:
         print(f"Has caido en {section} puntos")
 
 

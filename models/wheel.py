@@ -1,6 +1,6 @@
 import random
 
-class Weel:
+class Wheel:
     __section: tuple[int | str, ...]
 
 
@@ -26,5 +26,5 @@ class Weel:
 
 
 if __name__ == "__main__":
-    well = Weel()
+    well = Wheel()
     print(well.tirada())
