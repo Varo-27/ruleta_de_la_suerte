@@ -68,17 +68,6 @@ name = "En proceso"
     completed = false
 
   [[processes.tasks]]
-  id = "kmqw04cuza6j4gbkj2l5hctu"
-  title = "Registrador de paneles"
-  description = "<p>Un cliente para poder añadir preguntas nuevas</p>"
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = "Low"
-  linkCommits = [ ]
-
-  [[processes.tasks]]
   id = "aeg4zub92ulnat9jhlp3gvty"
   title = "Control Visibidad Propiedades"
   description = "<p></p>"
@@ -223,6 +212,17 @@ name = "Completadas"
   dueDate = ""
   checkList = [ ]
   priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "kmqw04cuza6j4gbkj2l5hctu"
+  title = "Registrador de paneles"
+  description = "<p>Un cliente para poder añadir preguntas nuevas</p>"
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = "Low"
   linkCommits = [ ]
 
 [[processes]]

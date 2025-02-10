@@ -27,7 +27,7 @@ colores = {
 fuente = pygame.font.Font("Gordita-Black.otf", 70)
 
 # Función para dibujar cada letra en un cuadrado con borde
-def dibujar_letras_enmarcadas(texto:str, x_inicial, y_inicial):
+def dibujar_letras_enmarcadas(self, texto:str, x_inicial, y_inicial):
     x = x_inicial  # Posición inicial en x
     aumento_x = 70
     for letra in texto.upper():

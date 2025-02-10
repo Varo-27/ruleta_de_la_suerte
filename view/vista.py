@@ -90,8 +90,8 @@ class Vista():
         print(f"Turno de {player_name}")
         print("1. Tirar")
         print("2. Comprar vocal (50 puntos)")
-        print("3. Pasar turno")
-        print("4. Resolver")
+        print("3. Resolver")
+        print("4. Pasar turno")
         answer = 0
         valid_answer = False
         while valid_answer == False:

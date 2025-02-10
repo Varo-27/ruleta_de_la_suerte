@@ -52,7 +52,7 @@ class Juego:
                         except json.JSONDecodeError:
                             self.vista.error("Error en el archivo JSON")
                         except ValueError as e:
-                            self.vista.error(e)
+                            self.vista.error(f"{e}")
                         except Exception as e:
                             self.vista.error(f"Error desconocido: {e}")
 
@@ -95,7 +95,7 @@ class Juego:
         for jugador in self.jugadores:
             jugador.puntos_ronda = 0
 
-    def wheel_throw(self) -> bool:
+    def wheel_throw(self) -> None:
         selection = self.wheel.tirada()
         match selection:
             case 'broke':
@@ -201,18 +201,5 @@ class Juego:
                         case _:
                             raise ValueError("Valor incorrecto en mach case")
 
-                self.num_panel += 1
+            self.num_panel += 1
         self.vista.end_points(self.jugadores)
-
-
-
-
-
-
-
-
-
-#Tests
-if __name__ == "__main__":
-    juego = Juego()
-    juego.run()
