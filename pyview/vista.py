@@ -8,7 +8,8 @@ class Vista():
 
     def __init__(self):
         pygame.init()
-
+        self.clock = pygame.time.Clock()
+        self.fps = 60
         self.screen = pygame.display.set_mode((1000, 800))
         self.fuente = pygame.font.Font("Gordita-Black.otf", 30)
         self.colores = {
@@ -54,7 +55,7 @@ class Vista():
 
 
 
-    def dibujar_consonantes(self, consonantes, x, y_inicial, mouse_pos):
+    def dibujar_consonantes(self, consonantes, x, y_inicial, mouse_pos, click_pos):
         alto = 50
         ancho = 40
         aumento_x = 50
@@ -68,6 +69,10 @@ class Vista():
                 pygame.draw.rect(self.screen, self.colores['gris'], sombra, border_radius=rad)
             else:
                 color_actual = self.colores['amarillo']
+
+            if rectangulo.collidepoint(click_pos):
+                print(f"Se ha pulsado {letra}")
+
             if letra == "_":
                 letra = " "
             letra_surface = self.fuente.render(letra, True, self.colores['negro'])
@@ -82,24 +87,36 @@ class Vista():
 
             x += aumento_x  # Espacio entre cuadros
 
+    def rotar_ruleta(self, angulo):
+        image = pygame.image.load('pyview\imgs\LaRuletadelaSuerte.png')
+        
+        imagen_rotada = pygame.transform.rotate(image, angulo)
+        imagen_escalada = pygame.transform.scale(imagen_rotada, (300,300))
+
+        rect_imagen = imagen_escalada.get_rect(center=(200, 300))
+        self.screen.blit(imagen_escalada, rect_imagen.topleft)
+        pass
 
 
 
-
-
-    def whiletrue(self):
+    def controller(self):
+        angulo = 0
         while True:
+            click_pos = (0,0)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     os._exit(0)
                     pygame.quit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        click_pos = event.pos
 
             # Rellenar la ventana con el color de fondo
             self.screen.fill(self.colores['blanco'])
             pygame.draw.rect(self.screen, self.colores['verde'], self.pista_rect)
 
             # Dibujar letras enmarcadas
-            letras = "est_ es _n _je_plo _wra la _un_ion _e _ibujar ___ "
+            letras = "est_ es _n _jem_lo _wra la _un_ion _e _ibujar _e "
             lineas = wrap(letras, 14)
             consonantes = 'bcdfghjklmnñpqrstvwxyz'
             consonantes = wrap(consonantes,6)
@@ -108,11 +125,15 @@ class Vista():
                 
                 mouse_pos = pygame.mouse.get_pos()
 
-    
+
                 self.dibujar_letras_enmarcadas(lineas[i], 50, i*50 + 75)
-                self.dibujar_consonantes(consonantes[i], 50, i*70+ 350, mouse_pos)
+                self.dibujar_consonantes(consonantes[i], 50, i*70+ 350, mouse_pos, click_pos)
+            
+            if angulo >= 360:
+                angulo = 0
+            angulo += 1
 
-
-
+            self.rotar_ruleta(angulo)
             # Actualizar la pantalla
             pygame.display.flip()
+            self.clock.tick(self.fps)

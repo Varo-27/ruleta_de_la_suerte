@@ -4,7 +4,7 @@ from pyview.vista import Vista
 
 if __name__ == "__main__": 
     vista = Vista()
-    vista.whiletrue()
+    vista.controller()
     
 
 
