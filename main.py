@@ -5,7 +5,7 @@ from pyview.vista import Vista
 if __name__ == "__main__": 
     vista = Vista()
     vista.controller()
-    
+
 
 
 #     vista = Vista()

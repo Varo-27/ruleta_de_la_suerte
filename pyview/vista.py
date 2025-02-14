@@ -24,80 +24,101 @@ class Vista():
                         'gris' : (200, 200, 200)
                         }
         self.pista_rect = pygame.Rect(50, 20, 560, 50)
+        self.boton_tirar = pygame.Rect(700, 500, 200, 50)
+        self.boton_compravocal = pygame.Rect(700, 560, 200, 50)
+        self.boton_resolver = pygame.Rect(700, 620, 200, 50)
+        self.boton_pasarturno = pygame.Rect(700, 680, 200, 50)
 
 
 
 
-    def dibujar_letras_enmarcadas(self, texto:str, x, y_inicial):
+
+    def dibujar_letras_enmarcadas(self, texto:str):
+        y_inicial = 50
+        
         aumento_x = 40
         alto = 50
         rad = 5
-        for letra in texto.upper():
-            rectangulo = pygame.Rect(x, y_inicial, aumento_x, alto)
-            if letra.isspace():
-                color_actual = self.colores['azul']
-            else:
-                color_actual = self.colores['amarillo']
-                if letra == "_":
-                    letra = " "
-                letra_surface = self.fuente.render(letra, True, self.colores['negro'])
-                letra_rect = letra_surface.get_rect(center=(x + aumento_x//2 , y_inicial + alto//2))
 
-            pygame.draw.rect(self.screen, color_actual, rectangulo, border_radius=rad)
-            pygame.draw.rect(self.screen, self.colores['negro'], rectangulo, 2, border_radius=rad)
+        lineas = wrap(texto, 14)
+        for i in range(len(lineas)):
+            x = 50
+            lineas[i] = lineas[i].center(14)
+            y_inicial += 50
 
-            # Dibujar la letra centrada dentro del cuadrado
-            if not letra.isspace():
-                self.screen.blit(letra_surface, letra_rect)
+            for letra in lineas[i].upper():
+                rectangulo = pygame.Rect(x, y_inicial, aumento_x, alto)
+                if letra.isspace():
+                    color_actual = self.colores['azul']
+                else:
+                    color_actual = self.colores['amarillo']
+                    if letra == "_":
+                        letra = " "
+                    letra_surface = self.fuente.render(letra, True, self.colores['negro'])
+                    letra_rect = letra_surface.get_rect(center=(x + aumento_x//2 , y_inicial + alto//2))
 
-            x += aumento_x  # Espacio entre cuadros
+                pygame.draw.rect(self.screen, color_actual, rectangulo, border_radius=rad)
+                pygame.draw.rect(self.screen, self.colores['negro'], rectangulo, 2, border_radius=rad)
+
+                # Dibujar la letra centrada dentro del cuadrado
+                if not letra.isspace():
+                    self.screen.blit(letra_surface, letra_rect)
+
+                x += aumento_x  # Espacio entre cuadros
 
 
+    def dibujar_consonantes(self, consonantes: str, mouse_pos, click_pos):
+        y_inicial = 350
 
-
-    def dibujar_consonantes(self, consonantes, x, y_inicial, mouse_pos, click_pos):
         alto = 50
         ancho = 40
         aumento_x = 50
         rad = 5
-        for letra in consonantes.upper():
-            rectangulo = pygame.Rect(x, y_inicial, ancho, alto)
-            
-            if rectangulo.collidepoint(mouse_pos):
-                color_actual = self.colores['rojo']  # Color hover
-                sombra = pygame.Rect(x-5, y_inicial-5, ancho+10, alto+10)
-                pygame.draw.rect(self.screen, self.colores['gris'], sombra, border_radius=rad)
-            else:
-                color_actual = self.colores['amarillo']
+        consonantes = consonantes.upper()
+        linea_consonantes = wrap(consonantes,6)
+        for i in range(len(linea_consonantes)):
+            x = 50
+            y_inicial += 70
 
-            if rectangulo.collidepoint(click_pos):
-                print(f"Se ha pulsado {letra}")
+            for letra in linea_consonantes[i]:
+                rectangulo = pygame.Rect(x, y_inicial, ancho, alto)
+                
+                if rectangulo.collidepoint(mouse_pos):
+                    color_actual = self.colores['rojo']  # Color hover
+                    sombra = pygame.Rect(x-5, y_inicial-5, ancho+10, alto+10)
+                    pygame.draw.rect(self.screen, self.colores['gris'], sombra, border_radius=rad)
+                else:
+                    color_actual = self.colores['amarillo']
 
-            if letra == "_":
-                letra = " "
-            letra_surface = self.fuente.render(letra, True, self.colores['negro'])
-            letra_rect = letra_surface.get_rect(center=(x + ancho//2 , y_inicial + alto//2))
+                if rectangulo.collidepoint(click_pos):
+                    print(f"Se ha pulsado {letra}")
 
-            pygame.draw.rect(self.screen, color_actual, rectangulo, border_radius=rad)
-            pygame.draw.rect(self.screen, self.colores['negro'], rectangulo, 2, border_radius=rad)
+                if letra == "_":
+                    letra = " "
+                letra_surface = self.fuente.render(letra, True, self.colores['negro'])
+                letra_rect = letra_surface.get_rect(center=(x + ancho//2 , y_inicial + alto//2))
 
-            # Dibujar la letra centrada dentro del cuadrado
-            if not letra.isspace():
-                self.screen.blit(letra_surface, letra_rect)
+                pygame.draw.rect(self.screen, color_actual, rectangulo, border_radius=rad)
+                pygame.draw.rect(self.screen, self.colores['negro'], rectangulo, 2, border_radius=rad)
 
-            x += aumento_x  # Espacio entre cuadros
+                # Dibujar la letra centrada dentro del cuadrado
+                if not letra.isspace():
+                    self.screen.blit(letra_surface, letra_rect)
+
+                x += aumento_x  # Espacio entre cuadros
 
     def rotar_ruleta(self, angulo):
-        image = pygame.image.load('pyview\imgs\LaRuletadelaSuerte.png')
+        image = pygame.image.load('pyview\\imgs\\LaRuletadelaSuerte.png')
         
-        imagen_rotada = pygame.transform.rotate(image, angulo)
-        imagen_escalada = pygame.transform.scale(imagen_rotada, (300,300))
+        imagen_escalada = pygame.transform.scale(image, (500,500))
+        imagen_rotada = pygame.transform.rotate(imagen_escalada, angulo)
 
-        rect_imagen = imagen_escalada.get_rect(center=(200, 300))
-        self.screen.blit(imagen_escalada, rect_imagen.topleft)
+        rect_imagen = imagen_rotada.get_rect(center=(1000, 200))
+        self.screen.blit(imagen_rotada, rect_imagen.topleft)
         pass
 
-
+    def en_juego(self):
+        pass
 
     def controller(self):
         angulo = 0
@@ -116,24 +137,32 @@ class Vista():
             pygame.draw.rect(self.screen, self.colores['verde'], self.pista_rect)
 
             # Dibujar letras enmarcadas
-            letras = "est_ es _n _jem_lo _wra la _un_ion _e _ibujar _e "
-            lineas = wrap(letras, 14)
+            frase = "est_ es _n _jem_lo _wra la _un_ion _e _ibujar _e "
             consonantes = 'bcdfghjklmnñpqrstvwxyz'
-            consonantes = wrap(consonantes,6)
-            for i in range(len(lineas)):
-                lineas[i] = lineas[i].center(14)
-                
-                mouse_pos = pygame.mouse.get_pos()
 
+            mouse_pos = pygame.mouse.get_pos()
 
-                self.dibujar_letras_enmarcadas(lineas[i], 50, i*50 + 75)
-                self.dibujar_consonantes(consonantes[i], 50, i*70+ 350, mouse_pos, click_pos)
+            self.dibujar_letras_enmarcadas(frase)
+            self.dibujar_consonantes(consonantes, mouse_pos, click_pos)
             
+            #botones
+            self.en_juego()
+            pygame.draw.rect(self.screen, self.colores['verde'], self.boton_tirar)
+            pygame.draw.rect(self.screen, self.colores['verde'], self.boton_compravocal)
+            pygame.draw.rect(self.screen, self.colores['verde'], self.boton_resolver)
+            pygame.draw.rect(self.screen, self.colores['verde'], self.boton_pasarturno)
+
+
+
+
+            #ruleta
             if angulo >= 360:
                 angulo = 0
             angulo += 1
-
             self.rotar_ruleta(angulo)
+
+
+
             # Actualizar la pantalla
             pygame.display.flip()
             self.clock.tick(self.fps)
