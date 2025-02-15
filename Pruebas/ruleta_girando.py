@@ -1,47 +1,19 @@
-import pygame
+import json
 
-# Inicializa Pygame
-pygame.init()
+# Diccionario original
+data = {
+    "varo": {"score": "1000", "date": "2025-01-01 12:00:00"},
+    "juan": {"score": "950", "date": "2025-01-02 15:30:00"},
+    "ana": {"score": "1100", "date": "2025-01-03 09:00:00"}
+}
 
-# Configuración de la pantalla
-screen = pygame.display.set_mode((1000, 1000))
-pygame.display.set_caption("Rotar una imagen en Pygame")
+# Convertir scores a enteros para la ordenación
+for key in data:
+    data[key]["score"] = int(data[key]["score"])
 
-# Carga la imagen
-imagen = pygame.image.load('imgs/LaRuletadelaSuerte.png')
+# Ordenar los ítems sin modificar el diccionario original
+items_ordenados = sorted(data.items(), key=lambda item: item[1]["score"], reverse=True)
 
-# Ángulo de rotación
-angulo = 0  # Puedes cambiar este valor para rotar la imagen al ángulo deseado
-
-# Configuración de FPS (frames per second)
-clock = pygame.time.Clock()
-fps = 60
-
-# Bucle principal
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-    if angulo >= 360:
-        angulo = 0
-    angulo += 1
-    # Rellena la pantalla con el color blanco
-    screen.fill((255, 255, 255))
-    
-    # Rota la imagen
-    imagen_rotada = pygame.transform.rotate(imagen, angulo)
-    
-    # Obtén el rectángulo de la imagen rotada para centrarla
-    rect_imagen = imagen_rotada.get_rect(center=(500, 500))
-    
-    # Dibuja la imagen rotada en la posición (500, 500) centrada
-    screen.blit(imagen_rotada, rect_imagen.topleft)
-    
-    # Actualiza la pantalla
-    pygame.display.flip()
-    
-    # Limita los FPS
-    clock.tick(fps)
-
-pygame.quit()
+# Recorrer los ítems ordenados
+for key, value in items_ordenados:
+    print(f"Nombre: {key}, Score: {value['score']}, Fecha: {value['date']}")

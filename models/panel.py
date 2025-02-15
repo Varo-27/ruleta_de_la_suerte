@@ -100,7 +100,6 @@ class Panel:
 
 
 if __name__ == "__main__":
-    import Pruebas.animation as animation
     import os
 
     os.system("cls" if os.name == "nt" else "clear")
@@ -108,29 +107,13 @@ if __name__ == "__main__":
         "frase" : "en un lugar de la mancha de cuyo nombre",
         "pista" : "Pista de prueba"
     }
-    pregunta2 = {
-        "frase" : "es una frase de prueba dos",
-        "pista" : "Pista de prueba dos"
-    }
 
     pregunta = (pregunta1["frase"], pregunta1["pista"])
-
     frase_prueba = Panel(pregunta)
-    frase_prueba.comprobar_letra("a")
-    frase_prueba.comprobar_letra("f")
-    frase_prueba.comprobar_letra("b")
-    frase_prueba.comprobar_letra("e")
-    frase_prueba.comprobar_letra("r")
-    frase_prueba.comprobar_letra("d")
-    frase_prueba.comprobar_letra("k")
-    frase_prueba.comprobar_letra("w")
-    frase_prueba.comprobar_letra("m")
-    frase_prueba.comprobar_letra("l")
-    frase_prueba.comprobar_letra("o")
-    frase_prueba.comprobar_letra("p")
-    frase_prueba.comprobar_letra("s")
-    frase_prueba.comprobar_letra("t")
+
+    letras = "aafberdkwmlopst"
+    for letra in letras:
+        frase_prueba.comprobar_letra(letra)
     print(frase_prueba)
-    # animation.animation()
     while True:
         pass

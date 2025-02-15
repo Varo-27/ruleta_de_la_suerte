@@ -1,8 +1,14 @@
 import os
 import time
+import getpass
 from models import Jugador, Panel
 
 class Vista():
+    letters : list[str]
+
+    def __init__(self):
+        self.letters =[]
+
 
 #Funciones solo de impresión
 #===========================
@@ -14,7 +20,7 @@ class Vista():
 
     def starting_game(self) -> None:
         print("Jugadores listos, empezando partida...")
-        time.sleep(2)
+        time.sleep(1)
 
     def error(self, menssaje: str) -> None:
         print(f"Error introduciendo datos: {menssaje}")
@@ -25,8 +31,11 @@ class Vista():
 
     def phrase_register(self):
         os.system("cls" if os.name == "nt" else "clear")
-        print("REGISTRANDO NUEVA ENTRADA EN EL JUEGO")
-        print("=====================================")
+        print("Menú de registro de frases")
+        print("==========================")
+
+    def login_success(self) -> None:
+        print("Login correcto")
 
 
     # Tiradas ruleta
@@ -40,6 +49,9 @@ class Vista():
 
     def wheel_x2(self) -> None:
         print("Acierta la consonante y duplica tus puntos esta ronda")
+
+    def wheel_1_2(self) -> None:
+        print("Acierta la consonante y reduce tus puntos a la mitad pero puedes seguir jugando")
 
     def wheel_lose_turn(self) -> None:
         print("Pierdes el turno")
@@ -56,11 +68,11 @@ class Vista():
             print(jugador.pintar_total())
         input("Pulsa enter para continuar...")
 
-    def pintar_panel(self, panel: Panel) -> None:
+    def print_panel(self, panel: Panel) -> None:
         os.system("cls" if os.name == "nt" else "clear")
         print(panel)
 
-    def pintar_jugadores(self, jugador: Jugador) -> None:
+    def print_players(self, jugador: Jugador) -> None:
         print(jugador)
 
 
@@ -70,7 +82,7 @@ class Vista():
     def start_menu(self) -> int:
         print("1.Añadir jugadores")
         print("2.Scoreboard")
-        print("3.Añadir nuevo panel")
+        print("3.Registro")
         print("4.Salir")
         answer = 0
         valid_answer = False
@@ -108,14 +120,23 @@ class Vista():
                 self.error("Tipo de dato incorrecto")
         return answer
 
-    def phrase_entry(self,msg: str) -> str:
+    def get_password(self) -> str:
+        return getpass.getpass()
+
+    def phrase_entry(self,msg: str, double_check: bool = False) -> str:
         print(f"{msg}: ", end="")
         answer = ""
         valid_answer = False
         while valid_answer == False:
             try:
                 answer = input().lower()
-                valid_answer = self.double_check()
+                if len(answer) > 0:
+                    if double_check == True:
+                        valid_answer = self.double_check()
+                    else:
+                        valid_answer = True
+                else:
+                    self.error("Este campo no puede estar vacío")
             except: 
                 self.error("Tipo de dato incorrecto")
         return answer
@@ -130,9 +151,9 @@ class Vista():
                 print(f"Introduce una {letter_type}: ", end="")
                 answer = input().lower()
                 if len(answer) == 1:
-                    if letter_type == "consonante" and answer in consonants:
+                    if letter_type == "consonant" and answer in consonants:
                         valid_answer = True
-                    elif letter_type == "vocal" and answer in vowels:
+                    elif letter_type == "vowel" and answer in vowels:
                         valid_answer = True
                     else:
                         self.error("Letra no reconocida")
@@ -154,14 +175,14 @@ class Vista():
                 print("Introducelo de nuevo: ", end="")
         return player_name
 
-    def num_participantes(self) -> int:
-        print("Introduce el número de participantes (2 o 3): ", end="")
+    def num_players(self) -> int:
+        print("Introduce el número de participantes (3 max): ", end="")
         answer = 0
         valid_answer = False
         while valid_answer == False:
             try:
                 answer = int(input())
-                if 1 < answer < 4:
+                if 1 <= answer < 4:
                     valid_answer = True
             except:
                 self.error("Tipo de dato incorrecto")

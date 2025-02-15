@@ -7,8 +7,23 @@ id = "process1"
 name = "Sin empezar"
 
   [[processes.tasks]]
-  id = "am5jj29h0972smxgcr2zqgxw"
-  title = "Comprobar metodos estáticos"
+  id = "awp9gi4jf4vt71nigbozkbzj"
+  title = "ScoreBoard"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+[[processes]]
+id = "process2"
+name = "En proceso"
+
+  [[processes.tasks]]
+  id = "uo90jwh31swuglgzixu15719"
+  title = "Inicio sesion jugador"
   description = ""
   tag = "backlog"
   linkFiles = [ ]
@@ -18,8 +33,8 @@ name = "Sin empezar"
   linkCommits = [ ]
 
   [[processes.tasks]]
-  id = "awp9gi4jf4vt71nigbozkbzj"
-  title = "ScoreBoard"
+  id = "am5jj29h0972smxgcr2zqgxw"
+  title = "Comprobar metodos estáticos"
   description = ""
   tag = "backlog"
   linkFiles = [ ]
@@ -37,6 +52,21 @@ name = "Sin empezar"
   dueDate = ""
   checkList = [ ]
   priority = "High"
+  linkCommits = [ ]
+
+[[processes]]
+id = "process3"
+name = "Completadas"
+
+  [[processes.tasks]]
+  id = "exf7wixvu3iyyakffdi07xga"
+  title = "implementar pygame"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
   linkCommits = [ ]
 
   [[processes.tasks]]
@@ -75,95 +105,6 @@ name = "Sin empezar"
     completed = false
 
   [[processes.tasks]]
-  id = "pe04nu8dw2g7z771bkeqhl55"
-  title = "Cambio de turnos"
-  description = "<p></p>"
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = "High"
-  linkCommits = [ ]
-
-  [[processes.tasks]]
-  id = "s3sal9ct7zhcek2qqp0qgbbp"
-  title = "Puntuacion al resolver un panel"
-  description = "<p></p>"
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = "High"
-  linkCommits = [ ]
-
-  [[processes.tasks]]
-  id = "tbaal8dr8uxrckvv4whehqgu"
-  title = "juego a varias rondas"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
-  linkCommits = [ ]
-
-[[processes]]
-id = "process2"
-name = "En proceso"
-
-  [[processes.tasks]]
-  id = "uqavhr1cw5sy4ulf1wwqy83c"
-  title = "Menu de Inicio"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
-  linkCommits = [ ]
-
-  [[processes.tasks]]
-  id = "acx63xen65ux0bgm3ou0h189"
-  title = "Ciclo de juego"
-  description = "<p></p>"
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = "High"
-  linkCommits = [ ]
-
-[[processes]]
-id = "process3"
-name = "Completadas"
-
-  [[processes.tasks]]
-  id = "exf7wixvu3iyyakffdi07xga"
-  title = "implementar pygame"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
-  linkCommits = [ ]
-
-[[processes]]
-id = "eqgsb2i1v2r2yhtlcw1g2wgl"
-name = "Descartes version terminal"
-
-  [[processes.tasks]]
-  id = "bfmypci4i4piw1a2m21han8i"
-  title = "preguntar por letra"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
-  linkCommits = [ ]
-
-  [[processes.tasks]]
   id = "y7iw8hsksae635wocjg7bu6k"
   title = "Printear el panel en todo momento"
   description = "<p></p>"
@@ -197,14 +138,14 @@ name = "Descartes version terminal"
   linkCommits = [ ]
 
   [[processes.tasks]]
-  id = "kmqw04cuza6j4gbkj2l5hctu"
-  title = "Registrador de paneles"
-  description = "<p>Un cliente para poder añadir preguntas nuevas</p>"
+  id = "rr7b5j5e11ntc65bw44orplh"
+  title = "preguntas aleatorias"
+  description = "eleccion de preguntas aleatorias"
   tag = "backlog"
   linkFiles = [ ]
   dueDate = ""
   checkList = [ ]
-  priority = "Low"
+  priority = ""
   linkCommits = [ ]
 
   [[processes.tasks]]
@@ -219,12 +160,83 @@ name = "Descartes version terminal"
   linkCommits = [ ]
 
   [[processes.tasks]]
-  id = "rr7b5j5e11ntc65bw44orplh"
-  title = "preguntas aleatorias"
-  description = "eleccion de preguntas aleatorias"
+  id = "kmqw04cuza6j4gbkj2l5hctu"
+  title = "Registrador de paneles"
+  description = "<p>Un cliente para poder añadir preguntas nuevas</p>"
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = "Low"
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "bfmypci4i4piw1a2m21han8i"
+  title = "preguntar por letra"
+  description = ""
   tag = "backlog"
   linkFiles = [ ]
   dueDate = ""
   checkList = [ ]
   priority = ""
   linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "s3sal9ct7zhcek2qqp0qgbbp"
+  title = "Puntuacion al resolver un panel"
+  description = "<p></p>"
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = "High"
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "tbaal8dr8uxrckvv4whehqgu"
+  title = "juego a varias rondas"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "pe04nu8dw2g7z771bkeqhl55"
+  title = "Cambio de turnos"
+  description = "<p></p>"
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = "High"
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "acx63xen65ux0bgm3ou0h189"
+  title = "Ciclo de juego"
+  description = "<p></p>"
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = "High"
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "uqavhr1cw5sy4ulf1wwqy83c"
+  title = "Menu de Inicio"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+[[processes]]
+id = "eqgsb2i1v2r2yhtlcw1g2wgl"
+name = "Descartes version terminal"
+tasks = [ ]

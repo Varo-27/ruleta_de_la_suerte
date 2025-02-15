@@ -1,16 +1,12 @@
 from controller.juego import Juego
-from models import Register, Wheel
-from pyview.vista import Vista
+from models import Register, Wheel, Scoreboard
+from view.vista import Vista
 
 if __name__ == "__main__": 
     vista = Vista()
-    vista.controller()
+    wheel = Wheel()
+    register = Register()
+    scoreboard = Scoreboard()
 
-
-
-#     vista = Vista()
-#     wheel = Wheel()
-#     register = Register()
-
-#     game = Juego(vista, wheel, register)
-#     game.run()
+    game = Juego(vista, wheel, register, scoreboard)
+    game.run()
