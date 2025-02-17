@@ -1,4 +1,5 @@
 from textwrap import wrap
+import pyfiglet
 
 class Panel:
     __frase: str
@@ -9,7 +10,7 @@ class Panel:
 
     def __init__(self,panel: tuple[str, str]):
         self.__frase = panel[0]
-        self.__pista = panel[1]
+        self.__pista = Panel.decorar_pista(panel[1])
         self.letras_acertadas = [" "]
         self.letras_falladas = []
         self.resuelto = False
@@ -17,6 +18,17 @@ class Panel:
     @property
     def frase(self):
         return self.__frase
+    
+    @staticmethod
+    def decorar_pista(pista: str) -> str:
+        pista =pista.lower()
+        figlet = pyfiglet.Figlet(font= "font/calvinss", justify="center")
+        figlet.width = 111
+        pista = figlet.renderText(pista)
+        linea = "="*111
+        linea2 = "="*111
+        return linea + "\n" + pista + linea2
+
 
     def comprobar_letra(self, letra: str) -> int:
         if letra in self.__frase:
@@ -61,10 +73,12 @@ class Panel:
                 " ‾‾‾‾‾ "
             ]
 
-    def decorar_frase(self, frase: str):
+    def decorar_frase(self):
         if self.resuelto == False:
-            frase = "".join([letra if letra.upper() in self.letras_acertadas else "_" for letra in frase])
-
+            frase = "".join([letra if letra.upper() in self.letras_acertadas else "_" for letra in self.frase])
+        else:
+            frase = self.frase
+            
         MAXLENGHT = 14
         divided_lines = wrap(frase.upper(), MAXLENGHT)                      #Separa la frase en lineas de 14 caracteres como maximo
 
@@ -77,14 +91,12 @@ class Panel:
                 for i in range(5):                                          #Cada linea son 5 filas de letra                                      
                     lines[index][i] += letter[i] + " "                      #Añade la fila de la letra a la fila de la linea
 
-        return "\n\n".join("\n".join(line) for line in lines)               #Junta las filas de la frase con un salto de linea y las lineas de la frase con dos saltos de linea
-
+        return "\n".join("\n".join(line) for line in lines)               #Junta las filas de la frase con un salto de linea y las lineas de la frase con dos saltos de linea
 
     def __str__(self) -> str:
-        frase_oculta = self.decorar_frase(self.__frase)
-        pista = self.__pista
+        frase_oculta = self.decorar_frase()
         frase_fallos = f"Letras ya probadas: {", ".join(self.letras_falladas).upper()}"
-        return frase_oculta + "\n"*2 + frase_fallos + "\n"*2 + pista + "\n"
+        return frase_oculta + "\n" + self.__pista + "\n" + frase_fallos
 
 
 
@@ -102,10 +114,12 @@ class Panel:
 if __name__ == "__main__":
     import os
 
+
+    
     os.system("cls" if os.name == "nt" else "clear")
     pregunta1 = {
         "frase" : "en un lugar de la mancha de cuyo nombre",
-        "pista" : "Pista de prueba"
+        "pista" : "es una pedazo de pista de prueba"
     }
 
     pregunta = (pregunta1["frase"], pregunta1["pista"])
@@ -115,5 +129,5 @@ if __name__ == "__main__":
     for letra in letras:
         frase_prueba.comprobar_letra(letra)
     print(frase_prueba)
-    while True:
-        pass
+    # while True:
+    #     pass
