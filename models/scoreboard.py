@@ -1,5 +1,6 @@
 import json
 import datetime
+from pathlib import Path
 
 class Scoreboard:
     def __init__(self):
@@ -14,7 +15,9 @@ class Scoreboard:
     @staticmethod
     def get_scores():
         try:
-            with open("scores.json", "r") as f:
+            root_dir = Path(__file__).resolve().parent.parent
+            scores_path = root_dir / "data" / "scores.json"
+            with open(scores_path, "r") as f:
                 return json.load(f)
         except:
             return {}

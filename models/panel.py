@@ -1,3 +1,4 @@
+from pathlib import Path
 from textwrap import wrap
 import pyfiglet
 
@@ -21,8 +22,11 @@ class Panel:
     
     @staticmethod
     def decorar_pista(pista: str) -> str:
+        root_dir = Path(__file__).resolve().parent.parent
+        
+        font_path = root_dir / "font" / "calvinss"
         pista =pista.lower()
-        figlet = pyfiglet.Figlet(font= "font/calvinss", justify="center")
+        figlet = pyfiglet.Figlet(font= f"{font_path}", justify="center")
         figlet.width = 111
         pista = figlet.renderText(pista)
         linea = "="*111
@@ -129,5 +133,5 @@ if __name__ == "__main__":
     for letra in letras:
         frase_prueba.comprobar_letra(letra)
     print(frase_prueba)
-    # while True:
-    #     pass
+    while True:
+        pass

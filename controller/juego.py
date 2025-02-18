@@ -2,6 +2,7 @@ from models import Jugador, Panel, Wheel, Register, Scoreboard
 from view.vista import Vista
 import random
 import json
+from pathlib import Path
 
 class Juego:
     turno: int
@@ -64,7 +65,9 @@ class Juego:
                     self.view.error("Valor incorrecto")
 
     def phrase(self) -> tuple[str, str]:
-        with open("paneles.json", "r") as f:
+        root_dir = Path(__file__).resolve().parent.parent
+        paneles_path = root_dir / "data" / "paneles.json"
+        with open(paneles_path, "r") as f:
             paneles = json.load(f)
         clave = random.choice(list(paneles.keys()))
         return (paneles[clave]["phrase"], paneles[clave]["hint"])
@@ -73,7 +76,9 @@ class Juego:
         username = self.view.phrase_entry("Introduce tu nombre de usuario ")
         passw = self.view.phrase_entry("Introduce tu contraseña ")
         
-        with open("usuarios.json", "r") as f:
+        root_dir = Path(__file__).resolve().parent.parent
+        usuarios_path = root_dir / "data" / "usuarios.json"
+        with open(usuarios_path, "r") as f:
             usuarios = json.load(f)
         if username in usuarios:
             if usuarios[username]["password"] == passw:

@@ -1,9 +1,12 @@
 import json
 from textwrap import wrap
+from pathlib import Path
 class Register:
 
     def next_id(self) -> str:
-        with open("paneles.json", "r") as file:
+        root_dir = Path(__file__).resolve().parent.parent
+        panel_path = root_dir / "data" / "paneles.json"
+        with open(panel_path, "r") as file:
             file_data = json.load(file)
 
         id_list = list(file_data.keys())
