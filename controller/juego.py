@@ -1,8 +1,8 @@
-from models import Jugador, Panel, Wheel, Register, Scoreboard
-from view.vista import Vista
 import random
 import json
 from pathlib import Path
+from models import Jugador, Panel, Wheel, Register, Scoreboard
+from view.vista import Vista
 
 class Juego:
     turno: int
@@ -10,6 +10,8 @@ class Juego:
     __panel_list: list[Panel]
     num_panel: int
     wheel: Wheel
+    register: Register
+    scoreboard: Scoreboard
     view: Vista
     player_round: bool
 
@@ -26,8 +28,11 @@ class Juego:
 
 
     def menu(self):
+        """
+        Menu de inicio, se eligen los jugadores y se cargan los paneles
+        """
         players_ok = False
-        while players_ok == False:
+        while players_ok is False:
             self.view.welcome()
             selection = self.view.start_menu()
             match selection:
@@ -41,23 +46,7 @@ class Juego:
                     input()
 
                 case 3:
-                    phrase = self.view.phrase_entry("Introduce la frase", True)
-                    if self.register.format_phrase(phrase) == None:
-                        self.view.error("Frase demasiado larga o corta")
-                    else:
-                        hint = self.view.phrase_entry("Introduce la pista", True)
-                        if self.register.format_hint(hint) == None:
-                            self.view.error("Pista demasiado larga o corta")
-                        try:
-                            self.register.entry_generator(phrase, hint)
-                        except FileNotFoundError:
-                            self.view.error("Archivo no encontrado")
-                        except json.JSONDecodeError:
-                            self.view.error("Error en el archivo JSON")
-                        except ValueError as e:
-                            self.view.error(f"{e}")
-                        except Exception as e:
-                            self.view.error(f"Error desconocido: {e}")
+                    self.select_register()
 
                 case 4:
                     if self.view.double_check():
@@ -65,10 +54,27 @@ class Juego:
                 case _:
                     self.view.error("Valor incorrecto")
 
+    def select_register(self):
+        phrase = self.view.phrase_entry("Introduce la frase", True)
+        if self.register.format_phrase(phrase) is None:
+            self.view.error("Frase demasiado larga o corta")
+        else:
+            hint = self.view.phrase_entry("Introduce la pista", True)
+            if self.register.format_hint(hint) is None:
+                self.view.error("Pista demasiado larga o corta")
+            try:
+                self.register.entry_generator(phrase, hint)
+            except FileNotFoundError:
+                self.view.error("Archivo no encontrado")
+            except json.JSONDecodeError:
+                self.view.error("Error en el archivo JSON")
+            except ValueError as e:
+                self.view.error(f"{e}")
+
     def phrase(self) -> tuple[str, str]:
         root_dir = Path(__file__).resolve().parent.parent
         paneles_path = root_dir / "data" / "paneles.json"
-        with open(paneles_path, "r") as f:
+        with open(paneles_path, "r", encoding="utf-8") as f:
             paneles = json.load(f)
         clave = random.choice(list(paneles.keys()))
         return (paneles[clave]["phrase"], paneles[clave]["hint"])
@@ -76,7 +82,7 @@ class Juego:
     def add_players(self):
         num_players = 0
         check = False
-        while check == False:
+        while check is False:
             try:
                 num_players = self.view.num_players()
                 check = True
@@ -93,19 +99,19 @@ class Juego:
             else:
                 self.players.append(Jugador(self.view.player_name(len(self.players)+1)))
         self.view.starting_game()
-    
+
     def login(self):
         valid_answer = False
-        while valid_answer == False:
+        while valid_answer is False:
             username = self.view.phrase_entry("Introduce tu nombre de usuario")
             passw = self.view.get_password("Introduce tu contraseña")
-            
+
             if username == "exit" or passw == "exit":
                 return "exit"
 
             root_dir = Path(__file__).resolve().parent.parent
             usuarios_path = root_dir / "data" / "usuarios.json"
-            with open(usuarios_path, "r") as f:
+            with open(usuarios_path, "r", encoding="uft-8") as f:
                 usuarios = json.load(f)
             if username in usuarios:
                 if usuarios[username]["password"] == passw:
@@ -173,7 +179,9 @@ class Juego:
                     self.view.wheel_points(selection)
                     letra = self.view.prove_letter("consonant")
                     if self.__panel_list[self.num_panel].comprobar_letra(letra) > 0:
-                        self.players[self.turno].puntos_ronda += self.__panel_list[self.num_panel].comprobar_letra(letra) * selection
+                        letter_count = self.__panel_list[self.num_panel].comprobar_letra(letra)
+                        puntos = letter_count * selection
+                        self.players[self.turno].puntos_ronda += puntos
                     else:
                         self.siguiente_turno()
                 except ValueError:
@@ -190,11 +198,11 @@ class Juego:
         while self.num_panel < 3:
             resuelto = False
 
-            while resuelto == False:
+            while resuelto is False:
                 first_throw = False
                 self.player_round = True
 
-                while self.player_round == True:
+                while self.player_round is True:
                     self.view.correct_letters =  self.__panel_list[self.num_panel].letras_acertadas
                     self.view.print_panel(self.__panel_list[self.num_panel])
                     self.view.print_players(self.players[self.turno])
@@ -205,7 +213,7 @@ class Juego:
                             self.wheel_throw()
 
                         case 2: #Comprar vocal
-                            if first_throw == False:
+                            if first_throw is False:
                                 self.view.error("Tienes que hacer una tirada primero")
                             elif self.players[self.turno].puntos_ronda <= 500:
                                 self.view.error("No tienes suficientes puntos")
@@ -221,7 +229,7 @@ class Juego:
                                 self.siguiente_turno()
 
                         case 3: #Resolver panel
-                            if first_throw == False:
+                            if first_throw is False:
                                 self.view.error("Tienes que hacer una tirada primero")
                             elif self.players[self.turno].puntos_ronda <= 0:
                                 self.view.error("No tienes puntos para guardar")

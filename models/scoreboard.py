@@ -17,9 +17,9 @@ class Scoreboard:
         try:
             root_dir = Path(__file__).resolve().parent.parent
             scores_path = root_dir / "data" / "scores.json"
-            with open(scores_path, "r") as f:
+            with open(scores_path, "r", encoding="utf-8") as f:
                 return json.load(f)
-        except:
+        except FileNotFoundError:
             return {}
 
     def __str__(self):
@@ -45,12 +45,10 @@ class Scoreboard:
 
         return table
 
-    
+
 
 if __name__ == "__main__":
     s = Scoreboard()
     s.add_score("albertos", 1567)
     s.add_score("ae", 1995)
     print(s)
-
-

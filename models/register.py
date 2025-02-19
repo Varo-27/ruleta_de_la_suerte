@@ -6,7 +6,7 @@ class Register:
     def next_id(self) -> str:
         root_dir = Path(__file__).resolve().parent.parent
         panel_path = root_dir / "data" / "paneles.json"
-        with open(panel_path, "r") as file:
+        with open(panel_path, "r", encoding="utf-8") as file:
             file_data = json.load(file)
 
         id_list = list(file_data.keys())
@@ -21,20 +21,20 @@ class Register:
             return None
         return phrase
 
-    def format_hint(self, hint: str) -> str:
+    def format_hint(self, hint: str) -> str | None:
         hint = hint.lower().strip()
         if len(hint) > 30 or len(hint) < 5:
             return None
         return hint
 
     def entry_generator(self, phrase: str, hint: str) -> None:
-        with open("paneles.json", "r") as file:
+        with open("paneles.json", "r", encoding="utf-8") as file:
             file_data = json.load(file)
 
-        for id in file_data:
-            if file_data[id]["phrase"] == phrase:
+        for entry_id in file_data:
+            if file_data[entry_id]["phrase"] == phrase:
                 raise ValueError("La frase ya existe en el registro")
-            elif file_data[id]["hint"] == hint:
+            elif file_data[entry_id]["hint"] == hint:
                 raise ValueError("La pista ya existe en el registro")
 
         new_id = self.next_id()
@@ -45,5 +45,5 @@ class Register:
                     }
 
         file_data.update(new_entry)
-        with open("paneles.json", "w") as file:
+        with open("paneles.json", "w", encoding="utf-8") as file:
             json.dump(file_data, file, indent=4)

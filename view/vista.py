@@ -1,3 +1,10 @@
+"""
+Vista
+===== 
+Archivo que contiene la clase Vista, que se encarga de la interacción con el usuario.
+Contiene funciones para imprimir mensajes y solicitar datos al usuario.
+"""
+
 import os
 import time
 import getpass
@@ -86,7 +93,7 @@ class Vista():
         print("4.Salir")
         answer = 0
         valid_answer = False
-        while valid_answer == False:
+        while valid_answer is False:
             try:
                 self.choice()
                 answer = int(input())
@@ -94,7 +101,7 @@ class Vista():
                     valid_answer = True
                 else:
                     self.error("Valor incorrecto")
-            except:
+            except ValueError:
                 self.error("Tipo de dato incorrecto")
         return answer
 
@@ -106,7 +113,7 @@ class Vista():
         print("4. Pasar turno")
         answer = 0
         valid_answer = False
-        while valid_answer == False:
+        while valid_answer is False:
             try:
                 self.choice()
                 answer = int(input())
@@ -115,7 +122,7 @@ class Vista():
                 else:
                     print("\033[F\033[K", end="")
                     self.error("Valor incorrecto")
-            except:
+            except ValueError:
                 print("\033[F\033[K", end="")
                 self.error("Tipo de dato incorrecto")
         return answer
@@ -137,18 +144,18 @@ class Vista():
         print(f"{msg}: ", end="")
         answer = ""
         valid_answer = False
-        while valid_answer == False:
+        while valid_answer is False:
             try:
                 answer = input().lower()
                 if len(answer) > 0:
-                    if double_check == True:
+                    if double_check is True:
                         valid_answer = self.double_check()
                     else:
                         valid_answer = True
                 else:
                     self.error("Este campo no puede estar vacío")
-            except: 
-                self.error("Tipo de dato incorrecto")
+            except (EOFError, KeyboardInterrupt) as e:
+                self.error(f"Error inesperado: {e}")
         return answer
 
     def prove_letter(self, letter_type: str) -> str:
@@ -167,7 +174,7 @@ class Vista():
         vowels = "aeiou"
         answer = ""
         valid_answer = False
-        while valid_answer == False:
+        while valid_answer is False:
             try:
                 print(f"Introduce una {letter_type}: ", end="")
                 answer = input().lower()
@@ -192,14 +199,14 @@ class Vista():
                         self.error("Letra no reconocida")
                 else:
                     self.error("Solo una letra")
-            except:
-                self.error("Tipo de dato incorrecto")
+            except (EOFError, KeyboardInterrupt) as e:
+                self.error(f"Error inesperado: {e}")
         return answer
 
     def player_name(self, num_jugador: int) -> str:
         player_name = ""
         valid_answer = False
-        while valid_answer == False:
+        while valid_answer is False:
             print(f"Nombre del Jugador {num_jugador}: ", end="")
             player_name = input()
             if len(player_name) > 0:
@@ -212,13 +219,15 @@ class Vista():
         print("Introduce el número de participantes (3 max): ", end="")
         answer = 0
         valid_answer = False
-        while valid_answer == False:
+        while valid_answer is False:
             try:
                 answer = int(input())
                 if 1 <= answer < 4:
                     valid_answer = True
-            except:
+            except ValueError:
                 self.error("Tipo de dato incorrecto")
+            except (EOFError, KeyboardInterrupt) as e:
+                self.error(f"Error inesperado: {e}")
         return answer
 
     def double_check(self) -> bool:
