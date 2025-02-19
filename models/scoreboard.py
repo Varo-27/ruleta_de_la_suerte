@@ -47,10 +47,10 @@ class Scoreboard:
 
     
 
-
-s = Scoreboard()
-s.add_score("albertos", 1567)
-s.add_score("ae", 1995)
-print(s)
+if __name__ == "__main__":
+    s = Scoreboard()
+    s.add_score("albertos", 1567)
+    s.add_score("ae", 1995)
+    print(s)
 
 

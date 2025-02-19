@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import pyfiglet
 import sys
 from pathlib import Path
@@ -12,10 +14,10 @@ sys.path.append(str(carpeta_fuentes))
 nombre_fuente = 'calvin_s'
 
 # Crear un objeto Figlet con la fuente personalizada
-figlet = pyfiglet.Figlet(font='cards')
+figlet = pyfiglet.Figlet(font='standard')
 
 # Generar texto grande
-texto_grande = figlet.renderText('1234567890abcdefghijklmnñopqrstuvwxyz')
+texto_grande = figlet.renderText(' é íúóO ñ ýúüU')
 
 # Imprimir el texto grande
 print(texto_grande)

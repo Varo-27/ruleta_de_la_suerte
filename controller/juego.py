@@ -33,10 +33,11 @@ class Juego:
             match selection:
                 case 1:
                     self.add_players()
-                    players_ok = True
+                    if len(self.players) > 0:
+                        players_ok = True
 
                 case 2:
-                    print("Aun no implementado")
+                    print(self.scoreboard)
                     input()
 
                 case 3:
@@ -71,23 +72,6 @@ class Juego:
             paneles = json.load(f)
         clave = random.choice(list(paneles.keys()))
         return (paneles[clave]["phrase"], paneles[clave]["hint"])
-    
-    def login(self):
-        username = self.view.phrase_entry("Introduce tu nombre de usuario ")
-        passw = self.view.phrase_entry("Introduce tu contraseña ")
-        
-        root_dir = Path(__file__).resolve().parent.parent
-        usuarios_path = root_dir / "data" / "usuarios.json"
-        with open(usuarios_path, "r") as f:
-            usuarios = json.load(f)
-        if username in usuarios:
-            if usuarios[username]["password"] == passw:
-                self.view.login_success()
-                return username
-            else:
-                self.view.error("Contraseña incorrecta")
-        
-
 
     def add_players(self):
         num_players = 0
@@ -98,15 +82,41 @@ class Juego:
                 check = True
             except ValueError:
                 self.view.error("Valor incorrecto")
-
         while len(self.players) < num_players:
+            name = ""
             if num_players == 1:
                 name = self.login()
-                self.players.append(Jugador(name))
+                if name != "exit":
+                    self.players.append(Jugador(name))
+                else:
+                    return
             else:
                 self.players.append(Jugador(self.view.player_name(len(self.players)+1)))
-
         self.view.starting_game()
+    
+    def login(self):
+        valid_answer = False
+        while valid_answer == False:
+            username = self.view.phrase_entry("Introduce tu nombre de usuario")
+            passw = self.view.get_password("Introduce tu contraseña")
+            
+            if username == "exit" or passw == "exit":
+                return "exit"
+
+            root_dir = Path(__file__).resolve().parent.parent
+            usuarios_path = root_dir / "data" / "usuarios.json"
+            with open(usuarios_path, "r") as f:
+                usuarios = json.load(f)
+            if username in usuarios:
+                if usuarios[username]["password"] == passw:
+                    self.view.login_success()
+                    valid_answer = True
+                else:
+                    self.view.error("Contraseña incorrecta\n(exit)para salir")
+            else:
+                self.view.error("Usuario no encontrado\n(exit)para salir")
+        return username
+
 
     def siguiente_turno(self):
         self.player_round = False
@@ -185,6 +195,7 @@ class Juego:
                 self.player_round = True
 
                 while self.player_round == True:
+                    self.view.correct_letters =  self.__panel_list[self.num_panel].letras_acertadas
                     self.view.print_panel(self.__panel_list[self.num_panel])
                     self.view.print_players(self.players[self.turno])
                     opcion_juego = self.view.game_menu(self.players[self.turno].nombre)
@@ -201,7 +212,7 @@ class Juego:
                             else:
                                 self.view.print_panel(self.__panel_list[self.num_panel])
                                 self.players[self.turno].compra_vocal()
-                                vowel = self.view.prove_letter("vowel", self.__panel_list[self.num_panel].letras_acertadas)
+                                vowel = self.view.prove_letter("vowel")
                                 if self.__panel_list[self.num_panel].comprobar_letra(vowel) == 0:
                                     self.siguiente_turno()
 
