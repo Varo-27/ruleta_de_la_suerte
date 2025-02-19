@@ -5,25 +5,15 @@ skipFiles = [ ".gitignore", "package.json" ]
 [[processes]]
 id = "process1"
 name = "Sin empezar"
-
-  [[processes.tasks]]
-  id = "awp9gi4jf4vt71nigbozkbzj"
-  title = "ScoreBoard"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
-  linkCommits = [ ]
+tasks = [ ]
 
 [[processes]]
 id = "process2"
 name = "En proceso"
 
   [[processes.tasks]]
-  id = "uo90jwh31swuglgzixu15719"
-  title = "Inicio sesion jugador"
+  id = "iqmha0lgdi718pie3s5t8yyg"
+  title = "Introducir el score board al ciclo del juego"
   description = ""
   tag = "backlog"
   linkFiles = [ ]
@@ -228,6 +218,28 @@ name = "Completadas"
   [[processes.tasks]]
   id = "uqavhr1cw5sy4ulf1wwqy83c"
   title = "Menu de Inicio"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "awp9gi4jf4vt71nigbozkbzj"
+  title = "ScoreBoard"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "uo90jwh31swuglgzixu15719"
+  title = "Inicio sesion jugador"
   description = ""
   tag = "backlog"
   linkFiles = [ ]

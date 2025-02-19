@@ -34,11 +34,14 @@ class Panel:
         return linea + "\n" + pista + "\n" + linea
 
 
-    def comprobar_letra(self, letra: str) -> int:
+    def check_letter(self, letra: str) -> int:
         if letra in self.__frase:
-            self.letras_acertadas.append(letra.upper())
-            self.letras_acertadas.sort()
-            return self.__frase.count(letra)
+            if letra.upper() not in self.letras_acertadas:
+                self.letras_acertadas.append(letra.upper())
+                self.letras_acertadas.sort()
+                return self.__frase.count(letra)
+            else:
+                return -1
         else:
             self.letras_falladas.append(letra)
             self.letras_falladas.sort()
@@ -133,7 +136,7 @@ if __name__ == "__main__":
 
     letras = "aafberdkwmlopst"
     for caracter in letras:
-        frase_prueba.comprobar_letra(caracter)
+        frase_prueba.check_letter(caracter)
     print(frase_prueba)
     while True:
         pass

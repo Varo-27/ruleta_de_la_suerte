@@ -11,10 +11,6 @@ import getpass
 from models import Jugador, Panel
 
 class Vista():
-    correct_letters : list[str]
-
-    def __init__(self):
-        self.correct_letters =[]
 
 
 #Funciones solo de impresión
@@ -49,7 +45,11 @@ class Vista():
 
     def wheel_bankrupt(self) -> None:
         print("Has caido en la quiebra")
-        time.sleep(2)
+        input("Pulsa enter para continuar...")
+
+    def wheel_lose_turn(self) -> None:
+        print("Pierdes el turno")
+        input("Pulsa enter para continuar...")
 
     def wheel_allvowels(self) -> None:
         print("Acierta la consonante y desbloquea todas las vocales")
@@ -59,10 +59,6 @@ class Vista():
 
     def wheel_1_2(self) -> None:
         print("Acierta la consonante y reduce tus puntos a la mitad pero puedes seguir jugando")
-
-    def wheel_lose_turn(self) -> None:
-        print("Pierdes el turno")
-        time.sleep(2)
 
     def wheel_points(self, section: int) -> None:
         print(f"Has caido en {section} puntos")
@@ -180,21 +176,11 @@ class Vista():
                 answer = input().lower()
                 if len(answer) == 1:
                     #Consonante
-                    if letter_type == "consonant" and answer in consonants:
-                        if answer not in self.correct_letters:
-                            valid_answer = True
-                        else:
-                            self.error("Consonante ya introducida, pierdes el turno")
-                            answer = ""
-                            valid_answer = True
+                    if letter_type == "consonante" and answer in consonants:
+                        valid_answer = True
                     #Vocal
-                    elif letter_type == "vowel" and answer in vowels:
-                        if answer not in self.correct_letters:
-                            valid_answer = True
-                        else:
-                            self.error("Vocal ya introducida, pierdes el turno")
-                            answer = ""
-                            valid_answer = True
+                    elif letter_type == "vocal" and answer in vowels:
+                        valid_answer = True
                     else:
                         self.error("Letra no reconocida")
                 else:

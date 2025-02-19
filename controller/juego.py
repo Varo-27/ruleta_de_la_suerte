@@ -147,41 +147,53 @@ class Juego:
                 self.siguiente_turno()
             case 'all_vowels':
                 self.view.wheel_allvowels()
-                self.view.prove_letter("consonant")
-                letra = self.view.prove_letter("consonant")
-                if self.__panel_list[self.num_panel].comprobar_letra(letra) > 0:
-                    self.__panel_list[self.num_panel].comprobar_letra("a")
-                    self.__panel_list[self.num_panel].comprobar_letra("e")
-                    self.__panel_list[self.num_panel].comprobar_letra("i")
-                    self.__panel_list[self.num_panel].comprobar_letra("o")
-                    self.__panel_list[self.num_panel].comprobar_letra("u")
+                letter = self.view.prove_letter("consonante")
+                num_letters = self.__panel_list[self.num_panel].check_letter(letter)
+                if num_letters > 0:
+                    self.__panel_list[self.num_panel].check_letter("a")
+                    self.__panel_list[self.num_panel].check_letter("e")
+                    self.__panel_list[self.num_panel].check_letter("i")
+                    self.__panel_list[self.num_panel].check_letter("o")
+                    self.__panel_list[self.num_panel].check_letter("u")
+                elif num_letters == -1:
+                    self.view.error("letter ya introducida")
+                    self.siguiente_turno()
                 else:
                     self.siguiente_turno()
             case 'x2':
                 self.view.wheel_x2()
-                self.view.prove_letter("consonant")
-                letra = self.view.prove_letter("consonant")
-                if self.__panel_list[self.num_panel].comprobar_letra(letra) > 0:
+                letter = self.view.prove_letter("consonante")
+                num_letters = self.__panel_list[self.num_panel].check_letter(letter)
+                if num_letters > 0:
                     self.players[self.turno].puntos_ronda *= 2
+                elif num_letters == -1:
+                    self.view.error("letter ya introducida")
+                    self.siguiente_turno()
                 else:
                     self.siguiente_turno()
             case '1/2':
                 self.view.wheel_1_2()
-                self.view.prove_letter("consonant")
-                letra = self.view.prove_letter("consonant")
-                if self.__panel_list[self.num_panel].comprobar_letra(letra) > 0:
+                letter = self.view.prove_letter("consonante")
+                num_letters = self.__panel_list[self.num_panel].check_letter(letter)
+                if num_letters > 0:
                     self.players[self.turno].puntos_ronda //= 2
+                elif num_letters == -1:
+                    self.view.error("letter ya introducida")
+                    self.siguiente_turno()
                 else:
                     self.siguiente_turno()
             case _:     #Cualquier opcion de puntos normal
                 try:
                     selection = int(selection)
                     self.view.wheel_points(selection)
-                    letra = self.view.prove_letter("consonant")
-                    if self.__panel_list[self.num_panel].comprobar_letra(letra) > 0:
-                        letter_count = self.__panel_list[self.num_panel].comprobar_letra(letra)
-                        puntos = letter_count * selection
+                    letter = self.view.prove_letter("consonante")
+                    num_letters = self.__panel_list[self.num_panel].check_letter(letter)
+                    if num_letters > 0:
+                        puntos = num_letters * selection
                         self.players[self.turno].puntos_ronda += puntos
+                    elif num_letters == -1:
+                        self.view.error("letra ya introducida")
+                        self.siguiente_turno()
                     else:
                         self.siguiente_turno()
                 except ValueError:
@@ -203,7 +215,6 @@ class Juego:
                 self.player_round = True
 
                 while self.player_round is True:
-                    self.view.correct_letters =  self.__panel_list[self.num_panel].letras_acertadas
                     self.view.print_panel(self.__panel_list[self.num_panel])
                     self.view.print_players(self.players[self.turno])
                     opcion_juego = self.view.game_menu(self.players[self.turno].nombre)
@@ -220,8 +231,8 @@ class Juego:
                             else:
                                 self.view.print_panel(self.__panel_list[self.num_panel])
                                 self.players[self.turno].compra_vocal()
-                                vowel = self.view.prove_letter("vowel")
-                                if self.__panel_list[self.num_panel].comprobar_letra(vowel) == 0:
+                                vowel = self.view.prove_letter("vocal")
+                                if self.__panel_list[self.num_panel].check_letter(vowel) == 0:
                                     self.siguiente_turno()
 
                         case 4: #Salir

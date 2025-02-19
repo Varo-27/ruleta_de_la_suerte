@@ -5,6 +5,7 @@ class Wheel:
 
 
     def __init__(self):
+        self.eleccion = 5
         self.__section = (
                         0, 0, 
                         200, 200, 
@@ -21,6 +22,8 @@ class Wheel:
                         )
 
     def tirada(self)  -> int | str:
+        self.eleccion +=1
+        return self.__section[self.eleccion % len(self.__section)]
         return random.choice(self.__section)
 
 
