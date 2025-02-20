@@ -3,39 +3,8 @@ skipFolders = [ "node_modules", ".vscode", "out", "dist", ".vscode-test" ]
 skipFiles = [ ".gitignore", "package.json" ]
 
 [[processes]]
-id = "eqgsb2i1v2r2yhtlcw1g2wgl"
-name = "Test pendientes"
-
-  [[processes.tasks]]
-  id = "n2d3s418c3fi5xhtgoe4gk2c"
-  title = "Mensaje error es valido borrar para todos los casos"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
-  linkCommits = [ ]
-
-[[processes]]
-id = "process1"
-name = "Sin empezar"
-tasks = [ ]
-
-[[processes]]
 id = "process2"
 name = "En proceso"
-
-  [[processes.tasks]]
-  id = "iqmha0lgdi718pie3s5t8yyg"
-  title = "Introducir el score board al ciclo del juego"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
-  linkCommits = [ ]
 
   [[processes.tasks]]
   id = "am5jj29h0972smxgcr2zqgxw"
@@ -57,6 +26,17 @@ name = "En proceso"
   dueDate = ""
   checkList = [ ]
   priority = "High"
+  linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "p8r6zebb7op2uhjmpkt8gmwt"
+  title = "Gajo comodin implementar"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
   linkCommits = [ ]
 
 [[processes]]
@@ -262,3 +242,19 @@ name = "Completadas"
   checkList = [ ]
   priority = ""
   linkCommits = [ ]
+
+  [[processes.tasks]]
+  id = "iqmha0lgdi718pie3s5t8yyg"
+  title = "Introducir el score board al ciclo del juego"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+[[processes]]
+id = "process1"
+name = "Sin empezar"
+tasks = [ ]
