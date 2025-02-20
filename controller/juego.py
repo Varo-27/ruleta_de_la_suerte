@@ -6,25 +6,26 @@ from view.vista import Vista
 
 class Juego:
     turno: int
+    num_panel: int
+    num_rounds: int
+    player_round: bool
     players: list[Jugador]
     __panel_list: list[Panel]
-    num_panel: int
     wheel: Wheel
     register: Register
     scoreboard: Scoreboard
     view: Vista
-    player_round: bool
 
     def __init__(self, vista: Vista, wheel: Wheel, register: Register, scoreboard: Scoreboard):
         self.turno = 0
+        self.num_panel = 0
+        self.player_round = True
         self.players = []
         self.__panel_list = []
-        self.num_panel = 0
         self.view = vista
         self.wheel = wheel
         self.register = register
         self.scoreboard = scoreboard
-        self.player_round = True
 
 
     def menu(self):
@@ -42,7 +43,7 @@ class Juego:
                         players_ok = True
 
                 case 2:
-                    print(self.scoreboard)
+                    self.view.print_scoreboard(self.scoreboard)
                     input()
 
                 case 3:
@@ -111,7 +112,7 @@ class Juego:
 
             root_dir = Path(__file__).resolve().parent.parent
             usuarios_path = root_dir / "data" / "usuarios.json"
-            with open(usuarios_path, "r", encoding="uft-8") as f:
+            with open(usuarios_path, "r", encoding="utf-8") as f:
                 usuarios = json.load(f)
             if username in usuarios:
                 if usuarios[username]["password"] == passw:
@@ -202,16 +203,16 @@ class Juego:
     def run(self):
         self.menu() #Menu de inicio - Elegir participantes
         if len(self.players) == 1:
-            self.num_rondas = 1
+            self.num_rounds = 1 #CAMBIAR A TRES// TODO: CAMBIAR VALOR kanpilotID(ziopqv6fvs37c9pa59tus49k)
         else:
-            self.num_rondas = self.view.num_rounds()
+            self.num_rounds = self.view.num_rounds()
 
-        while len(self.__panel_list) < 3:
+        while len(self.__panel_list) < self.num_rounds:
             panel = Panel(self.phrase())                                            #Crear paneles con una frase aleatoria
             if panel.frase not in [panel.frase for panel in self.__panel_list]:     #Asegurarse de no repetir la frase
                 self.__panel_list.append(panel)
 
-        while self.num_panel < 3:
+        while self.num_panel < self.num_rounds:
             resuelto = False
 
             while resuelto is False:

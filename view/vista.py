@@ -8,7 +8,7 @@ Contiene funciones para imprimir mensajes y solicitar datos al usuario.
 import os
 import time
 import getpass
-from models import Jugador, Panel
+from models import Jugador, Panel, Scoreboard
 
 class Vista():
 
@@ -67,6 +67,9 @@ class Vista():
     # Paneles y puntuaciones
 
     def end_points(self, jugadores: list[Jugador]) -> None:
+        os.system("cls" if os.name == "nt" else "clear")
+        print("Puntuaciones finales")
+        print("===================")
         for jugador in jugadores:
             print(jugador.pintar_total())
         input("Pulsa enter para continuar...")
@@ -77,6 +80,10 @@ class Vista():
 
     def print_players(self, jugador: Jugador) -> None:
         print(jugador)
+    
+    def print_scoreboard(self, scoreboard: Scoreboard) -> None:
+        os.system("cls" if os.name == "nt" else "clear")
+        print(scoreboard)
 
 
 #Funciones con input

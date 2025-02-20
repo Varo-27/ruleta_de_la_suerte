@@ -4,23 +4,28 @@ from pathlib import Path
 
 class Scoreboard:
     def __init__(self):
+        self.__scores_path = self.get_path()
         self.scores = self.get_scores()
+
+    @staticmethod
+    def get_path():
+        root_dir = Path(__file__).resolve().parent.parent
+        return root_dir / "data" / "scores.json"
+
+    def get_scores(self):
+        try:
+            with open(self.__scores_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except FileNotFoundError:
+            return {}
 
     def add_score(self, player_name: str, score: int):
         now = datetime.datetime.now()
         formatted_date = now.strftime("%Y-%m-%d %H:%M")
         self.scores.update({player_name: {"score": score, "date": f"{formatted_date}"}})
+        with open(self.__scores_path, "w", encoding="utf-8") as f:
+            return json.dump(self.scores, f, ensure_ascii=False, indent=4)
 
-
-    @staticmethod
-    def get_scores():
-        try:
-            root_dir = Path(__file__).resolve().parent.parent
-            scores_path = root_dir / "data" / "scores.json"
-            with open(scores_path, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except FileNotFoundError:
-            return {}
 
     def __str__(self):
         #Ordenar las puntuaciones
@@ -39,9 +44,7 @@ class Scoreboard:
         for player, value in sorted_scores:
             table += "|" + f"{player}".center(max_len_name, " ")
             table += "|" + f"{value['score']}".center(max_len_score) 
-            table += "|  " + f"{value['date']}"
-            table += "  |" + "\n"
-
+            table += "|  " + f"{value['date']}" + "  |" + "\n"
 
         return table
 
