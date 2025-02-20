@@ -8,6 +8,11 @@ class Jugador:
         self.puntos_ronda = 0
         self.__puntos_totales = 0
 
+    @property
+    def puntos_totales(self) -> int:
+        return self.__puntos_totales
+
+
     def compra_vocal(self):
         self.puntos_ronda -=500
 

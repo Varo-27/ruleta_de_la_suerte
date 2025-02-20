@@ -201,6 +201,10 @@ class Juego:
 
     def run(self):
         self.menu() #Menu de inicio - Elegir participantes
+        if len(self.players) == 1:
+            self.num_rondas = 1
+        else:
+            self.num_rondas = self.view.num_rounds()
 
         while len(self.__panel_list) < 3:
             panel = Panel(self.phrase())                                            #Crear paneles con una frase aleatoria
@@ -258,3 +262,6 @@ class Juego:
 
             self.num_panel += 1
         self.view.end_points(self.players)
+
+        if len(self.players) == 1:
+            self.scoreboard.add_score(self.players[0].nombre, self.players[0].puntos_totales)

@@ -123,6 +123,24 @@ class Vista():
                 self.error("Tipo de dato incorrecto")
         return answer
 
+    def num_rounds(self) -> int:
+        print("Elige el numero de rondas (1-6): ", end="")
+        answer = 0
+        valid_answer = False
+        while valid_answer is False:
+            try:
+                self.choice()
+                answer = int(input())
+                if answer in [1, 2, 3, 4, 5, 6]:
+                    valid_answer = True
+                else:
+                    print("\033[F\033[K", end="")
+                    self.error("Valor incorrecto")
+            except ValueError:
+                print("\033[F\033[K", end="")
+                self.error("Tipo de dato incorrecto")
+        return answer
+
     def get_password(self, msg :str) -> str:
         return getpass.getpass(f"{msg}: ")
 
