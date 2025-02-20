@@ -17,17 +17,19 @@ class Register:
     def format_phrase(self,phrase: str) -> str|None:
         phrase = phrase.lower().strip()
         phrase_lines = wrap(phrase, 14)
-        if len(phrase_lines) > 4 or len(phrase) < 5:
+        if len(phrase) < 5 or len(phrase_lines) > 4:
             return None
         return phrase
 
     def format_hint(self, hint: str) -> str | None:
         hint = hint.lower().strip()
-        if len(hint) > 30 or len(hint) < 5:
+        if len(hint) > 45 or len(hint) < 3:
             return None
         return hint
 
     def entry_generator(self, phrase: str, hint: str) -> None:
+        file_data : dict
+
         with open(self.panel_path, "r", encoding="utf-8") as file:
             file_data = json.load(file)
 
@@ -36,14 +38,26 @@ class Register:
                 raise ValueError("La frase ya existe en el registro")
             elif file_data[entry_id]["hint"] == hint:
                 raise ValueError("La pista ya existe en el registro")
-
         new_id = self.next_id(file_data)
+
+        accents = {
+                'a': ['á', 'à', 'ä', 'â'],
+                'e': ['é', 'è', 'ë', 'ê'],
+                'i': ['í', 'ì', 'ï', 'î'],
+                'o': ['ó', 'ò', 'ö', 'ô'],
+                'u': ['ú', 'ù', 'ü', 'û']
+                }
+
+        for unaccented_char, accented_letters in accents.items():
+            for accented_char in accented_letters:
+                phrase = phrase.replace(accented_char, unaccented_char)
+
         new_entry = { new_id : {
                         "phrase": phrase,
                         "hint": hint
                         }
                     }
-
         file_data.update(new_entry)
+
         with open(self.panel_path, "w", encoding="utf-8") as file:
             json.dump(file_data, file, indent=4)

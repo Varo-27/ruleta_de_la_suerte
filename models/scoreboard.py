@@ -36,15 +36,26 @@ class Scoreboard:
         max_len_score = max(len(f"{self.scores[player]['score']}") for player in self.scores) + 8
 
         #Cabecera
-        table = "|" + " Nombre ".center(max_len_name, "-")
-        table += "|" + " Puntaje ".center(max_len_score, "-")
-        table += "|------ Fecha -------|" + "\n"
+        table = "┌" + "─" * max_len_name
+        table += "┬" + "─" * max_len_score
+        table += "┬────────────────────┐" + "\n"
+        table += "├" + " Nombre ".center(max_len_name, "─")
+        table += "┼" + " Puntaje ".center(max_len_score, "─")
+        table += "┼────── Fecha ───────┤" + "\n"
+        table += "├" + "─" * max_len_name
+        table += "┼" + "─" * max_len_score
+        table += "┼────────────────────┤" + "\n"
 
         #Datos
-        for player, value in sorted_scores:
-            table += "|" + f"{player}".center(max_len_name, " ")
-            table += "|" + f"{value['score']}".center(max_len_score) 
-            table += "|  " + f"{value['date']}" + "  |" + "\n"
+        for player, value in sorted_scores[:10]:
+            table += "│" + f"{player}".center(max_len_name, " ")
+            table += "│" + f"{value['score']}".center(max_len_score)
+            table += "│  " + f"{value['date']}" + "  │" + "\n"
+
+        #Pie
+        table += "└" + "─" * max_len_name
+        table += "┴" + "─" * max_len_score
+        table += "┴────────────────────┘" + "\n"
 
         return table
 

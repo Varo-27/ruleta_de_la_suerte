@@ -35,7 +35,7 @@ class Vista():
     def choice(self) -> None:
         print("Elige una opción: ", end="")
 
-    def phrase_register(self):
+    def phrase_register(self) -> None:
         os.system("cls" if os.name == "nt" else "clear")
         print("Menú de registro de frases")
         print("==========================")
@@ -71,8 +71,8 @@ class Vista():
 
     def end_points(self, jugadores: list[Jugador]) -> None:
         os.system("cls" if os.name == "nt" else "clear")
-        print("Puntuaciones finales")
-        print("===================")
+        print("Puntuaciones")
+        print("============")
         for jugador in jugadores:
             print(jugador.pintar_total())
         input("Pulsa enter para continuar...")

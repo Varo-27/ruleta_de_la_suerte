@@ -125,14 +125,13 @@ class Juego:
                 self.view.error("Usuario no encontrado\n(exit)para salir")
         return username
 
-
-    def siguiente_turno(self):
+    def siguiente_turno(self) -> None:
         self.player_round = False
         self.turno += 1
         if self.turno == len(self.players):
             self.turno = 0
 
-    def control_points(self):
+    def control_points(self) -> None:
         self.players[self.turno].win_panel()
         for jugador in self.players:
             jugador.puntos_ronda = 0
@@ -201,10 +200,10 @@ class Juego:
                 except ValueError:
                     self.view.error("Error en la tirada, valor 'selection' no previsto")
 
-    def run(self):
+    def run(self) -> None:
         self.menu() #Menu de inicio - Elegir participantes
         if len(self.players) == 1:
-            self.num_rounds = 1 #CAMBIAR A TRES// TODO: CAMBIAR VALOR kanpilotID(ziopqv6fvs37c9pa59tus49k)
+            self.num_rounds = 3
         else:
             self.num_rounds = self.view.num_rounds()
 

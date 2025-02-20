@@ -13,12 +13,12 @@ class Jugador:
         return self.__puntos_totales
 
 
-    def compra_vocal(self):
+    def compra_vocal(self) -> None:
         self.puntos_ronda -=500
 
-    def win_panel(self):
+    def win_panel(self) -> None:
         self.__puntos_totales += self.puntos_ronda
-    
+
     def pintar_total(self) -> str:
         return f"{self.nombre} - {self.__puntos_totales} puntos"
 

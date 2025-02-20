@@ -20,17 +20,7 @@ name = "Test pendientes"
 [[processes]]
 id = "process1"
 name = "Sin empezar"
-
-  [[processes.tasks]]
-  id = "ziopqv6fvs37c9pa59tus49k"
-  title = "CAMBIAR VALOR"
-  description = ""
-  tag = "backlog"
-  linkFiles = [ ]
-  dueDate = ""
-  checkList = [ ]
-  priority = ""
-  linkCommits = [ ]
+tasks = [ ]
 
 [[processes]]
 id = "process2"

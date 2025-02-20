@@ -12,7 +12,7 @@ class Panel:
     def __init__(self,panel: tuple[str, str]):
         self.__frase = panel[0]
         self.__pista = Panel.decorar_pista(panel[1])
-        self.letras_acertadas = [" "]
+        self.letras_acertadas = [" ", ","]
         self.letras_falladas = []
         self.resuelto = False
 
@@ -24,13 +24,13 @@ class Panel:
     def decorar_pista(pista: str) -> str:
         pista =pista.upper().center(111, " ")
         linea = "="*111
-        
+
         # root_dir = Path(__file__).resolve().parent.parent
         # font_path = root_dir / "font" / "calvinss"
         # figlet = pyfiglet.Figlet(font= f"{font_path}", justify="center")
         # figlet.width = 111
         # pista = figlet.renderText(pista)
-        
+
         return linea + "\n" + pista + "\n" + linea
 
 
@@ -105,7 +105,7 @@ class Panel:
     def __str__(self) -> str:
         frase_oculta = self.decorar_frase()
         frase_fallos = f"Letras ya probadas: {", ".join(self.letras_falladas).upper()}"
-        return frase_oculta + "\n" + self.__pista + "\n" + frase_fallos
+        return frase_oculta + "\n" + self.__pista + "\n" + frase_fallos + "\n"
 
 
 
@@ -123,8 +123,6 @@ class Panel:
 if __name__ == "__main__":
     import os
 
-
-    
     os.system("cls" if os.name == "nt" else "clear")
     pregunta1 = {
         "frase" : "en un lugar de la mancha de cuyo nombre",
