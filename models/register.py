@@ -2,13 +2,13 @@ import json
 from textwrap import wrap
 from pathlib import Path
 class Register:
+    panel_path: Path
 
-    def next_id(self) -> str:
+    def __init__(self):
         root_dir = Path(__file__).resolve().parent.parent
-        panel_path = root_dir / "data" / "paneles.json"
-        with open(panel_path, "r", encoding="utf-8") as file:
-            file_data = json.load(file)
+        self.panel_path = root_dir / "data" / "paneles.json"
 
+    def next_id(self, file_data: dict) -> str:
         id_list = list(file_data.keys())
         last_id = id_list[-1]
         next_id = str("id" + str(int(last_id[2:]) + 1))
@@ -28,7 +28,7 @@ class Register:
         return hint
 
     def entry_generator(self, phrase: str, hint: str) -> None:
-        with open("paneles.json", "r", encoding="utf-8") as file:
+        with open(self.panel_path, "r", encoding="utf-8") as file:
             file_data = json.load(file)
 
         for entry_id in file_data:
@@ -37,7 +37,7 @@ class Register:
             elif file_data[entry_id]["hint"] == hint:
                 raise ValueError("La pista ya existe en el registro")
 
-        new_id = self.next_id()
+        new_id = self.next_id(file_data)
         new_entry = { new_id : {
                         "phrase": phrase,
                         "hint": hint
@@ -45,5 +45,5 @@ class Register:
                     }
 
         file_data.update(new_entry)
-        with open("paneles.json", "w", encoding="utf-8") as file:
+        with open(self.panel_path, "w", encoding="utf-8") as file:
             json.dump(file_data, file, indent=4)

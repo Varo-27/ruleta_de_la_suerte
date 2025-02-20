@@ -28,7 +28,7 @@ class Juego:
         self.scoreboard = scoreboard
 
 
-    def menu(self):
+    def menu(self) -> None:
         """
         Menu de inicio, se eligen los jugadores y se cargan los paneles
         """
@@ -55,7 +55,8 @@ class Juego:
                 case _:
                     self.view.error("Valor incorrecto")
 
-    def select_register(self):
+    def select_register(self) -> None:
+        self.view.phrase_register()
         phrase = self.view.phrase_entry("Introduce la frase", True)
         if self.register.format_phrase(phrase) is None:
             self.view.error("Frase demasiado larga o corta")
@@ -80,7 +81,7 @@ class Juego:
         clave = random.choice(list(paneles.keys()))
         return (paneles[clave]["phrase"], paneles[clave]["hint"])
 
-    def add_players(self):
+    def add_players(self) -> None:
         num_players = 0
         check = False
         while check is False:
@@ -101,7 +102,7 @@ class Juego:
                 self.players.append(Jugador(self.view.player_name(len(self.players)+1)))
         self.view.starting_game()
 
-    def login(self):
+    def login(self) -> str:
         valid_answer = False
         while valid_answer is False:
             username = self.view.phrase_entry("Introduce tu nombre de usuario")
@@ -265,4 +266,11 @@ class Juego:
         self.view.end_points(self.players)
 
         if len(self.players) == 1:
-            self.scoreboard.add_score(self.players[0].nombre, self.players[0].puntos_totales)
+            try:
+                self.scoreboard.add_score(self.players[0].nombre, self.players[0].puntos_totales)
+            except FileNotFoundError:
+                self.view.error("Archivo no encontrado")
+            except json.JSONDecodeError:
+                self.view.error("Error en el archivo JSON")
+            except ValueError as e:
+                self.view.error(f"{e}")

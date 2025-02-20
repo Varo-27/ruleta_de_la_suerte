@@ -3,6 +3,21 @@ skipFolders = [ "node_modules", ".vscode", "out", "dist", ".vscode-test" ]
 skipFiles = [ ".gitignore", "package.json" ]
 
 [[processes]]
+id = "eqgsb2i1v2r2yhtlcw1g2wgl"
+name = "Test pendientes"
+
+  [[processes.tasks]]
+  id = "n2d3s418c3fi5xhtgoe4gk2c"
+  title = "Mensaje error es valido borrar para todos los casos"
+  description = ""
+  tag = "backlog"
+  linkFiles = [ ]
+  dueDate = ""
+  checkList = [ ]
+  priority = ""
+  linkCommits = [ ]
+
+[[processes]]
 id = "process1"
 name = "Sin empezar"
 
@@ -257,8 +272,3 @@ name = "Completadas"
   checkList = [ ]
   priority = ""
   linkCommits = [ ]
-
-[[processes]]
-id = "eqgsb2i1v2r2yhtlcw1g2wgl"
-name = "Descartes version terminal"
-tasks = [ ]

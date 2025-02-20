@@ -1,6 +1,6 @@
 """
 Vista
-===== 
+=====
 Archivo que contiene la clase Vista, que se encarga de la interacción con el usuario.
 Contiene funciones para imprimir mensajes y solicitar datos al usuario.
 """
@@ -28,6 +28,9 @@ class Vista():
     def error(self, menssaje: str) -> None:
         print(f"Error introduciendo datos: {menssaje}")
         input("Pulsa enter para continuar...")
+        print("\033[F\033[K", end="")
+        print("\033[F\033[K", end="")
+        print("\033[F\033[K", end="")
 
     def choice(self) -> None:
         print("Elige una opción: ", end="")
@@ -80,7 +83,7 @@ class Vista():
 
     def print_players(self, jugador: Jugador) -> None:
         print(jugador)
-    
+
     def print_scoreboard(self, scoreboard: Scoreboard) -> None:
         os.system("cls" if os.name == "nt" else "clear")
         print(scoreboard)
@@ -123,28 +126,23 @@ class Vista():
                 if answer in [1, 2, 3, 4]:
                     valid_answer = True
                 else:
-                    print("\033[F\033[K", end="")
                     self.error("Valor incorrecto")
             except ValueError:
-                print("\033[F\033[K", end="")
                 self.error("Tipo de dato incorrecto")
         return answer
 
     def num_rounds(self) -> int:
-        print("Elige el numero de rondas (1-6): ", end="")
         answer = 0
         valid_answer = False
         while valid_answer is False:
             try:
-                self.choice()
+                print("Elige el numero de rondas (1-6): ", end="")
                 answer = int(input())
                 if answer in [1, 2, 3, 4, 5, 6]:
                     valid_answer = True
                 else:
-                    print("\033[F\033[K", end="")
                     self.error("Valor incorrecto")
             except ValueError:
-                print("\033[F\033[K", end="")
                 self.error("Tipo de dato incorrecto")
         return answer
 
@@ -162,11 +160,11 @@ class Vista():
         Returns:
             str: _description_
         """
-        print(f"{msg}: ", end="")
         answer = ""
         valid_answer = False
         while valid_answer is False:
             try:
+                print(f"{msg}: ", end="")
                 answer = input().lower()
                 if len(answer) > 0:
                     if double_check is True:
@@ -223,15 +221,15 @@ class Vista():
             if len(player_name) > 0:
                 valid_answer = self.double_check()
             else:
-                print("Introducelo de nuevo: ", end="")
+                self.error("Este campo no puede estar vacío")
         return player_name
 
     def num_players(self) -> int:
-        print("Introduce el número de participantes (3 max): ", end="")
         answer = 0
         valid_answer = False
         while valid_answer is False:
             try:
+                print("Introduce el número de participantes (3 max): ", end="")
                 answer = int(input())
                 if 1 <= answer < 4:
                     valid_answer = True
@@ -247,6 +245,7 @@ class Vista():
         if answer.lower() == "s":
             return True
         else:
+            self.error("Entrada cancelada")
             return False
 
 
