@@ -1,15 +1,15 @@
 """
-Vista
+View
 =====
-Archivo que contiene la clase Vista, que se encarga de la interacción con el usuario.
+Archivo que contiene la clase View, que se encarga de la interacción con el usuario.
 Contiene funciones para imprimir mensajes y solicitar datos al usuario.
 """
 
 import os
 import time
-from models import Jugador, Panel, Scoreboard
+from models import Player, Panel, Scoreboard
 
-class Vista():
+class View():
 
 
 #Funciones solo de impresión
@@ -68,20 +68,27 @@ class Vista():
 
     # Paneles y puntuaciones
 
-    def end_points(self, jugadores: list[Jugador]) -> None:
+    def endround_points(self, players: list[Player]) -> None:
+        print("Puntuacion de la ronda")
+        print("=====================")
+        for player in players:
+            print(player.print_round_points())
+        input("Pulsa enter para continuar...")
+
+    def total_points(self, players: list[Player]) -> None:
         os.system("cls" if os.name == "nt" else "clear")
-        print("Puntuaciones")
+        print("Puntuacion total")
         print("============")
-        for jugador in jugadores:
-            print(jugador.pintar_total())
+        for player in players:
+            print(player.print_total_points())
         input("Pulsa enter para continuar...")
 
     def print_panel(self, panel: Panel) -> None:
         os.system("cls" if os.name == "nt" else "clear")
         print(panel)
 
-    def print_players(self, jugador: Jugador) -> None:
-        print(jugador)
+    def print_players(self, player: Player) -> None:
+        print(player)
 
     def print_scoreboard(self, scoreboard: Scoreboard) -> None:
         os.system("cls" if os.name == "nt" else "clear")
@@ -145,7 +152,7 @@ class Vista():
             except ValueError:
                 self.error("Tipo de dato incorrecto")
         return answer
-    
+
     def phrase_entry(self,msg: str, double_check: bool = False) -> str:
         """
         Introduce una frase y comprueba que no esté vacía
@@ -254,5 +261,5 @@ class Vista():
 
 
 if __name__ == "__main__":
-    v = Vista()
+    v = View()
     v.prove_letter("consonante")

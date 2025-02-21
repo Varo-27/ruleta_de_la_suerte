@@ -6,7 +6,7 @@ class Register:
 
     def __init__(self):
         root_dir = Path(__file__).resolve().parent.parent
-        self.panel_path = root_dir / "data" / "paneles.json"
+        self.__panel_path = root_dir / "data" / "paneles.json"
 
     def next_id(self, file_data: dict) -> str:
         id_list = list(file_data.keys())
@@ -30,7 +30,7 @@ class Register:
     def entry_generator(self, phrase: str, hint: str) -> None:
         file_data : dict
 
-        with open(self.panel_path, "r", encoding="utf-8") as file:
+        with open(self.__panel_path, "r", encoding="utf-8") as file:
             file_data = json.load(file)
 
         for entry_id in file_data:
@@ -59,5 +59,5 @@ class Register:
                     }
         file_data.update(new_entry)
 
-        with open(self.panel_path, "w", encoding="utf-8") as file:
+        with open(self.__panel_path, "w", encoding="utf-8") as file:
             json.dump(file_data, file, indent=4)

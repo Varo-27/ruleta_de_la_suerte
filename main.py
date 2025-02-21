@@ -1,12 +1,12 @@
-from controller.juego import Juego
+from controller.game import Game
 from models import Register, Wheel, Scoreboard
-from view.vista import Vista
+from view.vista import View
 
 if __name__ == "__main__":
-    vista = Vista()
+    view = View()
     wheel = Wheel()
     register = Register()
     scoreboard = Scoreboard()
 
-    game = Juego(vista, wheel, register, scoreboard)
+    game = Game(view, wheel, register, scoreboard)
     game.run()

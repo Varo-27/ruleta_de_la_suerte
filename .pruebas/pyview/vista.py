@@ -1,10 +1,10 @@
 import os
 import time
-from models import Jugador, Panel
+from models import Player, Panel
 import pygame
 from textwrap import wrap
 
-class Vista():
+class View():
 
     def __init__(self):
         pygame.init()
@@ -139,7 +139,7 @@ class Vista():
         self.screen.blit(imagen_escalada, rect_imagen.topleft)
 
 
-    def en_juego(self,click_pos):
+    def en_game(self,click_pos):
         pygame.draw.rect(self.screen, self.colores['verde'], self.pista_rect)
 
         # Dibujar letras enmarcadas
@@ -183,9 +183,9 @@ class Vista():
                             os._exit(0)
                     if self.game_state == "añadir_jugadores":
                         if self.twoply.collidepoint(click_pos):
-                            self.game_state = "juego"
+                            self.game_state = "game"
                         if self.threeply.collidepoint(click_pos):
-                            self.game_state = "juego"
+                            self.game_state = "game"
                         
             self.imagen_fondo = pygame.image.load('pyview\\imgs\\Fondo.jpg').convert()
             self.screen.blit(self.imagen_fondo, (-500, 0))
@@ -194,8 +194,8 @@ class Vista():
                 self.menu_inicio()
             elif self.game_state == "añadir_jugadores":
                 self.añadir_jugadores()
-            elif self.game_state == "juego":
-                self.en_juego(click_pos)
+            elif self.game_state == "game":
+                self.en_game(click_pos)
                 
 
 

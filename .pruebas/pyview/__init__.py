@@ -1,1 +1,1 @@
-from .vista import Vista
+from .vista import View

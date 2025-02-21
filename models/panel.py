@@ -1,22 +1,22 @@
 from textwrap import wrap
 class Panel:
-    __frase: str
+    __phrase: str
     __pista: str
     letras_acertadas: list[str]
     letras_falladas: list[str]
-    resuelto: bool
+    __resuelto: bool
 
     def __init__(self,panel: tuple[str, str]):
-        self.__frase = panel[0]
+        self.__phrase = panel[0]
         self.__pista = Panel.decorar_pista(panel[1])
         self.letras_acertadas = [" ", ","]
         self.letras_falladas = []
-        self.resuelto = False
+        self.__resuelto = False
 
     @property
-    def frase(self):
-        return self.__frase
-    
+    def phrase(self):
+        return self.__phrase
+
     @staticmethod
     def decorar_pista(pista: str) -> str:
         pista =pista.upper().center(111, " ")
@@ -25,11 +25,11 @@ class Panel:
 
 
     def check_letter(self, letra: str) -> int:
-        if letra in self.__frase:
+        if letra in self.__phrase:
             if letra.upper() not in self.letras_acertadas:
                 self.letras_acertadas.append(letra.upper())
                 self.letras_acertadas.sort()
-                return self.__frase.count(letra)
+                return self.__phrase.count(letra)
             else:
                 return -1
         else:
@@ -38,8 +38,8 @@ class Panel:
             return 0
 
     def comprobar_resolucion(self, resolucion: str)  -> bool:
-        if resolucion.lower() == self.__frase.lower():
-            self.resuelto = True
+        if resolucion.lower() == self.__phrase.lower():
+            self.__resuelto = True
             return True
         else:
             return False
@@ -48,38 +48,38 @@ class Panel:
         if letra == " ":
             return [
                 " _____ ",
-                "|█████|",
-                "|█████|",
-                "|█████|",
+                "│█████│",
+                "│█████│",
+                "│█████│",
                 " ‾‾‾‾‾ "
             ]
         elif letra == "_":
             return [
                 " _____ ",
-                "|     |",
-                "|     |",
-                "| ▀▀▀ |",
+                "│     │",
+                "│     │",
+                "│ ▀▀▀ │",
                 " ‾‾‾‾‾ "
             ]
         else:
             return [
                 " _____ ",
-                "|     |",
-                "|  {}  |".format(letra),
-                "|     |",
+                "│     │",
+                "│  {}  │".format(letra),
+                "│     │",
                 " ‾‾‾‾‾ "
             ]
 
     def decorar_frase(self):
-        if self.resuelto is False:
-            frase = "".join([letra if letra.upper() in self.letras_acertadas else "_" for letra in self.frase])
-        else:
-            frase = self.frase
+        phrase = self.phrase
+
+        if self.__resuelto is False:
+            phrase = "".join([letra if letra.upper() in self.letras_acertadas else "_" for letra in self.phrase])
 
         MAXLENGHT = 14
 
         #Separa la frase en lineas de 14 caracteres como maximo
-        divided_lines = wrap(frase.upper(), MAXLENGHT)
+        divided_lines = wrap(phrase.upper(), MAXLENGHT)
 
         centered_lines = [linea.center(MAXLENGHT, " ") for linea in divided_lines]
         lines = [["", "", "", "", ""] for _ in range(len(centered_lines))]
