@@ -1,7 +1,4 @@
 from textwrap import wrap
-# from pathlib import Path
-#import pyfiglet
-
 class Panel:
     __frase: str
     __pista: str
@@ -24,13 +21,6 @@ class Panel:
     def decorar_pista(pista: str) -> str:
         pista =pista.upper().center(111, " ")
         linea = "="*111
-
-        # root_dir = Path(__file__).resolve().parent.parent
-        # font_path = root_dir / "font" / "calvinss"
-        # figlet = pyfiglet.Figlet(font= f"{font_path}", justify="center")
-        # figlet.width = 111
-        # pista = figlet.renderText(pista)
-
         return linea + "\n" + pista + "\n" + linea
 
 

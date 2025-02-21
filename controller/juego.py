@@ -44,10 +44,9 @@ class Juego:
 
                 case 2:
                     self.view.print_scoreboard(self.scoreboard)
-                    input()
 
                 case 3:
-                    self.select_register()
+                    self.phrase_register()
 
                 case 4:
                     if self.view.double_check():
@@ -55,7 +54,7 @@ class Juego:
                 case _:
                     self.view.error("Valor incorrecto")
 
-    def select_register(self) -> None:
+    def phrase_register(self) -> None:
         self.view.phrase_register()
         phrase = self.view.phrase_entry("Introduce la frase", True)
         if self.register.format_phrase(phrase) is None:
@@ -91,39 +90,8 @@ class Juego:
             except ValueError:
                 self.view.error("Valor incorrecto")
         while len(self.players) < num_players:
-            name = ""
-            if num_players == 1:
-                name = self.login()
-                if name != "exit":
-                    self.players.append(Jugador(name))
-                else:
-                    return
-            else:
                 self.players.append(Jugador(self.view.player_name(len(self.players)+1)))
         self.view.starting_game()
-
-    def login(self) -> str:
-        valid_answer = False
-        while valid_answer is False:
-            username = self.view.phrase_entry("Introduce tu nombre de usuario")
-            passw = self.view.get_password("Introduce tu contraseña")
-
-            if username == "exit" or passw == "exit":
-                return "exit"
-
-            root_dir = Path(__file__).resolve().parent.parent
-            usuarios_path = root_dir / "data" / "usuarios.json"
-            with open(usuarios_path, "r", encoding="utf-8") as f:
-                usuarios = json.load(f)
-            if username in usuarios:
-                if usuarios[username]["password"] == passw:
-                    self.view.login_success()
-                    valid_answer = True
-                else:
-                    self.view.error("Contraseña incorrecta\n(exit)para salir")
-            else:
-                self.view.error("Usuario no encontrado\n(exit)para salir")
-        return username
 
     def siguiente_turno(self) -> None:
         self.player_round = False
@@ -264,12 +232,14 @@ class Juego:
             self.num_panel += 1
         self.view.end_points(self.players)
 
-        if len(self.players) == 1:
+        for player in self.players:
             try:
-                self.scoreboard.add_score(self.players[0].nombre, self.players[0].puntos_totales)
+                self.scoreboard.add_score(player.nombre, player.puntos_totales)
             except FileNotFoundError:
                 self.view.error("Archivo no encontrado")
             except json.JSONDecodeError:
                 self.view.error("Error en el archivo JSON")
             except ValueError as e:
                 self.view.error(f"{e}")
+
+        self.view.print_scoreboard(self.scoreboard)

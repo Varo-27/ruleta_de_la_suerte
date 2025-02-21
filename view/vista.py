@@ -7,7 +7,6 @@ Contiene funciones para imprimir mensajes y solicitar datos al usuario.
 
 import os
 import time
-import getpass
 from models import Jugador, Panel, Scoreboard
 
 class Vista():
@@ -22,7 +21,7 @@ class Vista():
         print("===================================")
 
     def starting_game(self) -> None:
-        print("Jugadores listos, empezando partida...")
+        print("Empezando partida...")
         time.sleep(1)
 
     def error(self, menssaje: str) -> None:
@@ -87,13 +86,14 @@ class Vista():
     def print_scoreboard(self, scoreboard: Scoreboard) -> None:
         os.system("cls" if os.name == "nt" else "clear")
         print(scoreboard)
+        input("Pulsa enter para continuar...")
 
 
 #Funciones con input
 #===================
 
     def start_menu(self) -> int:
-        print("1.Añadir jugadores")
+        print("1.Empezar partida")
         print("2.Scoreboard")
         print("3.Registro")
         print("4.Salir")
@@ -145,10 +145,7 @@ class Vista():
             except ValueError:
                 self.error("Tipo de dato incorrecto")
         return answer
-
-    def get_password(self, msg :str) -> str:
-        return getpass.getpass(f"{msg}: ")
-
+    
     def phrase_entry(self,msg: str, double_check: bool = False) -> str:
         """
         Introduce una frase y comprueba que no esté vacía
@@ -246,6 +243,7 @@ class Vista():
             return True
         else:
             self.error("Entrada cancelada")
+            print("\033[F\033[K", end="")
             return False
 
 

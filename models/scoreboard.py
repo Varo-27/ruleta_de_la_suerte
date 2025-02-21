@@ -4,7 +4,7 @@ from pathlib import Path
 
 class Scoreboard:
     def __init__(self):
-        self.__scores_path = self.get_path()
+        self.__scores_path = Scoreboard.get_path()
         self.scores = self.get_scores()
 
     @staticmethod
