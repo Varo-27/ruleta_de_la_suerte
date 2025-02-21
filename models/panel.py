@@ -1,50 +1,51 @@
 from textwrap import wrap
 class Panel:
     __phrase: str
-    __pista: str
-    letras_acertadas: list[str]
-    letras_falladas: list[str]
-    __resuelto: bool
+    __hint: str
+    correct_letters: list[str]
+    incorrect_letters: list[str]
+    __solved: bool
 
     def __init__(self,panel: tuple[str, str]):
         self.__phrase = panel[0]
-        self.__pista = Panel.decorar_pista(panel[1])
-        self.letras_acertadas = [" ", ","]
-        self.letras_falladas = []
-        self.__resuelto = False
+        self.__hint = Panel.decorate_hint(panel[1])
+        self.correct_letters = [" ", ","]
+        self.incorrect_letters = []
+        self.__solved = False
 
     @property
     def phrase(self):
         return self.__phrase
 
+
     @staticmethod
-    def decorar_pista(pista: str) -> str:
-        pista =pista.upper().center(111, " ")
-        linea = "="*111
-        return linea + "\n" + pista + "\n" + linea
+    def decorate_hint(hint: str) -> str:
+        hint =hint.upper().center(111, " ")
+        line = "="*111
+        return line + "\n" + hint + "\n" + line
 
 
-    def check_letter(self, letra: str) -> int:
-        if letra in self.__phrase:
-            if letra.upper() not in self.letras_acertadas:
-                self.letras_acertadas.append(letra.upper())
-                self.letras_acertadas.sort()
-                return self.__phrase.count(letra)
+    def check_letter(self, letter: str) -> int:
+        if letter in self.__phrase:
+            if letter.upper() not in self.correct_letters:
+                self.correct_letters.append(letter.upper())
+                self.correct_letters.sort()
+                return self.__phrase.count(letter)
             else:
                 return -1
         else:
-            self.letras_falladas.append(letra)
-            self.letras_falladas.sort()
+            self.incorrect_letters.append(letter)
+            self.incorrect_letters.sort()
             return 0
 
-    def comprobar_resolucion(self, resolucion: str)  -> bool:
-        if resolucion.lower() == self.__phrase.lower():
-            self.__resuelto = True
+    def check_solution(self, solution: str)  -> bool:
+        if solution.lower() == self.__phrase.lower():
+            self.__solved = True
             return True
         else:
             return False
 
-    def decorar_letra(self, letra: str) -> list[str]:
+    def decorate_letter(self, letra: str) -> list[str]:
         if letra == " ":
             return [
                 " _____ ",
@@ -70,11 +71,11 @@ class Panel:
                 " ‾‾‾‾‾ "
             ]
 
-    def decorar_frase(self):
-        phrase = self.phrase
+    def decorate_phrase(self):
+        phrase = self.__phrase
 
-        if self.__resuelto is False:
-            phrase = "".join([letra if letra.upper() in self.letras_acertadas else "_" for letra in self.phrase])
+        if self.__solved is False:
+            phrase = "".join([letra if letra.upper() in self.correct_letters else "_" for letra in self.__phrase])
 
         MAXLENGHT = 14
 
@@ -85,31 +86,21 @@ class Panel:
         lines = [["", "", "", "", ""] for _ in range(len(centered_lines))]
 
         for index, line in enumerate(centered_lines):                       #Cada linea de la frase
-            decorada = [self.decorar_letra(letter) for letter in line]      #Decorar cada letra de la linea
-            for letter in decorada:                                         #Cada letra de la linea ya decorada
+            decorated = [self.decorate_letter(letter) for letter in line]      #Decorar cada letra de la linea
+            for letter in decorated:                                         #Cada letra de la linea ya decorada
                 for i in range(5):                                          #5 filas por letra
                     lines[index][i] += letter[i] + " "                      #Añade la fila de la letra a la fila de la linea
 
         return "\n".join("\n".join(line) for line in lines) #Junta las filas de cada linea, y todas las lineas
 
     def __str__(self) -> str:
-        frase_oculta = self.decorar_frase()
-        frase_fallos = f"Letras ya probadas: {", ".join(self.letras_falladas).upper()}"
-        return frase_oculta + "\n" + self.__pista + "\n" + frase_fallos + "\n"
+        hidden_phrase = self.decorate_phrase()
+        failed_letters = f"Letras ya probadas: {", ".join(set(sorted(self.incorrect_letters))).upper()}"
+        return hidden_phrase + "\n" + self.__hint + "\n" + failed_letters + "\n"
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+#TEST
 if __name__ == "__main__":
     import os
 
@@ -122,7 +113,7 @@ if __name__ == "__main__":
     pregunta = (pregunta1["frase"], pregunta1["pista"])
     frase_prueba = Panel(pregunta)
 
-    letras = "aafberdkwmlopst"
+    letras = "aafffffffberdkwmlopst"
     for caracter in letras:
         frase_prueba.check_letter(caracter)
     print(frase_prueba)

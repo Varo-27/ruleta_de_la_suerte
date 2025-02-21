@@ -216,7 +216,7 @@ class Game:
                             else:
                                 self.__view.print_panel(self.__panel_list[self.__num_panel])
                                 solucion = self.__view.phrase_entry("Introduce la solución", True)
-                                if self.__panel_list[self.__num_panel].comprobar_resolucion(solucion):
+                                if self.__panel_list[self.__num_panel].check_solution(solucion):
                                     resuelto = True
                                     self.control_points()
                                     self.__view.print_panel(self.__panel_list[self.__num_panel])
